@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,8 +76,9 @@ public class RestTemplateWrapperImpl implements IRestTemplateWrapper {
   }
 
   @Override
-  public <T, R> T postForEntity(Class<T> clazz, String url, R body, Object... uriVariables) {
-    HttpEntity<R> request = new HttpEntity<>(body);
+  public <T, R> T postForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
+      Object... uriVariables) {
+    HttpEntity<R> request = new HttpEntity<>(body, headers);
     ResponseEntity<String> response =
         restTemplate.postForEntity(url, request, String.class, uriVariables);
     JavaType javaType = objectMapper.getTypeFactory()
@@ -117,5 +119,15 @@ public class RestTemplateWrapperImpl implements IRestTemplateWrapper {
     }
     return result;
   }
+
+  @Override
+  public <T, R> String customPostForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
+      Object... uriVariables) {
+    HttpEntity<R> entity = new HttpEntity<>(body, headers);
+    ResponseEntity<String> response =
+        restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+    return response.getBody();
+  }
+
 
 }
