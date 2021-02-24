@@ -16,4 +16,5 @@ public class ApiRequestConfig {
   private Object requestBody;
   private String retry;
   private List<String> store;
+  private List<Handle> successHandlers;
 }

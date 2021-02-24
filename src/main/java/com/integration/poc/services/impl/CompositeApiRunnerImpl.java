@@ -1,18 +1,18 @@
 package com.integration.poc.services.impl;
 
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.external.CompositeApiRequest;
+import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.GenericApiRequest;
 import com.integration.poc.exceptions.Error;
 import com.integration.poc.exceptions.GenericError;
 import com.integration.poc.exceptions.GenericException;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.services.ICompositeApiRunner;
+import com.integration.poc.utils.HandlerExecutorImpl;
 
 @Service
 public class CompositeApiRunnerImpl implements ICompositeApiRunner {
@@ -20,7 +20,8 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
   @Autowired
   IApiExecutor apiExecutor;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(CompositeApiRunnerImpl.class);
+  @Autowired
+  HandlerExecutorImpl handleExecutor;
 
   @Override
   public void run(CompositeApiRequest requestConfig) {
@@ -36,15 +37,30 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     GenericApiRequest currentRequest = apiRequestList.get(0);
     while (null != currentRequest) {
       try {
+        ApiRequestConfig currentApiConfig = currentRequest.getApiRequest();
         apiExecutor.executeApi(currentRequest.getApiRequest());
-        String nextApiKey = currentRequest.getOnSuccess()
-            .get(0);
-        currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
+        boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(),
+            currentApiConfig.getSuccessHandlers());
+        if (success) {
+          String nextApiKey = currentRequest.getOnSuccess()
+              .get(0);
+          currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
+        } else if (currentApiConfig.getRetry()
+            .equalsIgnoreCase("*")) {
+          Thread.sleep(10000);
+        } else {
+          String nextApiKey = currentRequest.getOnFailure()
+              .get(0);
+          currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
+        }
+
       } catch (GenericException e) {
         throw new GenericException(new GenericError(Error.REST_CLIENT.getErrorCode(),
             Error.REST_CLIENT.getErrorMsg() + "Error while executing API with key: "
                 + currentRequest.getApiRequest()
                     .getApiKey()));
+      } catch (InterruptedException ie) {
+        ie.getMessage();
       }
     }
   }

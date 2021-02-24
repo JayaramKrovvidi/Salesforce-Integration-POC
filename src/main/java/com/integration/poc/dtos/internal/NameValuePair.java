@@ -8,5 +8,4 @@ import lombok.Setter;
 public class NameValuePair<K, V> {
   private K name;
   private V value;
-  private String scope;
 }

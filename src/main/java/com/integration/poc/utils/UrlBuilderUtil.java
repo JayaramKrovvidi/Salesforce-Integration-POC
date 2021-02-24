@@ -1,68 +1,51 @@
 package com.integration.poc.utils;
 
-import java.util.HashMap;
-
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.NameValuePair;
 import com.integration.poc.services.IMapBuilder;
-import com.integration.poc.services.impl.MapBuilderImpl;
 
+@Service
 public class UrlBuilderUtil {
-	
+
+  @Autowired
+  IMapBuilder mapBuilder;
 
   private UrlBuilderUtil() {}
 
   private static final String EMPTY_STRING = "";
+  private static final String URL_PATTERN = "\\{(.*?)\\}";
 
-  public static String buildUrl(ApiRequestConfig apiConfig) {
-	  	
-    StringBuilder urlBuilder = new StringBuilder();  
-    urlBuilder.append(apiConfig.getUrl());  
-    urlBuilder = new StringBuilder(buildPathParams(urlBuilder.toString()));  
-   
-//    urlBuilder.append(addPathParams(apiConfig.getPathParams()));
-//    urlBuilder.append(addRequestParams(apiConfig.getRequestParams()));
-    System.out.println(urlBuilder.toString());
+  public String buildUrl(ApiRequestConfig apiConfig) {
+    StringBuilder urlBuilder = new StringBuilder(buildPathParams(apiConfig.getUrl()));
+    urlBuilder.append(addRequestParams(apiConfig.getRequestParams()));
     return urlBuilder.toString();
   }
 
-  private static String buildPathParams(String url) {
-	  IMapBuilder mapBuilder = new MapBuilderImpl();
-	  
-	  StringBuilder urlBuilder = new StringBuilder(url);
-	   
-		Pattern p = Pattern.compile("\\{(.*?)\\}");
-		Matcher ans = p.matcher(url);
-		while(ans.find()) {
-          String group = ans.group(1);            
-          String[] split = group.split("\\.");
-          String key1 = split[0];
-          String key2 = split[1];
-          
-          String res = (String) mapBuilder.getMap(key1, key2);
-          String replace = (urlBuilder+"").replace("{"+group+"}", res);
-          urlBuilder=new StringBuilder(replace);      
-      }
-	  return urlBuilder.toString();
-  }
-  private static String addPathParams(List<NameValuePair<String, String>> pathParams) {
-    if (CollectionUtils.isEmpty(pathParams)) {
-      return EMPTY_STRING;
+  private String buildPathParams(String url) {
+
+    Pattern p = Pattern.compile(URL_PATTERN);
+    Matcher ans = p.matcher(url);
+    while (ans.find()) {
+      String group = ans.group(1);
+      int firstDot = group.indexOf(".");
+      String key1 = group.substring(0, firstDot);
+      String key2 = group.substring(firstDot + 1);
+
+      String res = mapBuilder.getMap(key1, key2)
+          .toString();
+      url = url.replace("{" + group + "}", res);
     }
-    return "/" + pathParams.stream()
-        .map(pair -> String.valueOf(pair.getValue()))
-        .collect(Collectors.joining("/"));
+    return url;
   }
 
-  private static String addRequestParams(List<NameValuePair<String, String>> requestParams) {
+  private String addRequestParams(List<NameValuePair<String, String>> requestParams) {
     if (CollectionUtils.isEmpty(requestParams)) {
       return EMPTY_STRING;
     }

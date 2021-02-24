@@ -129,5 +129,14 @@ public class RestTemplateWrapperImpl implements IRestTemplateWrapper {
     return response.getBody();
   }
 
+  @Override
+  public <T> String customGetForEntity(Class<T> clazz, String url, HttpHeaders headers,
+      Object... uriVariables) {
+    HttpEntity<String> entity = new HttpEntity<>(headers);
+    ResponseEntity<String> response =
+        restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+    return response.getBody();
+  }
+
 
 }
