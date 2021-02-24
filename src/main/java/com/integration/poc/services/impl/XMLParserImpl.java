@@ -19,13 +19,11 @@ public class XMLParserImpl implements IXMLParser {
 	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(new InputSource(new StringReader(response)));
 			doc.getDocumentElement().normalize();
-			return(doc.getElementsByTagName(id).item(0).getTextContent());
-			
-	    
+			return(doc.getElementsByTagName(id).item(0).getTextContent());	
 	    }  catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	      return "-1";
+	      return "";
 		}
 }

@@ -9,23 +9,20 @@ import com.integration.poc.services.IMapBuilder;
 @Service
 public class MapBuilderImpl implements IMapBuilder{
 
-	Map<String,Map<String,Object>> mapBuilder=new HashMap();
-	public void putMap(String apiKey,String id,Object obj) {
+	Map<String,Map<String,String>> mapBuilder=new HashMap();
+	public void putMap(String apiKey,String id,String obj) {
 		
 		if(mapBuilder.containsKey(apiKey)) {
 		    mapBuilder.get(apiKey).put(id, obj);
 		}
 		else {
-			System.out.println(apiKey);
-			Map<String,Object> innerMap=new HashMap();
+			Map<String,String> innerMap=new HashMap();
 			innerMap.put(id,obj);
 			mapBuilder.put(apiKey, innerMap);
-			
-		}
-		
+		}	
 	}
 	
-	public Object getMap(String apiKey,String id) {
+	public String getMap(String apiKey,String id) {
 		return mapBuilder.get(apiKey).get(id);
 	}
 }

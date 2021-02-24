@@ -40,15 +40,14 @@ public class ApiExecutorImpl implements IApiExecutor {
   }
 
   private void executePost(ApiRequestConfig apiRequest) {
+
     String url = UrlBuilderUtil.buildUrl(apiRequest);
     String response = restTemplate.customPostForEntity(String.class, url, apiRequest.getRequestBody(),
         addHeaders(apiRequest));
     LOGGER.info("Response after Post: {}", response);
-    
+
     String value= xmlParser.parsedata(response,apiRequest.getStore().get(0));
-    System.out.println(value);
     mapBuilder.putMap(apiRequest.getApiKey(), apiRequest.getStore().get(0), value);
-    System.out.println(mapBuilder.getMap(apiRequest.getApiKey(),apiRequest.getStore().get(0))); 
   }
 
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {
