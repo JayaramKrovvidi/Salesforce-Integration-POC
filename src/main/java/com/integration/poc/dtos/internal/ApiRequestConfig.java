@@ -15,4 +15,5 @@ public class ApiRequestConfig {
   private List<NameValuePair<String, String>> headers;
   private Object requestBody;
   private String retry;
+  private List<String> store;
 }
