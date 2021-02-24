@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.NameValuePair;
 import com.integration.poc.services.IApiExecutor;
+import com.integration.poc.services.IMapBuilder;
 import com.integration.poc.services.IRestTemplateWrapper;
+import com.integration.poc.services.IXMLParser;
 import com.integration.poc.utils.UrlBuilderUtil;
+
 
 @Service
 public class ApiExecutorImpl implements IApiExecutor {
@@ -18,6 +21,10 @@ public class ApiExecutorImpl implements IApiExecutor {
 
   @Autowired
   IRestTemplateWrapper restTemplate;
+  @Autowired 
+  IXMLParser xmlParser;
+  @Autowired
+  IMapBuilder mapBuilder;
 
   @Override
   public void executeApi(ApiRequestConfig apiRequest) {
@@ -37,12 +44,18 @@ public class ApiExecutorImpl implements IApiExecutor {
     String response = restTemplate.customPostForEntity(String.class, url, apiRequest.getRequestBody(),
         addHeaders(apiRequest));
     LOGGER.info("Response after Post: {}", response);
+    
+    String value= xmlParser.parsedata(response,apiRequest.getStore().get(0));
+    System.out.println(value);
+    mapBuilder.putMap(apiRequest.getApiKey(), apiRequest.getStore().get(0), value);
+    System.out.println(mapBuilder.getMap(apiRequest.getApiKey(),apiRequest.getStore().get(0))); 
   }
 
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {
     HttpHeaders headers = new HttpHeaders();
     for (NameValuePair<String, String> header : apiRequest.getHeaders()) {
       headers.add(header.getName(), header.getValue());
+      
     }
     return headers;
   }

@@ -18,16 +18,22 @@ public class UrlBuilderUtil {
 
   public static String buildUrl(ApiRequestConfig apiConfig) {
 	  System.out.println(apiConfig.getUrl());
-    StringBuilder urlBuilder = new StringBuilder();
+    StringBuilder urlBuilder = new StringBuilder();  
     urlBuilder.append(apiConfig.getUrl());
-//    buildPathParams(apiConfig.getUrl());
+    
+    String buildPathParams = buildPathParams(apiConfig.getUrl());
+    System.out.println(buildPathParams);
+    
+   
     urlBuilder.append(addPathParams(apiConfig.getPathParams()));
     urlBuilder.append(addRequestParams(apiConfig.getRequestParams()));
     return urlBuilder.toString();
   }
 
   private static String buildPathParams(String url) {
-	  
+	  System.out.println(url);
+//	  String url  = "https://www.google.com/{1.sessionId}/{2.id}";
+	  StringBuilder urlBuilder = new StringBuilder(url);
 	  Map<String, Map<String, String>> mainMap = new HashMap<>();
 		Map<String, String> insideMap1 = new HashMap<String, String>();
 		insideMap1.put("sessionId", "1222222");
@@ -44,11 +50,10 @@ public class UrlBuilderUtil {
           String key1 = split[0];
           String key2 = split[1];
           String res = mainMap.get(key1).get(key2);
-          String replace = url.replace("{"+group+"}", res);
-          System.out.println(replace);
-         
+          String replace = (urlBuilder+"").replace("{"+group+"}", res);
+          urlBuilder=new StringBuilder(replace);      
       }
-	  return  "";
+	  return urlBuilder.toString();
   }
   private static String addPathParams(List<NameValuePair<String, String>> pathParams) {
     if (CollectionUtils.isEmpty(pathParams)) {
