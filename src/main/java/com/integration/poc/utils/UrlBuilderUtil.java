@@ -30,7 +30,6 @@ public class UrlBuilderUtil {
    
 //    urlBuilder.append(addPathParams(apiConfig.getPathParams()));
 //    urlBuilder.append(addRequestParams(apiConfig.getRequestParams()));
-    System.out.println(urlBuilder.toString());
     return urlBuilder.toString();
   }
 
