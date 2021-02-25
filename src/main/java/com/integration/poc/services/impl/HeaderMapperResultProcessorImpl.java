@@ -3,6 +3,7 @@ package com.integration.poc.services.impl;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,13 @@ import com.integration.poc.utils.FTPClientUtil;
 @Service("SalesforceBatchResultProcessor")
 public class HeaderMapperResultProcessorImpl implements IResultProcessor {
 	
-	@Autowired
-	FTPClientUtil ftpClient;
+//	@Autowired
+//	FTPClientUtil ftpClient;
 
 	@Override
 	public void process(ApiRequestConfig apiRequest, String apiKey, String response) {
-		System.out.println(response);
 		String[] rows = response.split("\\r?\\n");
+		System.out.println(rows[0]);
 
 		List<String> newRows = new ArrayList<>();
 		newRows.add(
@@ -50,7 +51,8 @@ public class HeaderMapperResultProcessorImpl implements IResultProcessor {
 			}
 		}
 		
-		ftpClient.upload(filePath, fileName);
+//		ftpClient.upload(filePath, fileName);
 		
 	}
 }
+
