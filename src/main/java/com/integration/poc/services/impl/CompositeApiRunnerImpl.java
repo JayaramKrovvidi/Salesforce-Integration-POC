@@ -1,5 +1,6 @@
 package com.integration.poc.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.external.CompositeApiRequest;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.GenericApiRequest;
+import com.integration.poc.dtos.internal.ObjectMapper;
 import com.integration.poc.enums.Error;
 import com.integration.poc.exceptions.GenericError;
 import com.integration.poc.exceptions.GenericException;
@@ -26,10 +28,17 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
 
   @Autowired
   HandlerExecutorImpl handleExecutor;
+  
+  List<ObjectMapper> objectMapper = new ArrayList<ObjectMapper>();
+  
+  public List<ObjectMapper> getObjectMapper(){
+	  return objectMapper;
+  }
 
   @Override
   public void run(CompositeApiRequest requestConfig) {
     List<GenericApiRequest> apiRequestList = requestConfig.getRequestList();
+    objectMapper = requestConfig.getObjectMapper();
     if (CollectionUtils.isEmpty(apiRequestList)) {
       throw new GenericException(new GenericError(Error.REST_CLIENT.getErrorCode(),
           Error.REST_CLIENT.getErrorMsg() + "Should have atleast one request "));

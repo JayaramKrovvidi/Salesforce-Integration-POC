@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.integration.poc.dtos.internal.ApiRequestConfig;
+import com.integration.poc.services.ICompositeApiRunner;
 import com.integration.poc.services.IResultProcessor;
 import com.integration.poc.utils.FTPClientUtil;
 
@@ -18,9 +19,15 @@ public class HeaderMapperResultProcessorImpl implements IResultProcessor {
 	
 //	@Autowired
 //	FTPClientUtil ftpClient;
+	
+	@Autowired
+	ICompositeApiRunner compositeRunner;
+	
 
 	@Override
 	public void process(ApiRequestConfig apiRequest, String apiKey, String response) {
+	
+		System.out.println(compositeRunner.getObjectMapper());
 		String[] rows = response.split("\\r?\\n");
 		System.out.println(rows[0]);
 

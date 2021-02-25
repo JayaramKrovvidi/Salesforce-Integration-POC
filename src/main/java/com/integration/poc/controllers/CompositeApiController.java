@@ -17,9 +17,7 @@ public class CompositeApiController {
 
   @PostMapping("/composite")
   public void compositeApiTest(@RequestBody CompositeApiRequest runnerConfig) {
-	  System.out.println(runnerConfig.getObjectMapper());
-//	  System.out.println(runnerConfig.getRequestList());
-//    compositeApiRunner.run(runnerConfig);
+    compositeApiRunner.run(runnerConfig);
   }
   
   
