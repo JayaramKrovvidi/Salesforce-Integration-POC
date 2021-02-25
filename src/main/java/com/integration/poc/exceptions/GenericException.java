@@ -1,5 +1,6 @@
 package com.integration.poc.exceptions;
 
+import com.integration.poc.enums.Error;
 
 public class GenericException extends RuntimeException {
 

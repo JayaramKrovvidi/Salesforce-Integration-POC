@@ -2,12 +2,13 @@ package com.integration.poc.services.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.external.CompositeApiRequest;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.GenericApiRequest;
-import com.integration.poc.exceptions.Error;
+import com.integration.poc.enums.Error;
 import com.integration.poc.exceptions.GenericError;
 import com.integration.poc.exceptions.GenericException;
 import com.integration.poc.services.IApiExecutor;
@@ -16,6 +17,9 @@ import com.integration.poc.utils.HandlerExecutorImpl;
 
 @Service
 public class CompositeApiRunnerImpl implements ICompositeApiRunner {
+
+  @Value("${retry.hold.value}")
+  private Integer retryHoldInMillis;
 
   @Autowired
   IApiExecutor apiExecutor;
@@ -41,18 +45,8 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
         apiExecutor.executeApi(currentRequest.getApiRequest());
         boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(),
             currentApiConfig.getSuccessHandlers());
-        if (success) {
-          String nextApiKey = currentRequest.getOnSuccess()
-              .get(0);
-          currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
-        } else if (currentApiConfig.getRetry()
-            .equalsIgnoreCase("*")) {
-          Thread.sleep(10000);
-        } else {
-          String nextApiKey = currentRequest.getOnFailure()
-              .get(0);
-          currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
-        }
+        currentRequest =
+            decideNextApiOnSuccess(apiRequestList, currentRequest, currentApiConfig, success);
 
       } catch (GenericException e) {
         throw new GenericException(new GenericError(Error.REST_CLIENT.getErrorCode(),
@@ -63,6 +57,24 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
         ie.getMessage();
       }
     }
+  }
+
+  private GenericApiRequest decideNextApiOnSuccess(List<GenericApiRequest> apiRequestList,
+      GenericApiRequest currentRequest, ApiRequestConfig currentApiConfig, boolean success)
+      throws InterruptedException {
+    if (success) {
+      String nextApiKey = currentRequest.getOnSuccess()
+          .get(0);
+      currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
+    } else if (currentApiConfig.getRetry()
+        .equalsIgnoreCase("*")) {
+      Thread.sleep(retryHoldInMillis);
+    } else {
+      String nextApiKey = currentRequest.getOnFailure()
+          .get(0);
+      currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
+    }
+    return currentRequest;
   }
 
   private GenericApiRequest getRequestConfigByApiKey(String apiKey,

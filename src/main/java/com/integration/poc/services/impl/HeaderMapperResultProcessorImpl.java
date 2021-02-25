@@ -13,7 +13,7 @@ import com.integration.poc.services.IResultProcessor;
 import com.integration.poc.utils.FTPClientUtil;
 
 @Service("SalesforceBatchResultProcessor")
-public class SalesforceBatchResultProcessor implements IResultProcessor {
+public class HeaderMapperResultProcessorImpl implements IResultProcessor {
 	
 	@Autowired
 	FTPClientUtil ftpClient;

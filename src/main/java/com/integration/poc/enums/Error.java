@@ -1,4 +1,4 @@
-package com.integration.poc.exceptions;
+package com.integration.poc.enums;
 
 public enum Error {
   NO_DATA_FOUND(1, "No Data Found Error"),

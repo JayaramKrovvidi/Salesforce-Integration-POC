@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
-import com.integration.poc.exceptions.Error;
+import com.integration.poc.enums.Error;
 import com.integration.poc.exceptions.GenericError;
 import com.integration.poc.exceptions.GenericException;
 import com.integration.poc.services.IRestTemplateWrapper;
