@@ -51,6 +51,7 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     while (null != currentRequest) {
       try {
         ApiRequestConfig currentApiConfig = currentRequest.getApiRequest();
+        //object mapper to send
         apiExecutor.executeApi(currentRequest.getApiRequest());
         boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(),
             currentApiConfig.getSuccessHandlers());

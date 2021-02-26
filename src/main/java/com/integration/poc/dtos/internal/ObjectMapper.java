@@ -13,12 +13,7 @@ public class ObjectMapper {
 	private List<String>  apiKey;
 	private String mappingKey;
 	private List<NameValuePair<String,String >> mappers;
-	@Override
-	public String toString() {
-		return "ObjectMapper [apiKey=" + apiKey + ", mappingKey=" + mappingKey + ", mappers=" + mappers + "]";
-	}
-	
-	
+
 	
 	
 	
