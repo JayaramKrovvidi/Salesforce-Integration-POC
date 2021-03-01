@@ -1,6 +1,5 @@
 package com.integration.poc.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,31 +27,26 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
 
   @Autowired
   HandlerExecutorImpl handleExecutor;
-  
-  List<ObjectMapper> objectMapper = new ArrayList<ObjectMapper>();
-  
-  public List<ObjectMapper> getObjectMapper(){
-	  return objectMapper;
-  }
 
   @Override
   public void run(CompositeApiRequest requestConfig) {
     List<GenericApiRequest> apiRequestList = requestConfig.getRequestList();
-    objectMapper = requestConfig.getObjectMapper();
+    List<ObjectMapper> mappers = requestConfig.getObjectMapper();
     if (CollectionUtils.isEmpty(apiRequestList)) {
       throw new GenericException(new GenericError(Error.REST_CLIENT.getErrorCode(),
           Error.REST_CLIENT.getErrorMsg() + "Should have atleast one request "));
     }
-    executeApisSequentially(apiRequestList);
+    executeApisSequentially(apiRequestList, mappers);
   }
 
-  private void executeApisSequentially(List<GenericApiRequest> apiRequestList) {
+  private void executeApisSequentially(List<GenericApiRequest> apiRequestList,
+      List<ObjectMapper> mappers) {
     GenericApiRequest currentRequest = apiRequestList.get(0);
     while (null != currentRequest) {
       try {
         ApiRequestConfig currentApiConfig = currentRequest.getApiRequest();
-        //object mapper to send
-        apiExecutor.executeApi(currentRequest.getApiRequest());
+        ObjectMapper mapperForCurrentApi = getMapperByApiKey(currentApiConfig.getApiKey(), mappers);
+        apiExecutor.executeApi(currentRequest.getApiRequest(), mapperForCurrentApi);
         boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(),
             currentApiConfig.getSuccessHandlers());
         currentRequest =
@@ -100,6 +94,16 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     }
     throw new GenericException(new GenericError(Error.REST_CLIENT.getErrorCode(),
         Error.REST_CLIENT.getErrorMsg() + "Couldn't find API Key " + apiKey));
+  }
+
+  private ObjectMapper getMapperByApiKey(String apiKey, List<ObjectMapper> mappers) {
+    for (ObjectMapper mapper : mappers) {
+      List<String> apiKeys = mapper.getApiKey();
+      if (apiKeys.contains(apiKey)) {
+        return mapper;
+      }
+    }
+    return null;
   }
 
 }

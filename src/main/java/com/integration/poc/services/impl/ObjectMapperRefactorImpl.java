@@ -1,100 +1,88 @@
 package com.integration.poc.services.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
-
 import com.integration.poc.dtos.internal.NameValuePair;
-import com.integration.poc.services.ICompositeApiRunner;
+import com.integration.poc.dtos.internal.ObjectMapper;
 import com.integration.poc.services.IObjectMapperRefactor;
 
-@Service 
-@RequestScope
+@Service
 public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
-	
-	private static String REGEX = "^[\"']+|[\"']+$";
-	List<String> header=new ArrayList<String>();
-    List<String> headerClone=new ArrayList<String>();
-    List<List <String>> content=new ArrayList<List<String>>();
-	List<List <String>> contentClone=new ArrayList<List<String>>();
-    Map<String,Map<String,String>> mappers=new HashMap<String, Map<String,String>>();
-    
-    @Autowired
-	ICompositeApiRunner compositeRunner;
-    
-    public void createMapper() {
-		List<NameValuePair<String, String>> m = compositeRunner.getObjectMapper().get(0).getMappers();
-    	 for(NameValuePair<String, String>nameValuePair:m) {
-         	Map<String,String> innermap=new HashMap<String, String>();
-         	innermap.put("value", nameValuePair.getValue());
-         	innermap.put("visited","false");
-             mappers.put(nameValuePair.getName(), innermap);
-         }
+
+  private static final String REGEX = "^[\"']+|[\"']+$";
+
+  @Override
+  public List<String> run(String[] rows, ObjectMapper mapper) {
+    List<String> header = buildHeader(rows);
+    List<String> newHeaders = buildNewHeaders(mapper);
+    Map<String, String> correspOldHeaderMap = createOldHeaderMapping(mapper);
+    List<Integer> newIndices = getNewIndices(header, newHeaders, correspOldHeaderMap);
+
+    String newHeader = newHeaders.stream()
+        .collect(Collectors.joining(","));
+    List<String> newRows = new ArrayList<>();
+    newRows.add(newHeader);
+    for (int i = 1; i < rows.length; i++) {
+      newRows.add(processRow(rows[i], newIndices));
     }
+    return newRows;
+  }
 
-	public void buildHeader(String[] rows){
-		String[] rowcontent=rows[0].split(",");	
-		for(int i=0;i<rowcontent.length;i++) {
-			header.add(rowcontent[i].replaceAll(REGEX, ""));
-			headerClone.add(rowcontent[i].replaceAll(REGEX, ""));
-		}
-	}
-	
-	public void buildContent(String[] rows) {
-		for(int i=1;i<rows.length;i++) {
-			String[] linecontent=rows[i].split(",");	
-			List <String> data=new ArrayList<String>();
-			for(int j=0;j<linecontent.length;j++) {
-		      	data.add(linecontent[j].replaceAll(REGEX, ""));
-			}
-			content.add(data);
-			contentClone.add(data);
-		}	
-	}
+  public List<String> buildHeader(String[] rows) {
+    List<String> header = new ArrayList<>();
+    String[] rowcontent = rows[0].split(",");
+    for (int i = 0; i < rowcontent.length; i++) {
+      header.add(rowcontent[i].replaceAll(REGEX, ""));
+    }
+    return header;
+  }
 
-	//if all name,value present in response and if extra header present in resposne
-	public void alterMapper1() {
-		for(String i:header) {
-			if(mappers.containsKey(i)) {
-			   mappers.get(i).put("visited","true");
-			   headerClone.set(header.indexOf(i),mappers.get(i).get("value"));		   
-			}
-			else {
-				int removeIndex=headerClone.indexOf(i);
-				headerClone.remove(removeIndex);
-				int contentsize=content.size();				
-				for(int j=0;j<contentsize;j++) {
-					contentClone.get(j).remove(removeIndex);					
-				}			
-			}
-		}
-	}
-	
-	// if configuration contains extra name value which are not present in response
-	public void alterMapper2() {
-		for(String i:mappers.keySet()) {
-			if(mappers.get(i).get("visited")=="false") {
-				headerClone.add(mappers.get(i).get("value"));
-				int contentsize=content.size();
-				for(int j=0;j<contentsize;j++) {
-					contentClone.get(j).add("");
-				}
-			}
-		}
-	}
+  private Map<String, String> createOldHeaderMapping(ObjectMapper mapper) {
+    List<NameValuePair<String, String>> nmValMapping = mapper.getMappers();
+    return nmValMapping.stream()
+        .collect(Collectors.toMap(NameValuePair::getValue, NameValuePair::getName));
+  }
 
-	@Override
-	public List<String> getHeaderClone() {
-		return headerClone;
-	}
+  private List<String> buildNewHeaders(ObjectMapper mapper) {
+    List<NameValuePair<String, String>> nmValMapping = mapper.getMappers();
+    return nmValMapping.stream()
+        .map(NameValuePair::getValue)
+        .collect(Collectors.toList());
+  }
 
-	@Override
-	public List<List<String>> getContentClone() {
-		return contentClone;
-	}
+  private List<Integer> getNewIndices(List<String> headerList, List<String> newHeaderList,
+      Map<String, String> headerMappings) {
+    List<Integer> newIncdices = new ArrayList<>();
+    for (String newHeader : newHeaderList) {
+      String correspOldHeader = headerMappings.get(newHeader);
+      if (headerList.contains(correspOldHeader)) {
+        newIncdices.add(headerList.indexOf(correspOldHeader));
+      } else {
+        newIncdices.add(-1);
+      }
+    }
+    return newIncdices;
+  }
+
+  private String processRow(String row, List<Integer> indices) {
+    List<String> oldRowValues = Arrays.asList(row.split(","))
+        .stream()
+        .map(value -> value.replaceAll(REGEX, ""))
+        .collect(Collectors.toList());
+
+    List<String> newRowValues = new ArrayList<>();
+    for (Integer index : indices) {
+      if (index.equals(-1)) {
+        newRowValues.add("");
+      } else {
+        newRowValues.add(oldRowValues.get(index));
+      }
+    }
+    return newRowValues.stream()
+        .collect(Collectors.joining(","));
+  }
 }

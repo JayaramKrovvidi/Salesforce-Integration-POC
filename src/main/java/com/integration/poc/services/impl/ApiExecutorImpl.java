@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.NameValuePair;
+import com.integration.poc.dtos.internal.ObjectMapper;
 import com.integration.poc.enums.ResultProcessorTypeEnum;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.services.IMapBuilder;
@@ -36,16 +37,16 @@ public class ApiExecutorImpl implements IApiExecutor {
   BeanFactoryServiceImpl beanFactoryService;
 
   @Override
-  public void executeApi(ApiRequestConfig apiRequest) {
+  public void executeApi(ApiRequestConfig apiRequest, ObjectMapper mapper) {
     switch (apiRequest.getMethodType()) {
       case "GET":
-        executeGet(apiRequest);
+        executeGet(apiRequest, mapper);
         return;
       case "POST":
-        executePost(apiRequest);
+        executePost(apiRequest, mapper);
         return;
       case "PUT":
-        executePut(apiRequest);
+        executePut(apiRequest, mapper);
         return;
       default:
         return;
@@ -53,7 +54,7 @@ public class ApiExecutorImpl implements IApiExecutor {
 
   }
 
-  private void executePut(ApiRequestConfig apiRequest) {
+  private void executePut(ApiRequestConfig apiRequest, ObjectMapper mapper) {
     String apiKey = apiRequest.getApiKey();
     prepareApiConfigForExecution(apiRequest);
 
@@ -61,10 +62,10 @@ public class ApiExecutorImpl implements IApiExecutor {
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.putForEntity(String.class, url, apiRequest.getRequestBody());
 
-    storeValuesFromResponse(apiRequest, apiKey, response);
+    storeValuesFromResponse(apiRequest, apiKey, response, mapper);
   }
 
-  private void executeGet(ApiRequestConfig apiRequest) {
+  private void executeGet(ApiRequestConfig apiRequest, ObjectMapper mapper) {
     String apiKey = apiRequest.getApiKey();
     prepareApiConfigForExecution(apiRequest);
 
@@ -72,10 +73,10 @@ public class ApiExecutorImpl implements IApiExecutor {
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.customGetForEntity(String.class, url, addHeaders(apiRequest));
 
-    storeValuesFromResponse(apiRequest, apiKey, response);
+    storeValuesFromResponse(apiRequest, apiKey, response, mapper);
   }
 
-  private void executePost(ApiRequestConfig apiRequest) {
+  private void executePost(ApiRequestConfig apiRequest, ObjectMapper mapper) {
     String apiKey = apiRequest.getApiKey();
     prepareApiConfigForExecution(apiRequest);
 
@@ -84,7 +85,7 @@ public class ApiExecutorImpl implements IApiExecutor {
     String response = restTemplate.customPostForEntity(String.class, url,
         apiRequest.getRequestBody(), addHeaders(apiRequest));
 
-    storeValuesFromResponse(apiRequest, apiKey, response);
+    storeValuesFromResponse(apiRequest, apiKey, response, mapper);
   }
 
   // -------------- Helper Methods Start Here -----------------
@@ -95,23 +96,23 @@ public class ApiExecutorImpl implements IApiExecutor {
     Util.replaceParamsAtRuntime(mapBuilder, apiRequest.getRequestParams());
   }
 
-  private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey,
-      String response) {
+  private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey, String response,
+      ObjectMapper mapper) {
     List<String> storeIds = apiRequest.getStore();
     if (!CollectionUtils.isEmpty(storeIds)) {
       for (String storageId : storeIds) {
-        processAndStoreValueInMap(apiRequest, apiKey, response, storageId);
+        processAndStoreValueInMap(apiRequest, apiKey, response, storageId, mapper);
       }
     }
   }
 
   private void processAndStoreValueInMap(ApiRequestConfig apiRequest, String apiKey,
-      String response, String storageId) {
+      String response, String storageId, ObjectMapper mapper) {
     if (storageId.startsWith(CUSTOM_PROCESS_IDENTIFIER)) {
       String classKey = storageId.substring(CUSTOM_PROCESS_IDENTIFIER.length());
       IResultProcessor resultProcessor = beanFactoryService
           .getBeanForClass(ResultProcessorTypeEnum.getResultProcessorByKey(classKey));
-      resultProcessor.process(apiRequest, apiKey, response);
+      resultProcessor.process(apiRequest, apiKey, response, mapper);
     } else {
       String value = xmlParser.parsedata(response, storageId);
       mapBuilder.putMap(apiKey, storageId, value);
