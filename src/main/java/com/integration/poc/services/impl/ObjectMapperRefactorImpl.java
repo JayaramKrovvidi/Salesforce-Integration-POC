@@ -7,12 +7,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.integration.poc.dtos.internal.NameValuePair;
 import com.integration.poc.services.ICompositeApiRunner;
 import com.integration.poc.services.IObjectMapperRefactor;
 
-@Service
+@Service 
+@RequestScope
 public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
 	
 	private static String REGEX = "^[\"']+|[\"']+$";
@@ -64,7 +66,7 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
 			}
 			else {
 				int removeIndex=headerClone.indexOf(i);
-				headerClone.remove(i);
+				headerClone.remove(removeIndex);
 				int contentsize=content.size();				
 				for(int j=0;j<contentsize;j++) {
 					contentClone.get(j).remove(removeIndex);					

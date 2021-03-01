@@ -40,7 +40,7 @@ public class HeaderMapperResultProcessorImpl implements IResultProcessor {
 		objectMapperRefactor.alterMapper2();
 		List<String> headerClone = objectMapperRefactor.getHeaderClone();
 		List<List<String>> contentClone = objectMapperRefactor.getContentClone();
-
+        System.out.println(headerClone);
 		String newHeader=String.join(",",headerClone);
 		List<String> newRows = new ArrayList<>();
 //		newRows.add(
