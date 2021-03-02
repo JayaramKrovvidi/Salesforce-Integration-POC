@@ -19,8 +19,8 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
   public List<String> run(String[] rows, ObjectMapper mapper) {
     List<String> header = buildHeader(rows);
     List<String> newHeaders = buildNewHeaders(mapper);
-    Map<String, String> correspOldHeaderMap = createOldHeaderMapping(mapper);
-    List<Integer> newIndices = getNewIndices(header, newHeaders, correspOldHeaderMap);
+    Map<String, String> OldHeaderMap = createOldHeaderMapping(mapper);
+    List<Integer> newIndices = getNewIndices(header, newHeaders, OldHeaderMap);
 
     String finalCSVHeader = newHeaders.stream()
         .collect(Collectors.joining(","));
@@ -48,8 +48,8 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
   }
 
   private List<String> buildNewHeaders(ObjectMapper mapper) {
-    List<NameValuePair<String, String>> nmValMapping = mapper.getMappers();
-    return nmValMapping.stream()
+    List<NameValuePair<String, String>> nameValMapping = mapper.getMappers();
+    return nameValMapping.stream()
         .map(NameValuePair::getValue)
         .collect(Collectors.toList());
   }
