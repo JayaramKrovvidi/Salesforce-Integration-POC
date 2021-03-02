@@ -1,0 +1,24 @@
+{
+	"mappers": [
+		{
+			"sourceId": "id__c",
+			"destId": "idjhajj"
+		},
+		{
+			"sourceId": "newsourceId",
+			"destId": "nandy"
+		},
+		{
+			"sourceId": "vehicle_type__c",
+			"destId": "vehicle"
+		},
+		{
+			"sourceId": "checking",
+			"destId": "checkdestId"
+		},
+		{
+			"sourceId": "vin__c",
+			"destId": "vinner"
+		}
+	]
+}

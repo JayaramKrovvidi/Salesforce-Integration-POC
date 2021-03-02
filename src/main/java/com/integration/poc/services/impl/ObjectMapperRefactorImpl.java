@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
-import com.integration.poc.dtos.internal.NameValuePair;
-import com.integration.poc.dtos.internal.ObjectMapper;
+import com.integration.poc.dtos.internal.PostProcessConfig;
 import com.integration.poc.services.IObjectMapperRefactor;
 
 @Service
@@ -15,24 +14,27 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
 
   private static final String REGEX = "^[\"']+|[\"']+$";
 
- 
+
   @Override
-  public List<String> run(List<List<String>> rows, ObjectMapper mapper) {
-   
-    
+  public List<String> run(List<List<String>> rows, PostProcessConfig mapper) {
+
+
     List<String> header = rows.get(0);
     List<String> newHeaders = buildNewHeaders(mapper);
-    Map<String, String> OldHeaderMap = createOldHeaderMapping(mapper);
-    List<Integer> newIndices = getNewIndices(header, newHeaders, OldHeaderMap);
+    Map<String, String> oldHeaderMap = createOldHeaderMapping(mapper);
+    List<Integer> newIndices = getNewIndices(header, newHeaders, oldHeaderMap);
 
     String finalCSVHeader = newHeaders.stream()
         .collect(Collectors.joining(","));
     List<String> fileContent = new ArrayList<>();
     fileContent.add(finalCSVHeader);
     for (int i = 1; i < rows.size(); i++) {
-    	fileContent.add(processRow(rows.get(i).stream().map(Object::toString).collect(Collectors.joining(",")), newIndices));
+      fileContent.add(processRow(rows.get(i)
+          .stream()
+          .map(Object::toString)
+          .collect(Collectors.joining(",")), newIndices));
     }
-    
+
     return fileContent;
   }
 
@@ -45,17 +47,19 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
     return header;
   }
 
-  private Map<String, String> createOldHeaderMapping(ObjectMapper mapper) {
-    List<NameValuePair<String, String>> nameValMapping = mapper.getMappers();
-    return nameValMapping.stream()
-        .collect(Collectors.toMap(NameValuePair::getValue, NameValuePair::getName));
+  private Map<String, String> createOldHeaderMapping(PostProcessConfig mapper) {
+    // List<NameValuePair<String, String>> nameValMapping = mapper.getMappers();
+    // return nameValMapping.stream()
+    // .collect(Collectors.toMap(NameValuePair::getValue, NameValuePair::getName));
+    return null;
   }
 
-  private List<String> buildNewHeaders(ObjectMapper mapper) {
-    List<NameValuePair<String, String>> nameValMapping = mapper.getMappers();
-    return nameValMapping.stream()
-        .map(NameValuePair::getValue)
-        .collect(Collectors.toList());
+  private List<String> buildNewHeaders(PostProcessConfig mapper) {
+    // List<NameValuePair<String, String>> nameValMapping = mapper.getMappers();
+    // return nameValMapping.stream()
+    // .map(NameValuePair::getValue)
+    // .collect(Collectors.toList());
+    return null;
   }
 
   private List<Integer> getNewIndices(List<String> headerList, List<String> newHeaderList,
