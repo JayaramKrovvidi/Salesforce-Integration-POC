@@ -5,5 +5,7 @@ import com.integration.poc.dtos.internal.ObjectMapper;
 
 public interface IObjectMapperRefactor {
 
-  public List<String> run(String[] rows, ObjectMapper mapper);
+ 
+
+  public List<String> run(List<List<String>> rows, ObjectMapper mapper);
 }

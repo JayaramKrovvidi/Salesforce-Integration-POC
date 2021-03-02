@@ -15,9 +15,12 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
 
   private static final String REGEX = "^[\"']+|[\"']+$";
 
+ 
   @Override
-  public List<String> run(String[] rows, ObjectMapper mapper) {
-    List<String> header = buildHeader(rows);
+  public List<String> run(List<List<String>> rows, ObjectMapper mapper) {
+   
+    
+    List<String> header = rows.get(0);
     List<String> newHeaders = buildNewHeaders(mapper);
     Map<String, String> OldHeaderMap = createOldHeaderMapping(mapper);
     List<Integer> newIndices = getNewIndices(header, newHeaders, OldHeaderMap);
@@ -26,9 +29,10 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
         .collect(Collectors.joining(","));
     List<String> fileContent = new ArrayList<>();
     fileContent.add(finalCSVHeader);
-    for (int i = 1; i < rows.length; i++) {
-    	fileContent.add(processRow(rows[i], newIndices));
+    for (int i = 1; i < rows.size(); i++) {
+    	fileContent.add(processRow(rows.get(i).stream().map(Object::toString).collect(Collectors.joining(",")), newIndices));
     }
+    
     return fileContent;
   }
 

@@ -17,4 +17,5 @@ public class ApiRequestConfig {
   private String retry;
   private List<String> store;
   private List<Handle> successHandlers;
+  private String objectMappingOnSuccess;
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.ObjectMapper;
+import com.integration.poc.mediator.Mediator;
 import com.integration.poc.services.IObjectMapperRefactor;
 import com.integration.poc.services.IResultProcessor;
 import com.integration.poc.utils.FTPClientUtil;
@@ -20,19 +21,19 @@ public class HeaderMapperResultProcessorImpl implements IResultProcessor {
   @Autowired
   IObjectMapperRefactor objectMapperRefactor;
 
-
+  @Autowired
+  Mediator mediator;
+ 
   @Override
   public void process(ApiRequestConfig apiRequest, String apiKey, String response,
-      ObjectMapper mapper) {
-    String[] rows = response.split("\\r?\\n");
-    List<String> newRows = objectMapperRefactor.run(rows, mapper);
-
+      ObjectMapper mapper) {   
+    List<String> mediatorOutput=  mediator.mediatorMain(response,apiRequest.getObjectMappingOnSuccess());;
     String fileName = "asset_" + System.currentTimeMillis() + ".csv";
     String filePath = "D:\\Salesforce POC\\" + fileName;
     FileWriter fileWriter = null;
     try {
       fileWriter = new FileWriter(filePath);
-      for (String row : newRows) {
+      for (String row : mediatorOutput) {
         fileWriter.append(row);
         fileWriter.append("\n");
       }
@@ -46,7 +47,7 @@ public class HeaderMapperResultProcessorImpl implements IResultProcessor {
       }
     }
 
-    ftpClient.upload(filePath, fileName);
+//    ftpClient.upload(filePath, fileName);
 
   }
 

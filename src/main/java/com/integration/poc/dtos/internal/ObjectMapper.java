@@ -10,6 +10,7 @@ public class ObjectMapper {
 
   private List<String> apiKey;
   private String mappingKey;
+ 
   private List<NameValuePair<String, String>> mappers;
 
 }
