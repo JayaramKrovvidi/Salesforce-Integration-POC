@@ -22,14 +22,14 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
     Map<String, String> correspOldHeaderMap = createOldHeaderMapping(mapper);
     List<Integer> newIndices = getNewIndices(header, newHeaders, correspOldHeaderMap);
 
-    String newHeader = newHeaders.stream()
+    String finalCSVHeader = newHeaders.stream()
         .collect(Collectors.joining(","));
-    List<String> newRows = new ArrayList<>();
-    newRows.add(newHeader);
+    List<String> fileContent = new ArrayList<>();
+    fileContent.add(finalCSVHeader);
     for (int i = 1; i < rows.length; i++) {
-      newRows.add(processRow(rows[i], newIndices));
+    	fileContent.add(processRow(rows[i], newIndices));
     }
-    return newRows;
+    return fileContent;
   }
 
   public List<String> buildHeader(String[] rows) {
@@ -42,8 +42,8 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
   }
 
   private Map<String, String> createOldHeaderMapping(ObjectMapper mapper) {
-    List<NameValuePair<String, String>> nmValMapping = mapper.getMappers();
-    return nmValMapping.stream()
+    List<NameValuePair<String, String>> nameValMapping = mapper.getMappers();
+    return nameValMapping.stream()
         .collect(Collectors.toMap(NameValuePair::getValue, NameValuePair::getName));
   }
 
@@ -56,16 +56,16 @@ public class ObjectMapperRefactorImpl implements IObjectMapperRefactor {
 
   private List<Integer> getNewIndices(List<String> headerList, List<String> newHeaderList,
       Map<String, String> headerMappings) {
-    List<Integer> newIncdices = new ArrayList<>();
+    List<Integer> newIndices = new ArrayList<>();
     for (String newHeader : newHeaderList) {
       String correspOldHeader = headerMappings.get(newHeader);
       if (headerList.contains(correspOldHeader)) {
-        newIncdices.add(headerList.indexOf(correspOldHeader));
+        newIndices.add(headerList.indexOf(correspOldHeader));
       } else {
-        newIncdices.add(-1);
+        newIndices.add(-1);
       }
     }
-    return newIncdices;
+    return newIndices;
   }
 
   private String processRow(String row, List<Integer> indices) {
