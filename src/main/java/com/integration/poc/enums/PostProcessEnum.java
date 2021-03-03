@@ -5,8 +5,9 @@ import com.integration.poc.services.impl.CSVMediatorImpl;
 
 public enum PostProcessEnum {
 
-  ASSET_OBJ_CONVERSION("AssetConversion", "D:\\eclipse-workspace\\Turvo\\poc\\Salesforce-Integration-POC\\src\\main\\resources\\lib\\asset-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
-
+  ASSET_OBJ_CONVERSION("AssetConversion", "src\\main\\resources\\lib\\asset-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class)
+  ,CONTACT_OBJ_CONVERSION("ContactConversion","src\\main\\resources\\lib\\contact-conversion-config.json",CSVMediatorImpl.class, CSVMediatorImpl.class)
+  ,COMMUNICATION_CHANNEL_OBJ_CONVERSION("CommunicationChannelConversion","src\\main\\resources\\lib\\communication-channel-conversion-config.json",CSVMediatorImpl.class, CSVMediatorImpl.class);
   private final String key;
   private final String conversionConfig;
   private final Class<? extends IMediator> inputFormatter;

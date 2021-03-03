@@ -17,6 +17,6 @@ public class ApiRequestConfig {
   private String retry;
   private List<String> store;
   private List<Handle> successHandlers;
-  private String procKeyOnSuccess;
-  private String procKeyOnFailure;
+  private List<String> procKeyOnSuccess;
+  private List<String> procKeyOnFailure;
 }

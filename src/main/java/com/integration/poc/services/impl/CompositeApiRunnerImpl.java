@@ -43,13 +43,17 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
 
   private void executeApisSequentially(List<GenericApiRequest> apiRequestList) {
     GenericApiRequest currentRequest = apiRequestList.get(0);
+    
     while (null != currentRequest) {
       ApiRequestConfig currentApiConfig = currentRequest.getApiRequest();
       try {
         String response = apiExecutor.executeApi(currentRequest.getApiRequest());
         boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(),
             currentApiConfig.getSuccessHandlers());
+        
+        
         genericResultProcessor.process(currentApiConfig, response, success);
+        
         currentRequest = decideNextApi(apiRequestList, currentRequest, currentApiConfig, success);
       } catch (Exception e) {
         throw new GenericException(

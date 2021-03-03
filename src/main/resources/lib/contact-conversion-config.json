@@ -1,0 +1,29 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Name",
+			"destId": "name"
+		},
+		{
+			"sourceId": "Role",
+			"destId": "role"
+		},
+		{
+			"sourceId": "Title",
+			"destId": "title"
+		},
+		{
+			"sourceId": "ContextId",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "ContextType",
+			"destId": "contextType"
+		}
+		
+	]
+}

@@ -27,25 +27,30 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
   @Override
   public void process(ApiRequestConfig apiRequest, String response, boolean success) {
-    String key = success ? apiRequest.getProcKeyOnSuccess() : apiRequest.getProcKeyOnFailure();
-    if (null == key) {
+    List<String> keys = success ? apiRequest.getProcKeyOnSuccess() : apiRequest.getProcKeyOnFailure();
+    if (null == keys) {
       return;
     }
+   
+    for(String key: keys) {
+   // Get Necessary Details and execute Post Processing
+      IMediator inFormatter = factory.getBeanForClass(PostProcessEnum.getInputFormatterByKey(key));
+      IMediator outFormatter = factory.getBeanForClass(PostProcessEnum.getOutputFormatterByKey(key));
+      String configFilePath = PostProcessEnum.getConfigFilePath(key);
+      PostProcessConfig postProcessConfig = fileManager.getConfigFromResource(configFilePath);
 
-    // Get Necessary Details and execute Post Processing
-    IMediator inFormatter = factory.getBeanForClass(PostProcessEnum.getInputFormatterByKey(key));
-    IMediator outFormatter = factory.getBeanForClass(PostProcessEnum.getOutputFormatterByKey(key));
-    String configFilePath = PostProcessEnum.getConfigFilePath(key);
-    PostProcessConfig postProcessConfig = fileManager.getConfigFromResource(configFilePath);
+      
+      List<Node> nodes = inFormatter.from(response);
+      List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
+      String processedResponse = outFormatter.to(processedNodes);
 
-    List<Node> nodes = inFormatter.from(response);
-    List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
-    String processedResponse = outFormatter.to(processedNodes);
-
-    Node.printNodes(nodes);
-    System.out.println(" --------------- After Processing -------------------");
-    Node.printNodes(processedNodes);
-    upload(processedResponse);
+      Node.printNodes(nodes);
+      System.out.println(" --------------- After Processing -------------------");
+      Node.printNodes(processedNodes);
+      upload(processedResponse);
+      
+    }
+    
 
   }
 

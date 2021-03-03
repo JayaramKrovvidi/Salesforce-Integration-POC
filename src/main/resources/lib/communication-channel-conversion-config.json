@@ -1,0 +1,76 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "ContextId",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "EmailType",
+			"destId": "email.type"
+		},
+		{
+			"sourceId": "Email",
+			"destId": "email"
+		},
+		{
+			"sourceId": "PhoneType",
+			"destId": "phone.type"
+		},
+		{
+			"sourceId": "Phone",
+			"destId": "phone"
+		},
+		{
+			"sourceId": "OtherPhone",
+			"destId": "phone.extension"
+		},
+		{
+			"sourceId": "PhoneCountry",
+			"destId": "phone.country"
+		},
+		{
+			"sourceId": "MailingType",
+			"destId": "address.type"
+		},
+		{
+			"sourceId": "MailingStreet",
+			"destId": "address.line1"
+		},
+		{
+			"sourceId": "MailingLine2",
+			"destId": "address.line2"
+		},
+		{
+			"sourceId": "MailingCity",
+			"destId": "address.city"
+		},
+		{
+			"sourceId": "MailingState",
+			"destId": "address.state"
+		},
+		{
+			"sourceId": "MailingZip",
+			"destId": " address.zip"
+		},
+		{
+			"sourceId": "MailingCountry",
+			"destId": "address.country"
+		},
+		{
+			"sourceId": "IsPrimaryAddress",
+			"destId": "isPrimaryAddress"
+		},
+		{
+			"sourceId": "IsPrimaryEmail",
+			"destId": "isPrimaryEmail"
+		},
+		{
+			"sourceId": "IsPrimaryPhone",
+			"destId": "isPrimaryPhone"
+		}
+	]
+}
