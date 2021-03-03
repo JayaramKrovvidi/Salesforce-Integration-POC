@@ -19,6 +19,6 @@ public class CompositeApiController {
   public void compositeApiTest(@RequestBody CompositeApiRequest runnerConfig) {
     compositeApiRunner.run(runnerConfig);
   }
-  
-  
+
+
 }

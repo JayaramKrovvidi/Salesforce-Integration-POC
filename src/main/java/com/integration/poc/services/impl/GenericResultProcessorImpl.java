@@ -27,19 +27,21 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
   @Override
   public void process(ApiRequestConfig apiRequest, String response, boolean success) {
-    List<String> keys = success ? apiRequest.getProcKeyOnSuccess() : apiRequest.getProcKeyOnFailure();
+    List<String> keys =
+        success ? apiRequest.getProcKeyOnSuccess() : apiRequest.getProcKeyOnFailure();
     if (null == keys) {
       return;
     }
-   
-    for(String key: keys) {
-   // Get Necessary Details and execute Post Processing
+
+    for (String key : keys) {
+      // Get Necessary Details and execute Post Processing
       IMediator inFormatter = factory.getBeanForClass(PostProcessEnum.getInputFormatterByKey(key));
-      IMediator outFormatter = factory.getBeanForClass(PostProcessEnum.getOutputFormatterByKey(key));
+      IMediator outFormatter =
+          factory.getBeanForClass(PostProcessEnum.getOutputFormatterByKey(key));
       String configFilePath = PostProcessEnum.getConfigFilePath(key);
       PostProcessConfig postProcessConfig = fileManager.getConfigFromResource(configFilePath);
 
-      
+
       List<Node> nodes = inFormatter.from(response);
       List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
       String processedResponse = outFormatter.to(processedNodes);
@@ -48,9 +50,9 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       System.out.println(" --------------- After Processing -------------------");
       Node.printNodes(processedNodes);
       upload(processedResponse);
-      
+
     }
-    
+
 
   }
 
