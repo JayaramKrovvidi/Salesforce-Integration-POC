@@ -23,7 +23,7 @@ public class GenericResultProcessorImpl implements IResultProcessor {
   BeanFactoryServiceImpl factory;
 
   @Autowired
-  FileManagerService fileManager;
+  FileManagerServiceImpl fileManager;
 
   @Override
   public void process(ApiRequestConfig apiRequest, String response, boolean success) {
@@ -42,6 +42,9 @@ public class GenericResultProcessorImpl implements IResultProcessor {
     List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
     String processedResponse = outFormatter.to(processedNodes);
 
+    Node.printNodes(nodes);
+    System.out.println(" --------------- After Processing -------------------");
+    Node.printNodes(processedNodes);
     upload(processedResponse);
 
   }
@@ -58,7 +61,7 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       e.printStackTrace();
     }
 
-//     ftpClient.upload(filePath, fileName);
+    // ftpClient.upload(filePath, fileName);
   }
 
 

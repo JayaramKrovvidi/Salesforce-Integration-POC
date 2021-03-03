@@ -13,7 +13,7 @@ import com.integration.poc.dtos.internal.ConvConfig;
 import com.integration.poc.dtos.internal.PostProcessConfig;
 
 @Service
-public class FileManagerService {
+public class FileManagerServiceImpl {
 
   public PostProcessConfig getConfigFromResource(String path) {
     try {
