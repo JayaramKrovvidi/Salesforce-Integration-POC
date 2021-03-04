@@ -2,7 +2,9 @@ package com.integration.poc.utils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import com.integration.poc.dtos.internal.NameValuePair;
 import com.integration.poc.services.IMapBuilder;
@@ -35,5 +37,10 @@ public class Util {
         param.setValue((String) mapBuilder.getMap(apiKey, id));
       }
     });
+  }
+
+  public static <K, V> Map<K, V> createMap(List<NameValuePair<K, V>> pairs) {
+    return pairs.stream()
+        .collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue));
   }
 }

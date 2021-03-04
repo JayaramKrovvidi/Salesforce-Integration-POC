@@ -8,6 +8,8 @@ import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.external.CompositeApiRequest;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.GenericApiRequest;
+import com.integration.poc.dtos.internal.Handle;
+import com.integration.poc.enums.AdaptersEnum;
 import com.integration.poc.enums.Error;
 import com.integration.poc.exceptions.GenericError;
 import com.integration.poc.exceptions.GenericException;
@@ -23,7 +25,7 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
   private Integer retryHoldInMillis;
 
   @Autowired
-  IApiExecutor apiExecutor;
+  BeanFactoryServiceImpl factory;
 
   @Autowired
   HandlerExecutorImpl handleExecutor;
@@ -43,42 +45,42 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
 
   private void executeApisSequentially(List<GenericApiRequest> apiRequestList) {
     GenericApiRequest currentRequest = apiRequestList.get(0);
-
     while (null != currentRequest) {
       ApiRequestConfig currentApiConfig = currentRequest.getApiRequest();
       try {
-        String response = apiExecutor.executeApi(currentRequest.getApiRequest());
-        boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(),
-            currentApiConfig.getSuccessHandlers());
-
-
-        genericResultProcessor.process(currentApiConfig, response, success);
-
-        currentRequest = decideNextApi(apiRequestList, currentRequest, currentApiConfig, success);
+        boolean success = executeCurrentApi(currentApiConfig, currentApiConfig.getApiKey());
+        currentRequest = decideNextApi(apiRequestList, currentRequest, success);
       } catch (Exception e) {
-        throw new GenericException(
-            new GenericError(Error.REST_CLIENT.getErrorCode(), Error.REST_CLIENT.getErrorMsg()
-                + "Error while executing API with key: " + currentApiConfig.getApiKey()));
+        throw new GenericException(new GenericError(Error.REST_CLIENT.getErrorCode(),
+            Error.REST_CLIENT.getErrorMsg() + "API Failure: " + currentApiConfig.getApiKey()));
       }
     }
   }
 
+  private boolean executeCurrentApi(ApiRequestConfig currentApiConfig, String apiKey) {
+    String response = findAdapterAndExecuteApi(currentApiConfig);
+    List<Handle> successHandlers = currentApiConfig.getSuccessHandlers();
+    boolean success = handleExecutor.executeHandles(apiKey, successHandlers);
+    genericResultProcessor.process(currentApiConfig, response, success);
+    return success;
+  }
+
+  private String findAdapterAndExecuteApi(ApiRequestConfig request) {
+    String requestType = request.getRequestType();
+    IApiExecutor apiExecutor = factory.getBeanForClass(AdaptersEnum.getAdapterByKey(requestType));
+    return apiExecutor.executeApi(request);
+  }
+
   private GenericApiRequest decideNextApi(List<GenericApiRequest> apiRequestList,
-      GenericApiRequest currentRequest, ApiRequestConfig currentApiConfig, boolean success)
-      throws InterruptedException {
-    if (success) {
-      String nextApiKey = currentRequest.getOnSuccess()
-          .get(0);
-      currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
-    } else if (currentApiConfig.getRetry()
-        .equalsIgnoreCase("*")) {
+      GenericApiRequest request, boolean success) throws InterruptedException {
+    ApiRequestConfig currentApiConfig = request.getApiRequest();
+    String retry = currentApiConfig.getRetry();
+    if (!success && retry.equalsIgnoreCase("*")) {
       Thread.sleep(retryHoldInMillis);
-    } else {
-      String nextApiKey = currentRequest.getOnFailure()
-          .get(0);
-      currentRequest = getRequestConfigByApiKey(nextApiKey, apiRequestList);
+      return request;
     }
-    return currentRequest;
+    List<String> nextKeys = success ? request.getOnSuccess() : request.getOnFailure();
+    return getRequestConfigByApiKey(nextKeys.get(0), apiRequestList);
   }
 
   private GenericApiRequest getRequestConfigByApiKey(String apiKey,

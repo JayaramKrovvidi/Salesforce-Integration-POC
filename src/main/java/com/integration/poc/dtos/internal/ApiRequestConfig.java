@@ -11,6 +11,7 @@ public class ApiRequestConfig {
   private String url;
   private List<NameValuePair<String, String>> pathParams;
   private List<NameValuePair<String, String>> requestParams;
+  private String requestType;
   private String methodType;
   private List<NameValuePair<String, String>> headers;
   private Object requestBody;

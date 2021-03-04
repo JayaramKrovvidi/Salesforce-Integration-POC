@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.integration.poc.constants.CommonConstants;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.Node;
 import com.integration.poc.dtos.internal.PostProcessConfig;
@@ -42,32 +43,30 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       String configFilePath = PostProcessEnum.getConfigFilePath(key);
       PostProcessConfig postProcessConfig = fileManager.getConfigFromResource(configFilePath);
 
-
       List<Node> nodes = inFormatter.from(response);
       List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
       String processedResponse = outFormatter.to(processedNodes);
-
-      Node.printNodes(nodes);
-      upload(processedResponse);
-
+      saveFileLocally(processedResponse, apiRequest.getApiKey(), key);
     }
-
-
   }
 
-  private void upload(String processedResponse) {
-    String fileName = "asset_" + System.currentTimeMillis() + ".csv";
-    String filePath = "D:\\Salesforce POC\\" + fileName;
+  private void saveFileLocally(String processedResponse, String apiKey, String processKey) {
+    String fileName = apiKey + processKey + ".csv";
+    String filePath = CommonConstants.LOCAL_FILE_PATH + fileName;
+
     FileWriter fileWriter = null;
     try {
       fileWriter = new FileWriter(filePath);
       fileWriter.append(processedResponse);
-      fileWriter.close();
     } catch (IOException e) {
-      e.printStackTrace();
+    } finally {
+      try {
+        if (fileWriter != null) {
+          fileWriter.close();
+        }
+      } catch (IOException e) {
+      }
     }
-
-    // ftpClient.upload(filePath, fileName);
   }
 
 

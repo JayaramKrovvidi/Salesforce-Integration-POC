@@ -15,7 +15,7 @@ import com.integration.poc.utils.UrlBuilderUtil;
 import com.integration.poc.utils.Util;
 
 @Service
-public class ApiExecutorImpl implements IApiExecutor {
+public class RestApiExecutorImpl implements IApiExecutor {
 
   @Autowired
   UrlBuilderUtil urlBuilder;

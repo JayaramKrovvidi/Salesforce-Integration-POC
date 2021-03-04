@@ -5,4 +5,5 @@ public class CommonConstants {
 
   public static final String SUCCESS_HANDLE_STRING = "successhandle.";
   public static final String CUSTOM_PROCESS_IDENTIFIER = "@";
+  public static final String LOCAL_FILE_PATH = "D:\\Salesforce POC\\";
 }
