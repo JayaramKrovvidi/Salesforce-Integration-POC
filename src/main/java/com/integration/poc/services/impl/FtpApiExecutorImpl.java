@@ -6,14 +6,17 @@ import java.io.InputStream;
 import java.util.Map;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.integration.poc.constants.CommonConstants;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.utils.Util;
 
 @Service
 public class FtpApiExecutorImpl implements IApiExecutor {
+
+  @Value("${local.file.path}")
+  private String localFilePath;
 
   @Override
   public String executeApi(ApiRequestConfig apiRequest) {
@@ -33,13 +36,13 @@ public class FtpApiExecutorImpl implements IApiExecutor {
     String ftpUName = requestParams.get("ftp.username");
     String ftpPass = requestParams.get("ftp.password");
     String fileNm = requestParams.get("apiKey") + requestParams.get("processKey") + ".csv";
-    String localPath = CommonConstants.LOCAL_FILE_PATH + fileNm;
-    String remotePath = requestParams.get("ftp.remotePath");
-    return uploadFileToFtpServer(ftpServer, ftpUName, ftpPass, fileNm, localPath, remotePath);
+    String localPath = localFilePath + fileNm;
+    String remoteUri = requestParams.get("ftp.remoteUri");
+    return uploadFileToFtpServer(ftpServer, ftpUName, ftpPass, localPath, remoteUri);
   }
 
   private String uploadFileToFtpServer(String ftpServer, String ftpUName, String ftpPass,
-      String fileNm, String localFilePath, String remoteFilePath) {
+      String localFilePath, String remoteUri) {
     FTPClient ftp = new FTPClient();
     boolean status = false;
     try {
@@ -48,7 +51,7 @@ public class FtpApiExecutorImpl implements IApiExecutor {
       ftp.setFileType(FTP.BINARY_FILE_TYPE);
       ftp.enterLocalPassiveMode();
       InputStream input = new FileInputStream(new File(localFilePath));
-      status = ftp.storeFile(remoteFilePath + fileNm, input);
+      status = ftp.storeFile(remoteUri + "05032021.csv", input);
       if (status) {
         System.out.println("Upload Successful");
       } else {

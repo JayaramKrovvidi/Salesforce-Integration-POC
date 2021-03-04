@@ -1,5 +1,6 @@
 package com.integration.poc.services.impl;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import com.integration.poc.dtos.internal.Node;
 import com.integration.poc.dtos.internal.PostProcessConfig;
 import com.integration.poc.services.IMediator;
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 
 @Service
 public class CSVMediatorImpl implements IMediator {
@@ -40,7 +42,7 @@ public class CSVMediatorImpl implements IMediator {
     return Collections.emptyList();
   }
 
-  private List<String[]> covertToRows(String csvString) throws Exception {
+  private List<String[]> covertToRows(String csvString) throws CsvException, IOException {
     StringReader stringReader = new StringReader(csvString);
     CSVReader csvReader = new CSVReader(stringReader);
     List<String[]> rows = csvReader.readAll();

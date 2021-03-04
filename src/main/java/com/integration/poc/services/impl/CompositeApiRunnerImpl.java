@@ -48,7 +48,7 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     while (null != currentRequest) {
       ApiRequestConfig currentApiConfig = currentRequest.getApiRequest();
       try {
-        boolean success = executeCurrentApi(currentApiConfig, currentApiConfig.getApiKey());
+        boolean success = executeCurrentApi(currentApiConfig);
         currentRequest = decideNextApi(apiRequestList, currentRequest, success);
       } catch (Exception e) {
         throw new GenericException(new GenericError(Error.REST_CLIENT.getErrorCode(),
@@ -57,10 +57,10 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     }
   }
 
-  private boolean executeCurrentApi(ApiRequestConfig currentApiConfig, String apiKey) {
+  private boolean executeCurrentApi(ApiRequestConfig currentApiConfig) {
     String response = findAdapterAndExecuteApi(currentApiConfig);
     List<Handle> successHandlers = currentApiConfig.getSuccessHandlers();
-    boolean success = handleExecutor.executeHandles(apiKey, successHandlers);
+    boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(), successHandlers);
     genericResultProcessor.process(currentApiConfig, response, success);
     return success;
   }

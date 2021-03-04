@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.integration.poc.constants.CommonConstants;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.Node;
 import com.integration.poc.dtos.internal.PostProcessConfig;
@@ -17,6 +17,9 @@ import com.integration.poc.utils.FTPClientUtil;
 
 @Service
 public class GenericResultProcessorImpl implements IResultProcessor {
+
+  @Value("${local.file.path}")
+  private String localFilePath;
 
   @Autowired
   FTPClientUtil ftpClient;
@@ -44,15 +47,25 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       PostProcessConfig postProcessConfig = fileManager.getConfigFromResource(configFilePath);
 
       List<Node> nodes = inFormatter.from(response);
+
+      System.out.println(" ------- CSV String before Processing --------\n" + response + "\n");
+      System.out.println(" -------- Mediator Representation before Processing --------");
+      Node.printNodes(nodes);
+
       List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
       String processedResponse = outFormatter.to(processedNodes);
+
+      System.out.println(" -------- Mediator Representation after Processing --------");
+      Node.printNodes(nodes);
+      System.out.println(" ---- CSV String after Processing ----\n" + processedResponse + "\n");
+
       saveFileLocally(processedResponse, apiRequest.getApiKey(), key);
     }
   }
 
   private void saveFileLocally(String processedResponse, String apiKey, String processKey) {
     String fileName = apiKey + processKey + ".csv";
-    String filePath = CommonConstants.LOCAL_FILE_PATH + fileName;
+    String filePath = localFilePath + fileName;
 
     FileWriter fileWriter = null;
     try {
