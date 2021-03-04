@@ -3,6 +3,7 @@ package com.integration.poc.services.impl;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
@@ -29,7 +30,7 @@ public class GenericResultProcessorImpl implements IResultProcessor {
   public void process(ApiRequestConfig apiRequest, String response, boolean success) {
     List<String> keys =
         success ? apiRequest.getProcKeyOnSuccess() : apiRequest.getProcKeyOnFailure();
-    if (null == keys) {
+    if (CollectionUtils.isEmpty(keys)) {
       return;
     }
 
@@ -47,8 +48,6 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       String processedResponse = outFormatter.to(processedNodes);
 
       Node.printNodes(nodes);
-      System.out.println(" --------------- After Processing -------------------");
-      Node.printNodes(processedNodes);
       upload(processedResponse);
 
     }

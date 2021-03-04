@@ -1,22 +1,27 @@
 package com.integration.poc.services.impl;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ConvConfig;
 import com.integration.poc.dtos.internal.Node;
 import com.integration.poc.dtos.internal.PostProcessConfig;
 import com.integration.poc.services.IMediator;
+import com.opencsv.CSVReader;
 
 @Service
 public class CSVMediatorImpl implements IMediator {
 
-  private static final String CSV_NEW_LINE_DELIMITTER = "\\r?\\n";
-  private static final String REGEX_ELIMINATE_QUOTES = "^[\"']+|[\"']+$";
+  private static final Logger LOGGER = LogManager.getLogger(CSVMediatorImpl.class);
+
   private static final String ROOT_NODE_NM = "root";
   private static final String OBJECT_NODE_NM = "obj";
   private static final String NEW_LINE = "\n";
@@ -25,30 +30,37 @@ public class CSVMediatorImpl implements IMediator {
 
   @Override
   public List<Node> from(String csvString) {
-    String[] rows = csvString.split(CSV_NEW_LINE_DELIMITTER);
-    List<Node> objectNodes = createObjectNodes(rows);
-    return Arrays.asList(new Node(ROOT_NODE_NM, objectNodes));
+    try {
+      List<String[]> rows = covertToRows(csvString);
+      List<Node> objectNodes = createObjectNodes(rows);
+      return Arrays.asList(new Node(ROOT_NODE_NM, objectNodes));
+    } catch (Exception e) {
+      LOGGER.error("Error While Parsing CSV String: {}", e.getMessage());
+    }
+    return Collections.emptyList();
   }
 
-  private List<Node> createObjectNodes(String[] rows) {
-    List<String> headerValues = splitValuesOfRow(rows[0]);
+  private List<String[]> covertToRows(String csvString) throws Exception {
+    StringReader stringReader = new StringReader(csvString);
+    CSVReader csvReader = new CSVReader(stringReader);
+    List<String[]> rows = csvReader.readAll();
+    csvReader.close();
+    stringReader.close();
+    return rows;
+  }
+
+  private List<Node> createObjectNodes(List<String[]> rows) {
+    List<String> headerValues = Arrays.asList(rows.get(0));
     List<Node> objectNodes = new ArrayList<>();
-    for (int i = 1; i < rows.length; i++) {
-      objectNodes.add(new Node(OBJECT_NODE_NM, createSubNodesForRow(headerValues, rows[i])));
+    for (int i = 1; i < rows.size(); i++) {
+      objectNodes.add(new Node(OBJECT_NODE_NM, createSubNodesForRow(headerValues, rows.get(i))));
     }
     return objectNodes;
   }
 
-  private List<String> splitValuesOfRow(String row) {
-    return Arrays.asList(row.split(","))
-        .stream()
-        .map(column -> column.replaceAll(REGEX_ELIMINATE_QUOTES, ""))
-        .collect(Collectors.toList());
-  }
-
-  private List<Node> createSubNodesForRow(List<String> headerValues, String row) {
+  private List<Node> createSubNodesForRow(List<String> headerValues, String[] row) {
     List<Node> nmValPairNodes = new ArrayList<>();
-    List<String> rowValues = splitValuesOfRow(row);
+    List<String> rowValues = Arrays.asList(row);
     for (int i = 0; i < rowValues.size(); i++) {
       nmValPairNodes.add(new Node(headerValues.get(i), rowValues.get(i)));
     }
@@ -81,6 +93,7 @@ public class CSVMediatorImpl implements IMediator {
 
   private void addLineToCSVString(StringBuilder csvBuilder, List<String> values) {
     csvBuilder.append(values.stream()
+        .map(value -> "\"" + value + "\"")
         .collect(Collectors.joining(",")));
     csvBuilder.append(NEW_LINE);
   }
