@@ -1,0 +1,65 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+			
+		},
+		{
+			"sourceId": "BillingAccountId",
+			"destId": "account.id"
+		},
+		{
+			"sourceId": "AccountName",
+			"destId": "account.name"
+		},
+		{
+			"sourceId": "AccountType",
+			"destId": "account.type"
+		},
+		{
+			"sourceId": "AccountOrderId",
+			"destId": "account.orderId"
+		},
+		{
+			"sourceId": "InvoiceNumber",
+			"destId": "invoiceNumber"
+		},
+		{
+			"sourceId": "CreatedDate",
+			"destId": "createdDate"
+		},
+		{
+			"sourceId": "DueDate",
+			"destId": "dueDate"
+		},
+		{
+			"sourceId": "Status",
+			"destId": "status"
+		},
+		{
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+		{
+			"sourceId": "Amount",
+			"destId": "amount"
+		},
+		{
+			"sourceId": "TotalAmount",
+			"destId": "paidAmount"
+		},
+		{
+			"sourceId": "DeductionAmount",
+			"destId": "deductionAmount"
+		},
+		{
+			"sourceId": "IsFullyPaid",
+			"destId": "isFullyPaid"
+		},
+		{
+			"sourceId": "DocumentNumber",
+			"destId": "documentId"
+		}
+	]
+}

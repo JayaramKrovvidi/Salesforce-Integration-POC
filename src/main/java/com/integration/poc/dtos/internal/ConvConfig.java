@@ -8,11 +8,12 @@ import lombok.Setter;
 public class ConvConfig {
   private String sourceId;
   private String destId;
-
-  public ConvConfig(String sourceId, String destId) {
+  private String defaultId;
+  public ConvConfig(String sourceId, String destId,String defaultId) {
     super();
     this.sourceId = sourceId;
     this.destId = destId;
+    this.defaultId=defaultId;
   }
 
 }

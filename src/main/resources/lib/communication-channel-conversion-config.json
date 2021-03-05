@@ -3,6 +3,7 @@
 		{
 			"sourceId": "Id",
 			"destId": "id"
+			
 		},
 		{
 			"sourceId": "ContextId",
@@ -10,7 +11,8 @@
 		},
 		{
 			"sourceId": "EmailType",
-			"destId": "email.type"
+			"destId": "email.type",
+			"defaultId":"emailDefaultId"
 		},
 		{
 			"sourceId": "Email",

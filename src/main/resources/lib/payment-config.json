@@ -1,0 +1,37 @@
+{
+	"mappers": [
+		{
+			"sourceId": "InvoiceNumber",
+			"destId": "invoice.numbebr"
+			
+		},
+		{
+			"sourceId": "Method",
+			"destId": "method"
+		},
+		{
+			"sourceId": "Term",
+			"destId": "term"
+		},
+		{
+			"sourceId": "Amount",
+			"destId": "amount"
+		},
+		{
+			"sourceId": "Date",
+			"destId": "date"
+		},
+		{
+			"sourceId": "ReferenceNumber",
+			"destId": "referenceNumber"
+		},
+		{
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+		{
+			"sourceId": "Status",
+			"destId": "status"
+		}
+	]
+}

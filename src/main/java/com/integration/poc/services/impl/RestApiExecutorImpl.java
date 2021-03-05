@@ -51,7 +51,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.putForEntity(String.class, url, apiRequest.getRequestBody());
-
+    
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }
@@ -63,7 +63,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.customGetForEntity(String.class, url, addHeaders(apiRequest));
-
+    System.out.println(response);
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }

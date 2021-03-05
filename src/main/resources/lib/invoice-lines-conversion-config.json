@@ -1,0 +1,49 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+			
+		},
+		{
+			"sourceId": "InvoiceId",
+			"destId": "invoiceId"
+		},
+		{
+			"sourceId": "lineItemCode",
+			"destId": "lineItem.code"
+		},
+		{
+			"sourceId": "lineItemDesc",
+			"destId": "lineItem.Desc"
+		},
+		{
+			"sourceId": "lineItemQty",
+			"destId": "lineItem.qty"
+		},
+		{
+			"sourceId": "lineItemPrice",
+			"destId": "lineItem.price"
+		},
+		{
+			"sourceId": "lineItemAmount",
+			"destId": "lineItem.amount"
+		},
+		{
+			"sourceId": "lineItemBillable",
+			"destId": "lineItem.billable"
+		},
+		{
+			"sourceId": "lineItemPayable",
+			"destId": "lineItem.payable"
+		},
+		{
+			"sourceId": "lineItemIsDeduction",
+			"destId": "lineItem.isDeduction"
+		},
+		{
+			"sourceId": "lineItemIsAdvance",
+			"destId": "lineItem.isAdvance"
+		}
+	]
+}
