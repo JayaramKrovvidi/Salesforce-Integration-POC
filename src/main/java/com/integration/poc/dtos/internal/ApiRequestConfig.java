@@ -15,7 +15,6 @@ public class ApiRequestConfig {
   private String methodType;
   private List<NameValuePair<String, String>> headers;
   private Object requestBody;
-  private String retry;
   private List<String> store;
   private List<Handle> successHandlers;
   private List<String> procKeyOnSuccess;

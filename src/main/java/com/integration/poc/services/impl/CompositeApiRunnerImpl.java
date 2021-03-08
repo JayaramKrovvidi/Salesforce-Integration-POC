@@ -58,6 +58,7 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
   }
 
   private boolean executeCurrentApi(ApiRequestConfig currentApiConfig) {
+    System.out.println(currentApiConfig.getApiKey());
     String response = findAdapterAndExecuteApi(currentApiConfig);
     List<Handle> successHandlers = currentApiConfig.getSuccessHandlers();
     boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(), successHandlers);
@@ -72,15 +73,19 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
   }
 
   private GenericApiRequest decideNextApi(List<GenericApiRequest> apiRequestList,
-      GenericApiRequest request, boolean success) throws InterruptedException {
-    ApiRequestConfig currentApiConfig = request.getApiRequest();
-    String retry = currentApiConfig.getRetry();
-    if (!success && retry.equalsIgnoreCase("*")) {
+    GenericApiRequest request, boolean success) throws InterruptedException {
+    String retry = null == request.getRetry() ? "" :  request.getRetry();
+    if(!success && retry.equals("*")) {
       Thread.sleep(retryHoldInMillis);
       return request;
     }
-    List<String> nextKeys = success ? request.getOnSuccess() : request.getOnFailure();
-    return getRequestConfigByApiKey(nextKeys.get(0), apiRequestList);
+    Integer retryInt = retry.isBlank() ? 0 : Integer.parseInt(retry);
+      if( success || retryInt == 0) {
+        List<String> nextKeys = success ? request.getOnSuccess() : request.getOnFailure();
+        return getRequestConfigByApiKey(nextKeys.get(0), apiRequestList);
+      }
+      request.setRetry(String.valueOf(--retryInt));
+      return request;
   }
 
   private GenericApiRequest getRequestConfigByApiKey(String apiKey,

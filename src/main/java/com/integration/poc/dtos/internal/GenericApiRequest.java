@@ -10,4 +10,5 @@ public class GenericApiRequest {
   private ApiRequestConfig apiRequest;
   private List<String> onSuccess;
   private List<String> onFailure;
+  private String retry;
 }
