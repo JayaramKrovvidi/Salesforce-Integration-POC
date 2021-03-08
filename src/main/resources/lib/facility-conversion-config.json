@@ -1,0 +1,94 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id",
+            "defaultId":"idDefaultId"			
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId",
+            "defaultId":"contextIdDefaultId"
+		},
+		{
+			"sourceId": "HoursOfOperationStart",
+			"destId": "hoursOfOperation.start",
+			"defaultId":"hoursOfOperation.startDefaultId"
+		},
+		{
+			"sourceId": "HoursOfOperationEnd",
+			"destId": "hoursOfOperation.end",
+            "defaultId":"hoursOfOperation.endDefaultId"
+		},
+		{
+			"sourceId": "HoursOfOperation.days",
+			"destId": "hoursOfOperation.days",
+            "defaultId":"hoursOfOperation.daysDefaultId"
+		},
+		{
+			"sourceId": "ShippingHoursStart",
+			"destId": "shippingHours.start",
+            "defaultId":"shippingHours.startDefaultId"
+		},
+		{
+			"sourceId": "ShippingHoursEnd",
+			"destId": "shippingHours.end",
+            "defaultId":"shippingHours.endDefaultId"
+		},
+		{
+			"sourceId": "ShippingHoursDays",
+			"destId": "shippingHours.days",
+            "defaultId":"shippingHours.daysDefaultId"
+		},		
+		{
+			"sourceId": "ReceivingHoursStart",
+			"destId": "receivingHours.start",
+            "defaultId":"receivingHours.startDefaultId"
+		},
+		{
+			"sourceId": "ReceivingHoursEnd",
+			"destId": "receivingHours.end",
+            "defaultId":"receivingHours.endDefaultId"
+		},
+        {
+			"sourceId": "ReceivingHoursDdays",
+			"destId": "receivingHours.days",
+            "defaultId":"receivingHours.daysDefaultId"
+		},
+        {
+			"sourceId": "SchedulingType",
+			"destId": "schedulingType",
+            "defaultId":"schedulingTypeDefaultId"
+		},
+        {
+			"sourceId": "CrossDock",
+			"destId": "crossDock",
+            "defaultId":"crossDockDefaultId"
+		},
+        {
+			"sourceId": "ColdStorage",
+			"destId": "coldStorage",
+            "defaultId":"coldStorageDefaultId"
+		},
+        {
+			"sourceId": "Warehouse",
+			"destId": "warehouse",
+            "defaultId":"warehouseDefaultId"
+		},
+        {
+			"sourceId": "UseApptAsDwellTime",
+			"destId": "useApptAsDwellTime",
+            "defaultId":"useApptAsDwellTimeDefaultId"
+		},
+        {
+			"sourceId": "DwellTime",
+			"destId": "dwellTime",
+            "defaultId":"dwellTimeDefaultId"
+		},
+        {
+			"sourceId": "DwellTimeUnit",
+			"destId": "dwellTimeUnit",
+            "defaultId":"dwellTimeUnitDefaultId"
+		}
+	]
+}

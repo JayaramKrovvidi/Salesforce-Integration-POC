@@ -1,0 +1,150 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id",
+			"defaultId":"DefaultId"
+			
+		},
+		{
+			"sourceId": "Name",
+			"destId": "name",
+			"defaultId":"nameDefaultId"
+		},
+		{
+			"sourceId": "GeofenceDistance",
+			"destId": "geofence.distance",
+			"defaultId":"geofenceDistanceDefaultId"
+		},
+		{
+			"sourceId": "GeofenceUnits",
+			"destId": "geofence.units",
+			"defaultId":"geofenceUnitsDefaultId"
+		},
+		{
+			"sourceId": "TimeZone",
+			"destId": "timezone",
+			"defaultId":"timezoneDefaultId"
+		},
+		{
+			"sourceId": "PrimaryContactId",
+			"destId": "primaryContact.id",
+			"defaultId":"primaryContactDefaultId"
+		},
+		{
+			"sourceId": "DrivingDirections",
+			"destId": "directions",
+			"defaultId":"directionsDefaultId"
+		},
+		{
+			"sourceId": "SpecialInstructions",
+			"destId": "specialInstructions",
+			"defaultId":"specialInstructionsDefaultId"
+		},
+		{
+			"sourceId": "CopyInstructions",
+			"destId": "copyInstructions",
+			"defaultId":"copyInstructionsDefaultId"
+		},
+		{
+			"sourceId": "CompanyId",
+			"destId": "company.id",
+			"defaultId":"companyIdDefaultId"
+		},
+		{
+			"sourceId": "AccountId",
+			"destId": "account.id",
+			"defaultId":"accountIdDefaultId"
+		},
+		{
+			"sourceId": "AccountType",
+			"destId": "account.type",
+			"defaultId":"accountTypeDefaultId"
+		},
+		{
+			"sourceId": "DeliveryLinkIsStatus",
+			"destId": "deliveryLink.isStatus",
+			"defaultId":"deliveryLinkIsStatusDefaultId"
+		},
+		{
+			"sourceId": "DeliveryLinkStatus",
+			"destId": "deliveryLink.status",
+			"defaultId":"deliveryLinkStatusDefaultId"
+		},
+		{
+			"sourceId": "DeliveryLinkIsLateType",
+			"destId": "deliveryLink.isLateType",
+			"defaultId":"deliveryLinkIsLateTypeDefaultId"
+		},
+		{
+			"sourceId": "DeliveryLinkLateType",
+			"destId": "deliveryLink.lateType",
+			"defaultId":"deliveryLinkLateTypeDefaultId"
+		},
+		{
+			"sourceId": "DeliveryLinkIsTime",
+			"destId": "deliveryLink.isTime",
+			"defaultId":"deliveryLinkIsTimeDefaultId"
+		},
+		{
+			"sourceId": "DeliveryLinkTime",
+			"destId": "deliveryLink.time",
+			"defaultId":"deliveryLinkTimeDefaultId"
+		},
+		{
+			"sourceId": "DeliveryLinkTimeUnits",
+			"destId": "deliveryLink.timeUnits",
+			"defaultId":"deliveryLinkTimeUnitsDefaultId"
+		},
+		{
+			"sourceId": "AddressType",
+			"destId": "address.type",
+			"defaultId":"addressTypeDefaultId"
+		},
+		{
+			"sourceId": "AddressLine1",
+			"destId": "address.line1",
+			"defaultId":"addressLine1DefaultId"
+		},
+		{
+			"sourceId": "AddressLine2",
+			"destId": "address.line2",
+			"defaultId":"addressLine2DefaultId"
+		},
+		{
+			"sourceId": "AddressCity",
+			"destId": "address.city",
+			"defaultId":"addressCityDefaultId"
+		},
+		{
+			"sourceId": "AddressState",
+			"destId": "address.state",
+			"defaultId":"addressStateDefaultId"
+		},
+		{
+			"sourceId": "AddressZip",
+			"destId": "address.zip",
+			"defaultId":"addressZipDefaultId"
+		},
+		{
+			"sourceId": "AddressCountry",
+			"destId": "address.country",
+			"defaultId":"addressCountryDefaultId"
+		},
+		{
+			"sourceId": "AddressLat",
+			"destId": "address.lat",
+			"defaultId":"addressLatDefaultId"
+		},
+		{
+			"sourceId": "AddressLong",
+			"destId": "address.long",
+			"defaultId":"addressLongDefaultId"
+		},
+		{
+			"sourceId": "IsPrimaryAddress",
+			"destId": "isPrimaryAddress",
+			"defaultId":"isPrimaryAddressDefaultId"
+		}
+	]
+}

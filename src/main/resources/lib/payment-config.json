@@ -2,7 +2,7 @@
 	"mappers": [
 		{
 			"sourceId": "InvoiceNumber",
-			"destId": "invoice.numbebr"
+			"destId": "invoice.number"
 			
 		},
 		{

@@ -179,7 +179,7 @@ public class CSVMediatorImpl implements IMediator {
         newValueNodes.add(new Node(destId,destIdToMap));
       } else {
         Node valueNode = valueNodes.get(srcIndex);
-        if(valueNode.equals("")) {
+        if(valueNode.getValue().equals("")) {
           newValueNodes.add(new Node(destId,destIdToMap));
         }
         else {

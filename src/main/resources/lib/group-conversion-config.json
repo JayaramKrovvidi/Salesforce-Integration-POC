@@ -1,0 +1,20 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id",
+			"defaultId":"DefaultId"
+			
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId",
+			"defaultId":"contextDefaultId"
+		},
+		{
+			"sourceId": "GroupId",
+			"destId": "groupId",
+			"defaultId":"groupDefaultId"
+		}
+	]
+}

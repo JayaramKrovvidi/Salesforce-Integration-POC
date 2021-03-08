@@ -1,0 +1,60 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id",
+            "defaultId":"idDefaultId"			
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId",
+            "defaultId":"contextIdDefaultId"
+		},
+		{
+			"sourceId": "EmailType",
+			"destId": "email.type",
+			"defaultId":"emailDefaultId"
+		},
+		{
+			"sourceId": "Email",
+			"destId": "email",
+            "defaultId":"emailDefaultId"
+		},
+		{
+			"sourceId": "PhoneType",
+			"destId": "phone.type",
+            "defaultId":"phoneDefaultId"
+		},
+		{
+			"sourceId": "Phone",
+			"destId": "phone",
+            "defaultId":"phoneDefaultId"
+		},
+		{
+			"sourceId": "OtherPhone",
+			"destId": "phone.extension",
+            "defaultId":"phoneextensionDefaultId"
+		},
+		{
+			"sourceId": "PhoneCountry",
+			"destId": "phone.country",
+            "defaultId":"phonecountryDefaultId"
+		},
+		{
+			"sourceId": "IsPrimaryEmail",
+			"destId": "isPrimaryEmail",
+            "defaultId":"isPrimaryMailDefaultId"
+		},
+		
+		{
+			"sourceId": "IsPrimaryPhone",
+			"destId": "isPrimaryPhone",
+            "defaultId":"isPrimaryPhoneDefaultId"
+		},
+		{
+			"sourceId": "IsTurvoLink",
+			"destId": "isTurvoLink",
+            "defaultId":"isTurvoLinkeDefaultId"
+		}
+	]
+}
