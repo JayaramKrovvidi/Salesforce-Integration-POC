@@ -47,6 +47,7 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     GenericApiRequest currentRequest = apiRequestList.get(0);
     while (null != currentRequest) {
       ApiRequestConfig currentApiConfig = currentRequest.getApiRequest();
+      System.out.println("Api key=---------------->"+currentRequest.getApiRequest().getApiKey());
       try {
         boolean success = executeCurrentApi(currentApiConfig);
         currentRequest = decideNextApi(apiRequestList, currentRequest, success);
