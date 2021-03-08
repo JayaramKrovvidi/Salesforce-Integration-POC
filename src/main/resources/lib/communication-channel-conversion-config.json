@@ -3,16 +3,14 @@
 		{
 			"sourceId": "Id",
 			"destId": "id"
-			
 		},
 		{
-			"sourceId": "ContextId",
+			"sourceId": "Id",
 			"destId": "contextId"
 		},
 		{
 			"sourceId": "EmailType",
-			"destId": "email.type",
-			"defaultId":"emailDefaultId"
+			"destId": "email.type"
 		},
 		{
 			"sourceId": "Email",
@@ -55,7 +53,7 @@
 			"destId": "address.state"
 		},
 		{
-			"sourceId": "MailingZip",
+			"sourceId": "MailingPostalCode",
 			"destId": " address.zip"
 		},
 		{

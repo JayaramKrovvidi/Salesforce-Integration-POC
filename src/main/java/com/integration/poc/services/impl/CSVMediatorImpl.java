@@ -11,7 +11,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ConvConfig;
 import com.integration.poc.dtos.internal.Node;
@@ -23,8 +22,6 @@ import com.opencsv.exceptions.CsvException;
 @Service
 public class CSVMediatorImpl implements IMediator {
 
-  @Autowired
-  FileManagerServiceImpl fileManager;
   private static final Logger LOGGER = LogManager.getLogger(CSVMediatorImpl.class);
 
   private static final String ROOT_NODE_NM = "root";
@@ -124,7 +121,7 @@ public class CSVMediatorImpl implements IMediator {
     List<String> destinationIds = getDestinationIds(config);
     Map<String, Integer> destIdToSrcIndexMap =
         getDestIdToSrcIndexMap(objNodes.get(0), config, destinationIds);
-    processNodeList(objNodes, destinationIds, destIdToSrcIndexMap,config);
+    processNodeList(objNodes, destinationIds, destIdToSrcIndexMap, config);
     return nodes;
   }
 
@@ -156,38 +153,46 @@ public class CSVMediatorImpl implements IMediator {
   }
 
   private void processNodeList(List<Node> objNodes, List<String> destinationIds,
-      Map<String, Integer> destIdToSrcIndexMap,PostProcessConfig config) {
+      Map<String, Integer> destIdToSrcIndexMap, PostProcessConfig config) {
     for (Node objNode : objNodes) {
-      processObjectNode(objNode, destinationIds, destIdToSrcIndexMap,config);
+      processObjectNode(objNode, destinationIds, destIdToSrcIndexMap, config);
     }
   }
 
   private void processObjectNode(Node objNode, List<String> destinationIds,
-      Map<String, Integer> destIdToSrcIndexMap,PostProcessConfig config) {
+      Map<String, Integer> destIdToSrcIndexMap, PostProcessConfig config) {
     List<Node> valueNodes = objNode.getSubNodes();
     List<Node> newValueNodes = new ArrayList<>();
     for (String destId : destinationIds) {
-      String destIdToMap ="";
-      for(ConvConfig i: config.getMappers()) {      
-        if(i.getDestId().equals(destId)) {
-          destIdToMap=i.getDefaultId();
-          break;
-        }
-      }
+      String defaultValue = getDefaultValue(config, destId);
       Integer srcIndex = destIdToSrcIndexMap.get(destId);
       if (srcIndex.equals(-1)) {
-        newValueNodes.add(new Node(destId,destIdToMap));
+        newValueNodes.add(new Node(destId, defaultValue));
       } else {
         Node valueNode = valueNodes.get(srcIndex);
-        if(valueNode.getValue().equals("")) {
-          newValueNodes.add(new Node(destId,destIdToMap));
-        }
-        else {
-        newValueNodes.add(new Node(destId, valueNode.getValue()));
+        String value = valueNode.getValue();
+        if (value.isEmpty()) {
+          newValueNodes.add(new Node(destId, defaultValue));
+        } else {
+          newValueNodes.add(new Node(destId, dm(value)));
         }
       }
     }
     objNode.setSubNodes(newValueNodes);
+  }
+
+  private String dm(String value) {
+    return null == value ? "" : value.replaceAll(NEW_LINE, "\\n");
+  }
+
+  private String getDefaultValue(PostProcessConfig config, String destId) {
+    for (ConvConfig mapper : config.getMappers()) {
+      String destinationId = mapper.getDestId();
+      if (destinationId.equals(destId)) {
+        return null == mapper.getDefaultId() ? "" : mapper.getDefaultId();
+      }
+    }
+    return "";
   }
 
   private Map<String, String> getDestToSrcMap(PostProcessConfig config) {

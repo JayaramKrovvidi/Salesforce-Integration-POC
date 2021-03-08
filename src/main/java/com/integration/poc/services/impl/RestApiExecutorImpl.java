@@ -63,7 +63,6 @@ public class RestApiExecutorImpl implements IApiExecutor {
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.customGetForEntity(String.class, url, addHeaders(apiRequest));
-    System.out.println(response);
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }
