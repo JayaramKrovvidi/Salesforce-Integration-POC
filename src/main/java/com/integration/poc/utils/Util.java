@@ -1,5 +1,7 @@
 package com.integration.poc.utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -42,5 +44,11 @@ public class Util {
   public static <K, V> Map<K, V> createMap(List<NameValuePair<K, V>> pairs) {
     return pairs.stream()
         .collect(Collectors.toMap(NameValuePair::getName, NameValuePair::getValue));
+  }
+
+  public static String getDateEnding() {
+    LocalDate today = LocalDate.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+    return today.format(formatter);
   }
 }

@@ -182,14 +182,14 @@ public class CSVMediatorImpl implements IMediator {
   }
 
   private String dm(String value) {
-    return null == value ? "" : value.replaceAll(NEW_LINE, "\\n");
+    return null == value ? "" : value.replace(NEW_LINE, ", ");
   }
 
   private String getDefaultValue(PostProcessConfig config, String destId) {
     for (ConvConfig mapper : config.getMappers()) {
       String destinationId = mapper.getDestId();
       if (destinationId.equals(destId)) {
-        return null == mapper.getDefaultId() ? "" : mapper.getDefaultId();
+        return null == mapper.getDefaultValue() ? "" : mapper.getDefaultValue();
       }
     }
     return "";

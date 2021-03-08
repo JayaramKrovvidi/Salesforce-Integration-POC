@@ -1,6 +1,8 @@
 package com.integration.poc.services.impl;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import com.integration.poc.utils.HandlerExecutorImpl;
 
 @Service
 public class CompositeApiRunnerImpl implements ICompositeApiRunner {
+
+  private static final Logger LOGGER = LogManager.getLogger(CompositeApiRunnerImpl.class);
 
   @Value("${retry.hold.value}")
   private Integer retryHoldInMillis;
@@ -58,10 +62,11 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
   }
 
   private boolean executeCurrentApi(ApiRequestConfig currentApiConfig) {
-    System.out.println(currentApiConfig.getApiKey());
+    LOGGER.info("API with Key: {} ready for execution", currentApiConfig.getApiKey());
     String response = findAdapterAndExecuteApi(currentApiConfig);
     List<Handle> successHandlers = currentApiConfig.getSuccessHandlers();
     boolean success = handleExecutor.executeHandles(currentApiConfig.getApiKey(), successHandlers);
+    LOGGER.info("API with Key: {} executed and status: {} ", currentApiConfig.getApiKey(), success);
     genericResultProcessor.process(currentApiConfig, response, success);
     return success;
   }
@@ -73,19 +78,30 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
   }
 
   private GenericApiRequest decideNextApi(List<GenericApiRequest> apiRequestList,
-    GenericApiRequest request, boolean success) throws InterruptedException {
-    String retry = null == request.getRetry() ? "" :  request.getRetry();
-    if(!success && retry.equals("*")) {
+      GenericApiRequest request, boolean success) throws InterruptedException {
+    if (success) {
+      List<String> onSuccessKeys = request.getOnSuccess();
+      return getRequestConfigByApiKey(onSuccessKeys.get(0), apiRequestList);
+    }
+    return dealWithFailure(apiRequestList, request);
+  }
+
+  private GenericApiRequest dealWithFailure(List<GenericApiRequest> apiRequestList,
+      GenericApiRequest request) throws InterruptedException {
+    String retry = null == request.getRetry() ? "" : request.getRetry();
+    if (retry.equals("*")) {
+      LOGGER.info("API Call on Hold for {} seconds", retryHoldInMillis / 1000);
       Thread.sleep(retryHoldInMillis);
       return request;
     }
-    Integer retryInt = retry.isBlank() ? 0 : Integer.parseInt(retry);
-      if( success || retryInt == 0) {
-        List<String> nextKeys = success ? request.getOnSuccess() : request.getOnFailure();
-        return getRequestConfigByApiKey(nextKeys.get(0), apiRequestList);
-      }
-      request.setRetry(String.valueOf(--retryInt));
-      return request;
+    Integer retryInt = retry.isEmpty() ? 0 : Integer.parseInt(retry);
+    if (retryInt == 0) {
+      List<String> failureKeys = request.getOnFailure();
+      return getRequestConfigByApiKey(failureKeys.get(0), apiRequestList);
+    }
+    request.setRetry(String.valueOf(--retryInt));
+    LOGGER.info("Retrying API, remaining attempts: {}", retryInt);
+    return request;
   }
 
   private GenericApiRequest getRequestConfigByApiKey(String apiKey,
@@ -96,6 +112,7 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     for (GenericApiRequest requestConfig : apiRequestList) {
       if (apiKey.equalsIgnoreCase(requestConfig.getApiRequest()
           .getApiKey())) {
+        LOGGER.info("Next API with key: {} is scheduled for execution", apiKey);
         return requestConfig;
       }
     }

@@ -11,7 +11,7 @@ public class Node {
 
   private String name;
   private String value;
- 
+
   private List<Node> subNodes;
 
   public Node() {}
@@ -26,7 +26,7 @@ public class Node {
     this.name = name;
     this.value = value;
   }
- 
+
 
   public Node(String name, List<Node> subNodes) {
     super();
@@ -46,7 +46,7 @@ public class Node {
     }
     String result = "{";
     for (Node node : subNodes) {
-      result += node.toString();
+      result += "\t" + node.toString();
     }
     result += "\n}";
     return result;

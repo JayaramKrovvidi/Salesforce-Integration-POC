@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.util.Map;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
@@ -14,6 +16,8 @@ import com.integration.poc.utils.Util;
 
 @Service
 public class FtpApiExecutorImpl implements IApiExecutor {
+
+  private static final Logger LOGGER = LogManager.getLogger(FtpApiExecutorImpl.class);
 
   @Value("${local.file.path}")
   private String localFilePath;
@@ -51,11 +55,12 @@ public class FtpApiExecutorImpl implements IApiExecutor {
       ftp.setFileType(FTP.BINARY_FILE_TYPE);
       ftp.enterLocalPassiveMode();
       InputStream input = new FileInputStream(new File(localFilePath));
-      status = ftp.storeFile(remoteUri + "05032021.csv", input);
+      String remoteFileDesc = remoteUri + Util.getDateEnding() + ".csv";
+      status = ftp.storeFile(remoteFileDesc, input);
       if (status) {
-        System.out.println("Upload Successful");
+        LOGGER.info("Upload File with Name: {} Successful", remoteFileDesc);
       } else {
-        System.out.println("Upload failed");
+        LOGGER.info("Upload File with Name: {} Failed", remoteFileDesc);
       }
       ftp.logout();
       ftp.disconnect();

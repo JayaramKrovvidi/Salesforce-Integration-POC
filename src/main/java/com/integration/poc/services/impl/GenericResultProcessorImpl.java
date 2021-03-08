@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import com.integration.poc.utils.FTPClientUtil;
 @Service
 public class GenericResultProcessorImpl implements IResultProcessor {
 
+  private static final Logger LOGGER = LogManager.getLogger(GenericResultProcessorImpl.class);
+
   @Value("${local.file.path}")
   private String localFilePath;
 
@@ -31,9 +35,8 @@ public class GenericResultProcessorImpl implements IResultProcessor {
   FileManagerServiceImpl fileManager;
 
   @Override
-  public void process(ApiRequestConfig apiRequest, String response, boolean success) {
-    List<String> keys =
-        success ? apiRequest.getProcKeyOnSuccess() : apiRequest.getProcKeyOnFailure();
+  public void process(ApiRequestConfig request, String response, boolean success) {
+    List<String> keys = success ? request.getProcKeyOnSuccess() : request.getProcKeyOnFailure();
     if (CollectionUtils.isEmpty(keys)) {
       return;
     }
@@ -48,18 +51,18 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
       List<Node> nodes = inFormatter.from(response);
 
-      System.out.println(" ------- CSV String before Processing --------\n" + response + "\n");
-      System.out.println(" -------- Mediator Representation before Processing --------");
+      LOGGER.info(" ------- CSV String before Processing --------\n {} \n", response);
+      LOGGER.info(" -------- Mediator Representation before Processing --------");
       Node.printNodes(nodes);
 
       List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
       String processedResponse = outFormatter.to(processedNodes);
 
-      System.out.println(" -------- Mediator Representation after Processing --------");
+      LOGGER.info(" -------- Mediator Representation after Processing --------");
       Node.printNodes(nodes);
-      System.out.println(" ---- CSV String after Processing ----\n" + processedResponse + "\n");
+      LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
 
-      saveFileLocally(processedResponse, apiRequest.getApiKey(), key);
+      saveFileLocally(processedResponse, request.getApiKey(), key);
     }
   }
 
@@ -72,12 +75,14 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       fileWriter = new FileWriter(filePath);
       fileWriter.append(processedResponse);
     } catch (IOException e) {
+      LOGGER.error("IO Exception while trying to save file locally");
     } finally {
       try {
         if (fileWriter != null) {
           fileWriter.close();
         }
       } catch (IOException e) {
+        LOGGER.error("IO Exception while trying to close fileWriter resources");
       }
     }
   }

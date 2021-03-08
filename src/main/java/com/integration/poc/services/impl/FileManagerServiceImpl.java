@@ -21,7 +21,6 @@ public class FileManagerServiceImpl {
       FileReader reader = new FileReader(path);
       JSONObject configJson = (JSONObject) jsonParser.parse(reader);
       JSONArray mappersJson = (JSONArray) configJson.get("mappers");
-//      System.out.println("---------------------------------------called");
       return convertToPostProcessConfig(mappersJson);
     } catch (ParseException | IOException e) {
       e.printStackTrace();
@@ -33,8 +32,8 @@ public class FileManagerServiceImpl {
     List<ConvConfig> mappers = new ArrayList<>();
     for (Object json : mappersJson) {
       JSONObject mapper = (JSONObject) json;
-//      System.out.println("--------------------------->sddsdfsdf----->"+mapper.get("defaultId")+"------>"+mapper.get("destId"));
-      mappers.add(new ConvConfig((String) mapper.get("sourceId"), (String) mapper.get("destId"),(String) mapper.get("defaultId")));
+      mappers.add(new ConvConfig((String) mapper.get("sourceId"), (String) mapper.get("destId"),
+          (String) mapper.get("defaultValue")));
     }
     return new PostProcessConfig(mappers);
   }

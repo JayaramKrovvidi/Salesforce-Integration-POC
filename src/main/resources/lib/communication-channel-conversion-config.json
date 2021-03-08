@@ -18,7 +18,8 @@
 		},
 		{
 			"sourceId": "PhoneType",
-			"destId": "phone.type"
+			"destId": "phone.type",
+			"defaultValue": "Work"
 		},
 		{
 			"sourceId": "Phone",
@@ -34,7 +35,8 @@
 		},
 		{
 			"sourceId": "MailingType",
-			"destId": "address.type"
+			"destId": "address.type",
+			"defaultValue": "Work"
 		},
 		{
 			"sourceId": "MailingStreet",
@@ -62,15 +64,18 @@
 		},
 		{
 			"sourceId": "IsPrimaryAddress",
-			"destId": "isPrimaryAddress"
+			"destId": "isPrimaryAddress",
+			"defaultValue": "true"
 		},
 		{
 			"sourceId": "IsPrimaryEmail",
-			"destId": "isPrimaryEmail"
+			"destId": "isPrimaryEmail",
+			"defaultValue": "true"
 		},
 		{
 			"sourceId": "IsPrimaryPhone",
-			"destId": "isPrimaryPhone"
+			"destId": "isPrimaryPhone",
+			"defaultValue": "true"
 		}
 	]
 }
