@@ -97,7 +97,7 @@
 			"defaultId":"deliveryLinkTimeUnitsDefaultId"
 		},
 		{
-			"sourceId": "AddressType",
+			"sourceId": "Address__r.AddressType",
 			"destId": "address.type",
 			"defaultId":"addressTypeDefaultId"
 		},
@@ -112,22 +112,22 @@
 			"defaultId":"addressLine2DefaultId"
 		},
 		{
-			"sourceId": "AddressCity",
+			"sourceId": "Address__r.city",
 			"destId": "address.city",
 			"defaultId":"addressCityDefaultId"
 		},
 		{
-			"sourceId": "AddressState",
+			"sourceId": "Address__r.state",
 			"destId": "address.state",
 			"defaultId":"addressStateDefaultId"
 		},
 		{
-			"sourceId": "AddressZip",
+			"sourceId": "Address__r.postalCode",
 			"destId": "address.zip",
 			"defaultId":"addressZipDefaultId"
 		},
 		{
-			"sourceId": "AddressCountry",
+			"sourceId": "Address__r.country",
 			"destId": "address.country",
 			"defaultId":"addressCountryDefaultId"
 		},

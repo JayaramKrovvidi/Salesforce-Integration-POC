@@ -16,7 +16,7 @@
 			"defaultId":"emailDefaultId"
 		},
 		{
-			"sourceId": "Email",
+			"sourceId": "ontact__r.email",
 			"destId": "email",
             "defaultId":"emailDefaultId"
 		},
@@ -26,12 +26,12 @@
             "defaultId":"phoneDefaultId"
 		},
 		{
-			"sourceId": "Phone",
+			"sourceId": "Contact__r.phone",
 			"destId": "phone",
             "defaultId":"phoneDefaultId"
 		},
 		{
-			"sourceId": "OtherPhone",
+			"sourceId": "Contact__r.OtherPhone",
 			"destId": "phone.extension",
             "defaultId":"phoneextensionDefaultId"
 		},
