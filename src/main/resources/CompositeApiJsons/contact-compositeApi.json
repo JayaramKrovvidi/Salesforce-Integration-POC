@@ -23,11 +23,11 @@
                     }
                 ],
                 "requestBody": "<?xml version=\"1.0\" encoding=\"utf-8\" ?> <env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"> <env:Body> <n1:login xmlns:n1=\"urn:partner.soap.sforce.com\">  <n1:username>jayaram@accolitedigital.com</n1:username>      <n1:password>Accolite@123Ljmq16LqC8ndmxau4fTKLhsQS</n1:password> </n1:login>  </env:Body> </env:Envelope>",
-                "retry": "*",
                 "store": [
                     "sessionId"
                 ]
             },
+            "retry": "*",
             "onSuccess": [
                 "2"
             ],
@@ -54,11 +54,11 @@
                     }
                 ],
                 "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Contact</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
-                "retry": "*",
                 "store": [
                     "id"
                 ]
             },
+            "retry": "*",
             "onSuccess": [
                 "3"
             ],
@@ -83,11 +83,11 @@
                     }
                 ],
                 "requestBody": "SELECT  Id, Name, Title, Email, Phone, OtherPhone, MailingStreet, MailingCity, MailingState, MailingCountry, MailingPostalCode FROM Contact",
-                "retry": "*",
                 "store": [
                     "id"
                 ]
             },
+            "retry": "*",
             "onSuccess": [
                 "6"
             ],
@@ -113,9 +113,9 @@
                         "scope": "runtime"
                     }
                 ],
-                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>",
-                "retry": "*"
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
             },
+            "retry": "*",
             "onSuccess": [
                 "-1"
             ],
@@ -135,9 +135,9 @@
                         "value": "{1.sessionId}",
                         "scope": "runtime"
                     }
-                ],
-                "retry": "*"
+                ]
             },
+            "retry": "*",
             "onSuccess": [
                 "7"
             ],
@@ -158,7 +158,6 @@
                         "scope": "runtime"
                     }
                 ],
-                "retry": "*",
                 "store": [
                     "state"
                 ],
@@ -172,6 +171,7 @@
                     }
                 ]
             },
+            "retry": "*",
             "onSuccess": [
                 "7"
             ],
@@ -192,11 +192,11 @@
                         "scope": "runtime"
                     }
                 ],
-                "retry": "*",
                 "store": [
                     "result"
                 ]
             },
+            "retry": "*",
             "onSuccess": [
                 "8"
             ],
@@ -217,13 +217,13 @@
                         "scope": "runtime"
                     }
                 ],
-                "retry": "*",
                 "procKeyOnSuccess": [
                     "ContactConversion",
                     "CommunicationChannelConversion"
                 ],
                 "procKeyOnFailure": []
             },
+            "retry": "*",
             "onSuccess": [
                 "9"
             ],
@@ -258,9 +258,9 @@
                 ],
                 "requestType": "FTP",
                 "methodType": "UPLOAD",
-                "headers": [],
-                "retry": "*"
+                "headers": []
             },
+            "retry": "*",
             "onSuccess": [
                 "10"
             ],
@@ -295,9 +295,9 @@
                 ],
                 "requestType": "FTP",
                 "methodType": "UPLOAD",
-                "headers": [],
-                "retry": "*"
+                "headers": []
             },
+            "retry": "*",
             "onSuccess": [
                 "11"
             ],
@@ -315,12 +315,16 @@
                     {
                         "name": "Content-Type",
                         "value": "application/json"
+                    },
+                    {
+                        "name": "nonce",
+                        "value": "salesforce-testing-20210308215"
                     }
                 ],
-                "retry": "*",
                 "store": [],
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
+            "retry": "*",
             "onSuccess": [
                 "4"
             ],
@@ -335,10 +339,10 @@
                 "requestType": "REST",
                 "methodType": "PUT",
                 "headers": [],
-                "retry": "*",
                 "store": [],
                 "requestBody": ""
             },
+            "retry": "*",
             "onSuccess": [
                 "4"
             ],
