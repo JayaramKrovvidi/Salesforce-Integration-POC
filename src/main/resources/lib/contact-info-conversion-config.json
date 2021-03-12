@@ -55,6 +55,11 @@
 			"sourceId": "IsTurvoLink",
 			"destId": "isTurvoLink",
             "defaultId":"isTurvoLinkeDefaultId"
+		},
+		{
+			"sourceId": "isMobile",
+			"destId": "isPrimaryPhone",
+            "defaultId":"isPrimaryPhoneDefaultId"
 		}
 	]
 }
