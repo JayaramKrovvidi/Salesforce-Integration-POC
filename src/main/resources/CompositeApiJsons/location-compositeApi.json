@@ -84,7 +84,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, Name, DrivingDirections, TimeZone, IsMobile FROM Location",
+                "requestBody": "SELECT Id,Name,TimeZone,DrivingDirections,IsMobile,CreatedBy.Email,CreatedBy.Street,CreatedBy.PostalCode,CreatedBy.Extension, CreatedBy.MobilePhone,CreatedBy.State,CreatedBy.City,CreatedBy.Country FROM Location",
                 "store": [
                     "id"
                 ]
@@ -393,13 +393,18 @@
                     {
                         "name": "Content-Type",
                         "value": "application/json"
+                    },
+                    {
+                        "name": "nonce",
+                        "value": "salesforce-testing-12302021"
                     }
+
                 ],
                 "store": [],
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
             "onSuccess": [
-                "4"
+                "14"
             ],
             "onFailure": [],
             "retry":"1"

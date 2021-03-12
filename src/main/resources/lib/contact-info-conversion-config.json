@@ -13,7 +13,7 @@
 			"destId": "email.type"
 		},
 		{
-			"sourceId": "ontact__r.email",
+			"sourceId": "CreatedBy.Email",
 			"destId": "email"
 		},
 		{
@@ -21,11 +21,11 @@
 			"destId": "phone.type"
 		},
 		{
-			"sourceId": "Contact__r.phone",
+			"sourceId": "CreatedBy.MobilePhone",
 			"destId": "phone"
 		},
 		{
-			"sourceId": "Contact__r.OtherPhone",
+			"sourceId": "CreatedBy.Extension",
 			"destId": "phone.extension"
 		},
 		{
@@ -38,8 +38,9 @@
 		},
 		
 		{
-			"sourceId": "IsPrimaryPhone",
+			"sourceId": "IsMobile",
 			"destId": "isPrimaryPhone"
+            
 		},
 		{
 			"sourceId": "IsTurvoLink",

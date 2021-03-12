@@ -81,7 +81,7 @@
 			"destId": "address.type"
 		},
 		{
-			"sourceId": "AddressLine1",
+			"sourceId": "CreatedBy.Street",
 			"destId": "address.line1"
 		},
 		{
@@ -89,19 +89,19 @@
 			"destId": "address.line2"
 		},
 		{
-			"sourceId": "Address__r.city",
+			"sourceId": "CreatedBy.City",
 			"destId": "address.city"
 		},
 		{
-			"sourceId": "Address__r.state",
+			"sourceId": "CreatedBy.State",
 			"destId": "address.state"
 		},
 		{
-			"sourceId": "Address__r.postalCode",
+			"sourceId": "CreatedBy.PostalCode",
 			"destId": "address.zip"
 		},
 		{
-			"sourceId": "Address__r.country",
+			"sourceId": "CreatedBy.Country",
 			"destId": "address.country"
 		},
 		{
