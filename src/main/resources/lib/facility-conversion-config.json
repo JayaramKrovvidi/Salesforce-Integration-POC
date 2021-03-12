@@ -2,93 +2,75 @@
 	"mappers": [
 		{
 			"sourceId": "Id",
-			"destId": "id",
-            "defaultId":"idDefaultId"			
+			"destId": "id"
 		},
 		{
 			"sourceId": "Id",
-			"destId": "contextId",
-            "defaultId":"contextIdDefaultId"
+			"destId": "contextId"
 		},
 		{
 			"sourceId": "HoursOfOperationStart",
-			"destId": "hoursOfOperation.start",
-			"defaultId":"hoursOfOperation.startDefaultId"
+			"destId": "hoursOfOperation.start"
 		},
 		{
 			"sourceId": "HoursOfOperationEnd",
-			"destId": "hoursOfOperation.end",
-            "defaultId":"hoursOfOperation.endDefaultId"
+			"destId": "hoursOfOperation.end"
 		},
 		{
 			"sourceId": "HoursOfOperation.days",
-			"destId": "hoursOfOperation.days",
-            "defaultId":"hoursOfOperation.daysDefaultId"
+			"destId": "hoursOfOperation.days"
 		},
 		{
 			"sourceId": "ShippingHoursStart",
-			"destId": "shippingHours.start",
-            "defaultId":"shippingHours.startDefaultId"
+			"destId": "shippingHours.start"
 		},
 		{
 			"sourceId": "ShippingHoursEnd",
-			"destId": "shippingHours.end",
-            "defaultId":"shippingHours.endDefaultId"
+			"destId": "shippingHours.end"
 		},
 		{
 			"sourceId": "ShippingHoursDays",
-			"destId": "shippingHours.days",
-            "defaultId":"shippingHours.daysDefaultId"
+			"destId": "shippingHours.days"
 		},		
 		{
 			"sourceId": "ReceivingHoursStart",
-			"destId": "receivingHours.start",
-            "defaultId":"receivingHours.startDefaultId"
+			"destId": "receivingHours.start"
 		},
 		{
 			"sourceId": "ReceivingHoursEnd",
-			"destId": "receivingHours.end",
-            "defaultId":"receivingHours.endDefaultId"
+			"destId": "receivingHours.end"
 		},
         {
 			"sourceId": "ReceivingHoursDdays",
-			"destId": "receivingHours.days",
-            "defaultId":"receivingHours.daysDefaultId"
+			"destId": "receivingHours.days"
 		},
         {
 			"sourceId": "SchedulingType",
-			"destId": "schedulingType",
-            "defaultId":"schedulingTypeDefaultId"
+			"destId": "schedulingType"
 		},
         {
 			"sourceId": "CrossDock",
-			"destId": "crossDock",
-            "defaultId":"crossDockDefaultId"
+			"destId": "crossDock"
 		},
         {
 			"sourceId": "ColdStorage",
-			"destId": "coldStorage",
-            "defaultId":"coldStorageDefaultId"
+			"destId": "coldStorage"
 		},
         {
 			"sourceId": "Warehouse",
-			"destId": "warehouse",
-            "defaultId":"warehouseDefaultId"
+			"destId": "warehouse"
 		},
         {
 			"sourceId": "UseApptAsDwellTime",
-			"destId": "useApptAsDwellTime",
-            "defaultId":"useApptAsDwellTimeDefaultId"
+			"destId": "useApptAsDwellTime"
 		},
         {
 			"sourceId": "DwellTime",
-			"destId": "dwellTime",
-            "defaultId":"dwellTimeDefaultId"
+			"destId": "dwellTime"
 		},
         {
 			"sourceId": "DwellTimeUnit",
-			"destId": "dwellTimeUnit",
-            "defaultId":"dwellTimeUnitDefaultId"
+			"destId": "dwellTimeUnit"
 		}
 	]
 }

@@ -2,59 +2,48 @@
 	"mappers": [
 		{
 			"sourceId": "Id",
-			"destId": "id",
-            "defaultId":"idDefaultId"			
+			"destId": "id"	
 		},
 		{
 			"sourceId": "Id",
-			"destId": "contextId",
-            "defaultId":"contextIdDefaultId"
+			"destId": "contextId"
 		},
 		{
 			"sourceId": "EmailType",
-			"destId": "email.type",
-			"defaultId":"emailDefaultId"
+			"destId": "email.type"
 		},
 		{
 			"sourceId": "ontact__r.email",
-			"destId": "email",
-            "defaultId":"emailDefaultId"
+			"destId": "email"
 		},
 		{
 			"sourceId": "PhoneType",
-			"destId": "phone.type",
-            "defaultId":"phoneDefaultId"
+			"destId": "phone.type"
 		},
 		{
 			"sourceId": "Contact__r.phone",
-			"destId": "phone",
-            "defaultId":"phoneDefaultId"
+			"destId": "phone"
 		},
 		{
 			"sourceId": "Contact__r.OtherPhone",
-			"destId": "phone.extension",
-            "defaultId":"phoneextensionDefaultId"
+			"destId": "phone.extension"
 		},
 		{
 			"sourceId": "PhoneCountry",
-			"destId": "phone.country",
-            "defaultId":"phonecountryDefaultId"
+			"destId": "phone.country"
 		},
 		{
 			"sourceId": "IsPrimaryEmail",
-			"destId": "isPrimaryEmail",
-            "defaultId":"isPrimaryMailDefaultId"
+			"destId": "isPrimaryEmail"
 		},
 		
 		{
 			"sourceId": "IsPrimaryPhone",
-			"destId": "isPrimaryPhone",
-            "defaultId":"isPrimaryPhoneDefaultId"
+			"destId": "isPrimaryPhone"
 		},
 		{
 			"sourceId": "IsTurvoLink",
-			"destId": "isTurvoLink",
-            "defaultId":"isTurvoLinkeDefaultId"
+			"destId": "isTurvoLink"
 		}
 	]
 }

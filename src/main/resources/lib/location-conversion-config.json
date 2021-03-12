@@ -2,149 +2,119 @@
 	"mappers": [
 		{
 			"sourceId": "Id",
-			"destId": "id",
-			"defaultId":"DefaultId"
-			
+			"destId": "id"
 		},
 		{
 			"sourceId": "Name",
-			"destId": "name",
-			"defaultId":"nameDefaultId"
+			"destId": "name"
 		},
 		{
 			"sourceId": "GeofenceDistance",
-			"destId": "geofence.distance",
-			"defaultId":"geofenceDistanceDefaultId"
+			"destId": "geofence.distance"
 		},
 		{
 			"sourceId": "GeofenceUnits",
-			"destId": "geofence.units",
-			"defaultId":"geofenceUnitsDefaultId"
+			"destId": "geofence.units"
 		},
 		{
 			"sourceId": "TimeZone",
-			"destId": "timezone",
-			"defaultId":"timezoneDefaultId"
+			"destId": "timezone"
 		},
 		{
 			"sourceId": "PrimaryContactId",
-			"destId": "primaryContact.id",
-			"defaultId":"primaryContactDefaultId"
+			"destId": "primaryContact.id"
 		},
 		{
 			"sourceId": "DrivingDirections",
-			"destId": "directions",
-			"defaultId":"directionsDefaultId"
+			"destId": "directions"
 		},
 		{
 			"sourceId": "SpecialInstructions",
-			"destId": "specialInstructions",
-			"defaultId":"specialInstructionsDefaultId"
+			"destId": "specialInstructions"
 		},
 		{
 			"sourceId": "CopyInstructions",
-			"destId": "copyInstructions",
-			"defaultId":"copyInstructionsDefaultId"
+			"destId": "copyInstructions"
 		},
 		{
 			"sourceId": "CompanyId",
-			"destId": "company.id",
-			"defaultId":"companyIdDefaultId"
+			"destId": "company.id"
 		},
 		{
 			"sourceId": "AccountId",
-			"destId": "account.id",
-			"defaultId":"accountIdDefaultId"
+			"destId": "account.id"
 		},
 		{
 			"sourceId": "AccountType",
-			"destId": "account.type",
-			"defaultId":"accountTypeDefaultId"
+			"destId": "account.type"
 		},
 		{
 			"sourceId": "DeliveryLinkIsStatus",
-			"destId": "deliveryLink.isStatus",
-			"defaultId":"deliveryLinkIsStatusDefaultId"
+			"destId": "deliveryLink.isStatus"
 		},
 		{
 			"sourceId": "DeliveryLinkStatus",
-			"destId": "deliveryLink.status",
-			"defaultId":"deliveryLinkStatusDefaultId"
+			"destId": "deliveryLink.status"
 		},
 		{
 			"sourceId": "DeliveryLinkIsLateType",
-			"destId": "deliveryLink.isLateType",
-			"defaultId":"deliveryLinkIsLateTypeDefaultId"
+			"destId": "deliveryLink.isLateType"
 		},
 		{
 			"sourceId": "DeliveryLinkLateType",
-			"destId": "deliveryLink.lateType",
-			"defaultId":"deliveryLinkLateTypeDefaultId"
+			"destId": "deliveryLink.lateType"
 		},
 		{
 			"sourceId": "DeliveryLinkIsTime",
-			"destId": "deliveryLink.isTime",
-			"defaultId":"deliveryLinkIsTimeDefaultId"
+			"destId": "deliveryLink.isTime"
 		},
 		{
 			"sourceId": "DeliveryLinkTime",
-			"destId": "deliveryLink.time",
-			"defaultId":"deliveryLinkTimeDefaultId"
+			"destId": "deliveryLink.time"
 		},
 		{
 			"sourceId": "DeliveryLinkTimeUnits",
-			"destId": "deliveryLink.timeUnits",
-			"defaultId":"deliveryLinkTimeUnitsDefaultId"
+			"destId": "deliveryLink.timeUnits"
 		},
 		{
 			"sourceId": "Address__r.AddressType",
-			"destId": "address.type",
-			"defaultId":"addressTypeDefaultId"
+			"destId": "address.type"
 		},
 		{
 			"sourceId": "AddressLine1",
-			"destId": "address.line1",
-			"defaultId":"addressLine1DefaultId"
+			"destId": "address.line1"
 		},
 		{
 			"sourceId": "AddressLine2",
-			"destId": "address.line2",
-			"defaultId":"addressLine2DefaultId"
+			"destId": "address.line2"
 		},
 		{
 			"sourceId": "Address__r.city",
-			"destId": "address.city",
-			"defaultId":"addressCityDefaultId"
+			"destId": "address.city"
 		},
 		{
 			"sourceId": "Address__r.state",
-			"destId": "address.state",
-			"defaultId":"addressStateDefaultId"
+			"destId": "address.state"
 		},
 		{
 			"sourceId": "Address__r.postalCode",
-			"destId": "address.zip",
-			"defaultId":"addressZipDefaultId"
+			"destId": "address.zip"
 		},
 		{
 			"sourceId": "Address__r.country",
-			"destId": "address.country",
-			"defaultId":"addressCountryDefaultId"
+			"destId": "address.country"
 		},
 		{
 			"sourceId": "AddressLat",
-			"destId": "address.lat",
-			"defaultId":"addressLatDefaultId"
+			"destId": "address.lat"
 		},
 		{
 			"sourceId": "AddressLong",
-			"destId": "address.long",
-			"defaultId":"addressLongDefaultId"
+			"destId": "address.long"
 		},
 		{
 			"sourceId": "IsPrimaryAddress",
-			"destId": "isPrimaryAddress",
-			"defaultId":"isPrimaryAddressDefaultId"
+			"destId": "isPrimaryAddress"
 		}
 	]
 }

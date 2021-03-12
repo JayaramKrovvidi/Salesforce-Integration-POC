@@ -253,11 +253,11 @@
                     },
                     {
                         "name": "processKey",
-                        "value": "ContactConversion"
+                        "value": "LocationConversion"
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/contact/contact_"
+                        "value": "/solo/location/location_"
                     }
                 ],
                 "requestType": "FTP",
@@ -290,11 +290,11 @@
                     },
                     {
                         "name": "processKey",
-                        "value": "CommunicationChannelConversion"
+                        "value": "ContactInfoConversion"
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/contact/communication_channel_"
+                        "value": "/solo/location/contact_info_"
                     }
                 ],
                 "requestType": "FTP",
@@ -310,7 +310,81 @@
         {
             "apiRequest": {
                 "apiKey": "11",
-                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/contact",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "FacilityConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/location/facility_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "12"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "12",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "GroupConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/location/group_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "13"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "13",
+                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/location",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -332,7 +406,7 @@
         },
         {
             "apiRequest": {
-                "apiKey": "12",
+                "apiKey": "14",
                 "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
