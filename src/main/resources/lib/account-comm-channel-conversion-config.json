@@ -29,6 +29,10 @@
 			"destId": "phone.extension"
 		},
 		{
+			"sourceId": "PhoneCountry",
+			"destId": "phone.country"
+		},
+		{
 			"sourceId": "AddressType",
 			"destId": "address.type",
 			"defaultValue": "Work"
@@ -36,6 +40,10 @@
 		{
 			"sourceId": "ShippingStreet",
 			"destId": "address.line1"
+		},
+		{
+			"sourceId": "AddressLine2",
+			"destId": "address.line2"
 		},
 		{
 			"sourceId": "ShippingCity",
@@ -50,8 +58,17 @@
 			"destId": "address.zip"
 		},
 		{
+			"sourceId": "ShippingCountry",
+			"destId": "address.country"
+		},
+		{
 			"sourceId": "IsPrimaryAddress",
 			"destId": "isPrimaryAddress",
+			"defaultValue": "true"
+		},
+		{
+			"sourceId": "IsPrimaryEmail",
+			"destId": "isPrimaryEmail",
 			"defaultValue": "true"
 		},
 		{
