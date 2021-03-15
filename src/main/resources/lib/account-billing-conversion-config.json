@@ -19,27 +19,27 @@
 		},
 
 		{
-			"sourceId": "ShippingStreet",
+			"sourceId": "BillingStreet",
 			"destId": "address.line1"
 		},
         {
-			"sourceId": "ShippingStreet",
+			"sourceId": "BillingStreet",
 			"destId": "address.line2"
 		},
 		{
-			"sourceId": "ShippingCity",
+			"sourceId": "BillingCity",
 			"destId": "address.city"
 		},
 		{
-			"sourceId": "ShippingState",
+			"sourceId": "BillingState",
 			"destId": "address.state"
 		},
 		{
-			"sourceId": "ShippingPostalCode",
+			"sourceId": "BillingPostalCode",
 			"destId": "address.zip"
 		},
         {
-			"sourceId": "ShippingCountry",
+			"sourceId": "BillingCountry",
 			"destId": "address.country"
 		},
         {

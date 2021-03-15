@@ -9,7 +9,7 @@
 			"destId": "contextId"
 		},
 		{
-			"sourceId": "UserId",
+			"sourceId": "OwnerId",
 			"destId": "user.id",
             "defaultValue":"userId"
 		},
