@@ -1,0 +1,21 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "Type",
+			"destId": "type"
+		},
+		{
+			"sourceId": "Value",
+			"destId": "value",
+            "defaultValue":"Value"
+		}
+	]
+}

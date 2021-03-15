@@ -1,0 +1,33 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+			
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "AccoutingSystem",
+			"destId": "accountingSystem",
+			"defaultValue": "AccountingSystemId"
+		},
+		{
+			"sourceId": "AccoutingId",
+			"destId": "accounting.id",
+			"defaultValue": "AccoutingDefaultId"
+		},
+		{
+			"sourceId": "AccountingType",
+			"destId": "accounting.type",
+			"defaultValue": "AccountingTypeDefaultId"
+		},
+		{
+			"sourceId": "AccountingValue",
+			"destId": "accounting.value",
+			"defaultValue": "AccountingTypeDefaultId"
+		}
+	]
+}
