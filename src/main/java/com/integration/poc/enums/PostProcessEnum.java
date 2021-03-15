@@ -14,7 +14,9 @@ public enum PostProcessEnum {
   LOCATION_OBJ_CONVERSION("LocationConversion", "src\\main\\resources\\lib\\location-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   GROUP_OBJ_CONVERSION("GroupConversion", "src\\main\\resources\\lib\\group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   CONTACT_INFO_OBJ_CONVERSION("ContactInfoConversion", "src\\main\\resources\\lib\\contact-info-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
-  FACILITY_OBJ_CONVERSION("FacilityConversion", "src\\main\\resources\\lib\\facility-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
+  FACILITY_OBJ_CONVERSION("FacilityConversion", "src\\main\\resources\\lib\\facility-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  ACCOUNT_CUSTOMER_OBJ_CONVERSION("AccountCustomerConversion", "src\\main\\resources\\lib\\account-customer-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  ACCOUNT_COMM_CHANNEL_OBJ_CONVERSION("AccountCommChannelConversion", "src\\main\\resources\\lib\\account-comm-channel-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
 
   private final String key;
   private final String conversionConfig;

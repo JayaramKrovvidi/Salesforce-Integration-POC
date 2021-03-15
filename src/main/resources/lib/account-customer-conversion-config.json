@@ -1,0 +1,24 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Name",
+			"destId": "name"
+		},
+		{
+			"sourceId": "CleanStatus",
+			"destId": "status.code"
+		},
+		{
+			"sourceId": "Description",
+			"destId": "status.notes"
+		},
+		{
+			"sourceId": "Website",
+			"destId": "url"
+		}
+	]
+}

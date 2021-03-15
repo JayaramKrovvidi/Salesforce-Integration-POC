@@ -36,12 +36,6 @@
 			"sourceId": "IsPrimaryEmail",
 			"destId": "isPrimaryEmail"
 		},
-		
-		{
-			"sourceId": "IsMobile",
-			"destId": "isPrimaryPhone"
-            
-		},
 		{
 			"sourceId": "IsTurvoLink",
 			"destId": "isTurvoLink",
