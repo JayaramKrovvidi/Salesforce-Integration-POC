@@ -9,8 +9,24 @@
 			"destId": "contextId"
 		},
 		{
+			"sourceId": "EmailType",
+			"destId": "email.type"
+		},
+		{
+			"sourceId": "Email",
+			"destId": "email"
+		},
+		{
+			"sourceId": "PhoneType",
+			"destId": "phone.type"
+		},
+		{
 			"sourceId": "Phone",
 			"destId": "phone"
+		},
+		{
+			"sourceId": "OtherPhone",
+			"destId": "phone.extension"
 		},
 		{
 			"sourceId": "AddressType",

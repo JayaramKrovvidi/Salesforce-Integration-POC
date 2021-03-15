@@ -529,7 +529,7 @@
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/customer/user_commisions_"
+                        "value": "/solo/customer/user_commissions_"
                     }
                 ],
                 "requestType": "FTP",
@@ -558,7 +558,7 @@
                     },
                     {
                         "name": "apiKey",
-                        "value": "8"
+                        "value": "15"
                     },
                     {
                         "name": "processKey",
@@ -655,7 +655,7 @@
         },
         {
             "apiRequest": {
-                "apiKey": "23",
+                "apiKey": "22",
                 "url": "ftp.turvo.com",
                 "pathParams": [],
                 "requestParams": [
@@ -685,14 +685,14 @@
                 "headers": []
             },
             "onSuccess": [
-                "24"
+                "-1"
             ],
             "onFailure": [],
             "retry":"1"
         },
         {
             "apiRequest": {
-                "apiKey": "24",
+                "apiKey": "23",
                 "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/customer",
                 "pathParams": [],
                 "requestParams": [],
@@ -713,14 +713,14 @@
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
             "onSuccess": [
-                "25"
+                "24"
             ],
             "onFailure": [],
             "retry":"1"
         },
         {
             "apiRequest": {
-                "apiKey": "25",
+                "apiKey": "24",
                 "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
