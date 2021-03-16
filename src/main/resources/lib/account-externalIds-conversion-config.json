@@ -15,7 +15,7 @@
 		{
 			"sourceId": "Value",
 			"destId": "value",
-            "defaultValue":"Value"
+            "defaultValue":"100"
 		}
 	]
 }

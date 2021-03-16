@@ -12,22 +12,22 @@
 		{
 			"sourceId": "AccoutingSystem",
 			"destId": "accountingSystem",
-			"defaultValue": "AccountingSystemId"
+			"defaultValue": "14005"
 		},
 		{
 			"sourceId": "AccoutingId",
 			"destId": "accounting.id",
-			"defaultValue": "AccoutingDefaultId"
+			"defaultValue": "accounting_id_ad_cust_ftp7219"
 		},
 		{
 			"sourceId": "AccountingType",
 			"destId": "accounting.type",
-			"defaultValue": "AccountingTypeDefaultId"
+			"defaultValue": "9701"
 		},
 		{
 			"sourceId": "AccountingValue",
 			"destId": "accounting.value",
-			"defaultValue": "AccountingTypeDefaultId"
+			"defaultValue": "accounting value"
 		}
 	]
 }

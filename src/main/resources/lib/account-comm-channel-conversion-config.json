@@ -47,15 +47,18 @@
 		},
 		{
 			"sourceId": "ShippingCity",
-			"destId": "address.city"
+			"destId": "address.city",
+			"defaultValue": "AddressCity"
 		},
 		{
 			"sourceId": "ShippingState",
-			"destId": "address.state"
+			"destId": "address.state",
+			"defaultValue":"AddressState"
 		},
 		{
 			"sourceId": "ShippingPostalCode",
-			"destId": "address.zip"
+			"destId": "address.zip",
+			"defaultValue":"AddressZip"
 		},
 		{
 			"sourceId": "ShippingCountry",
