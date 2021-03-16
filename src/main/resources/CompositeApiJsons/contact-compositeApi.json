@@ -2,7 +2,6 @@
     "requestList": [
         {
             "apiRequest": {
-                "apiKey": "1",
                 "url": "https://login.salesforce.com/services/Soap/u/51.0",
                 "pathParams": [],
                 "requestParams": [],
@@ -28,14 +27,14 @@
                 ]
             },
             "retry": "*",
+            "apiKey": "1",
             "onSuccess": [
                 "2"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "2",
+            "apiRequest": {          
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job",
                 "pathParams": [],
                 "requestParams": [],
@@ -59,14 +58,14 @@
                 ]
             },
             "retry": "*",
+            "apiKey": "2",
             "onSuccess": [
                 "3"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "3",
+            "apiRequest": {              
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch",
                 "pathParams": [],
                 "requestParams": [],
@@ -88,14 +87,14 @@
                 ]
             },
             "retry": "*",
+            "apiKey": "3",
             "onSuccess": [
                 "6"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "4",
+            "apiRequest": {             
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
                 "pathParams": [],
                 "requestParams": [],
@@ -116,14 +115,14 @@
                 "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
             },
             "retry": "*",
+            "apiKey": "4",
             "onSuccess": [
                 "-1"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "5",
+            "apiRequest": {                
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
                 "pathParams": [],
                 "requestParams": [],
@@ -138,14 +137,14 @@
                 ]
             },
             "retry": "*",
+            "apiKey": "5",
             "onSuccess": [
                 "7"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "6",
+            "apiRequest": {               
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}",
                 "pathParams": [],
                 "requestParams": [],
@@ -172,14 +171,14 @@
                 ]
             },
             "retry": "*",
+            "apiKey": "6",
             "onSuccess": [
                 "7"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "7",
+            "apiRequest": {               
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result",
                 "pathParams": [],
                 "requestParams": [],
@@ -197,14 +196,14 @@
                 ]
             },
             "retry": "*",
+            "apiKey": "7",
             "onSuccess": [
                 "8"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "8",
+            "apiRequest": {               
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result/{7.result}",
                 "pathParams": [],
                 "requestParams": [],
@@ -224,14 +223,14 @@
                 "procKeyOnFailure": []
             },
             "retry": "*",
+            "apiKey": "8",
             "onSuccess": [
                 "9"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "9",
+            "apiRequest": {              
                 "url": "ftp.turvo.com",
                 "pathParams": [],
                 "requestParams": [
@@ -261,14 +260,14 @@
                 "headers": []
             },
             "retry": "*",
+            "apiKey": "9",
             "onSuccess": [
                 "10"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "10",
+            "apiRequest": {               
                 "url": "ftp.turvo.com",
                 "pathParams": [],
                 "requestParams": [
@@ -298,14 +297,14 @@
                 "headers": []
             },
             "retry": "*",
+            "apiKey": "10",
             "onSuccess": [
                 "11"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "11",
+            "apiRequest": {            
                 "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/contact",
                 "pathParams": [],
                 "requestParams": [],
@@ -325,14 +324,14 @@
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
             "retry": "*",
+            "apiKey": "11",
             "onSuccess": [
                 "4"
             ],
             "onFailure": []
         },
         {
-            "apiRequest": {
-                "apiKey": "12",
+            "apiRequest": {        
                 "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
@@ -343,6 +342,7 @@
                 "requestBody": ""
             },
             "retry": "*",
+            "apiKey": "12",
             "onSuccess": [
                 "4"
             ],
