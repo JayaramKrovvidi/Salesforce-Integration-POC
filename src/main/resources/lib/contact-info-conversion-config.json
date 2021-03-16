@@ -39,12 +39,12 @@
 		{
 			"sourceId": "IsTurvoLink",
 			"destId": "isTurvoLink",
-            "defaultId":"isTurvoLinkeDefaultId"
+            "defaultValue":"isTurvoLinkeDefaultId"
 		},
 		{
 			"sourceId": "isMobile",
 			"destId": "isPrimaryPhone",
-            "defaultId":"isPrimaryPhoneDefaultId"
+            "defaultValue":"isPrimaryPhoneDefaultId"
 		}
 	]
 }

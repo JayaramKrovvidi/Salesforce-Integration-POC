@@ -17,8 +17,28 @@
 			"destId": "status.notes"
 		},
 		{
+			"sourceId": "TaxId",
+			"destId": "taxId"
+		},
+		{
+			"sourceId": "SpecialInstructions",
+			"destId": "specialInstructions"
+		},
+		{
 			"sourceId": "Website",
 			"destId": "url"
+		},
+		{
+			"sourceId": "PrimaryContactId",
+			"destId": "primaryContact.id"
+		},
+		{
+			"sourceId": "OwnerId",
+			"destId": "owner.id"
+		},
+		{
+			"sourceId": "CompanyId",
+			"destId": "company.id"
 		}
 	]
 }

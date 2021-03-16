@@ -1,0 +1,22 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "OwnerId",
+			"destId": "user.id"
+            
+		},
+		{
+			"sourceId": "UserCommision",
+			"destId": "user.commission",
+            "defaultValue":"5"
+		}
+	]
+}

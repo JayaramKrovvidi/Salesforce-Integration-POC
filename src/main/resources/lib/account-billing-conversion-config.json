@@ -1,0 +1,94 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "ToName",
+			"destId": "toName",
+            "defaultValue":"to_name_89"
+		},
+        {
+			"sourceId": "CareOf",
+			"destId": "careOf"
+		},
+
+		{
+			"sourceId": "BillingStreet",
+			"destId": "address.line1"
+		},
+        {
+			"sourceId": "BillingStreet",
+			"destId": "address.line2"
+		},
+		{
+			"sourceId": "BillingCity",
+			"destId": "address.city"
+		},
+		{
+			"sourceId": "BillingState",
+			"destId": "address.state"
+		},
+		{
+			"sourceId": "BillingPostalCode",
+			"destId": "address.zip"
+		},
+        {
+			"sourceId": "BillingCountry",
+			"destId": "address.country"
+		},
+        {
+			"sourceId": "Phone",
+			"destId": "phone.number"
+		},
+        {
+			"sourceId": "PhoneExtension",
+			"destId": "phone.extension"
+		},
+		{
+			"sourceId": "PhoneCountry",
+			"destId": "phone.country"
+		},
+		{
+			"sourceId": "Emails",
+			"destId": "emails"
+		},
+		{
+			"sourceId": "ContactId",
+			"destId": "contactId"
+		},
+		{
+			"sourceId": "CreditLimit",
+			"destId": "creditLimit"
+		},
+		{
+			"sourceId": "PayTerms",
+			"destId": "payTerms"
+		},
+		{
+			"sourceId": "Instructions",
+			"destId": "instructions"
+		},
+		{
+			"sourceId": "PaysUnloading",
+			"destId": "paysUnloading"
+		},
+		{
+			"sourceId": "InvoiceDocuments",
+			"destId": "invoiceDocuments"
+		},
+		{
+			"sourceId": "AutoInvoice",
+			"destId": "autoInvoice"
+		},
+		{
+			"sourceId": "IsThirdParty",
+			"destId": "isThirdParty"
+		}
+	]
+}

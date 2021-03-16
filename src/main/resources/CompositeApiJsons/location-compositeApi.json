@@ -140,7 +140,7 @@
                 ]
             },
             "onSuccess": [
-                "7"
+                "6"
             ],
             "onFailure": [],
             "retry":"2"

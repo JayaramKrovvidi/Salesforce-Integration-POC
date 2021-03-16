@@ -1,0 +1,48 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "ApptApproachingLate",
+			"destId": "appt.approachingLate"
+		},
+		{
+			"sourceId": "ActualEndTime",
+			"destId": "appt.approachingLateDuration"
+		},
+		{
+			"sourceId": "ApptRunningLate",
+			"destId": "appt.runningLate"
+		},
+		{
+			"sourceId": "ApptRunningLateDuration",
+			"destId": "appt.runningLateDuration"
+		},
+		{
+			"sourceId": "FcfsApproachingLate",
+			"destId": "fcfs.approachingLate"
+		},
+		{
+			"sourceId": "FcfsApproachingLateDuration",
+			"destId": "fcfs.approachingLateDuration"
+		},
+		{
+			"sourceId": "FcfsRunningLate",
+			"destId": "fcfs.runningLate"
+		},
+		{
+			"sourceId": "FcfsRunningLateDuration",
+			"destId": "fcfs.runningLateDuration"
+		},
+		{
+			"sourceId": "ShareOperatingCarrier",
+			"destId": "shareOperatingCarrier"
+		}
+	]
+}

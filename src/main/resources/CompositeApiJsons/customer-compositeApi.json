@@ -1,73 +1,276 @@
 {
-	"requestList": [
+    "requestList": [
+        {
+            "apiRequest": {
+                "apiKey": "1",
+                "url": "https://login.salesforce.com/services/Soap/u/51.0",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Accept",
+                        "value": "*/*"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "value": "text/xml; charset=UTF-8"
+                    },
+                    {
+                        "name": "SOAPAction",
+                        "value": "login"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"utf-8\" ?> <env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"> <env:Body> <n1:login xmlns:n1=\"urn:partner.soap.sforce.com\">  <n1:username>jayaram@accolitedigital.com</n1:username>      <n1:password>Accolite@123Ljmq16LqC8ndmxau4fTKLhsQS</n1:password> </n1:login>  </env:Body> </env:Envelope>",
+                "store": [
+                    "sessionId"
+                ]
+            },
+            "onSuccess": [
+                "2"
+            ],
+            "onFailure": [
+               
+            ],
+            "retry":"4"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "2",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/xml; charset=UTF-8",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Account</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "store": [
+                    "id"
+                ]
+            },
+            "onSuccess": [
+                "3"
+            ],
+            "onFailure": [],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "3",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv; charset=UTF-8"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "requestBody": "SELECT Id, Name, CleanStatus, Description, Website, OwnerId, Phone, Type,ShippingCity, ShippingCountry, ShippingStreet, ShippingState, ShippingPostalCode, BillingCity, BillingCountry, BillingPostalCode, BillingState, BillingStreet FROM Account",
+                "store": [
+                    "id"
+                ]
+            },
+            "onSuccess": [
+                "6"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "4",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv; charset=UTF-8",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
+            },
+            "onSuccess": [
+                "-1"
+            ],
+            "onFailure": [],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "5",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ]
+            },
+            "onSuccess": [
+                "6"
+            ],
+            "onFailure": [],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "6",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "store": [
+                    "state"
+                ],
+                "successHandlers": [
+                    {
+                        "handlerId": 1,
+                        "operand1": "{6.state}",
+                        "operand2": "Completed",
+                        "operator": "EQUALS",
+                        "result": ""
+                    }
+                ]
+            },
+            "onSuccess": [
+                "7"
+            ],
+            "onFailure": ["-1"],
+            "retry":"*"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "7",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "store": [
+                    "result"
+                ]
+            },
+            "onSuccess": [
+                "8"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "8",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result/{7.result}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "procKeyOnSuccess": [
+                    "AccountCustomerConversion",
+                    "AccountCommChannelConversion",
+                    "AccountUserCommisionConversion",
+                    "AccountGroupConversion",
+                    "AccountExternalIdsConversion",
+                    "AccountBillingConversion",
+                    "AccountDistributionConversion"
+                ],
+                "procKeyOnFailure": []
+            },
+            "onSuccess": [
+                "9"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2"
+        },
+         {
+            "apiRequest": {
+                "apiKey": "9",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/xml; charset=UTF-8",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>ServiceAppointment</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "store": [
+                    "id"
+                ]
+            },
+            "onSuccess": [
+                "10"
+            ],
+            "onFailure": [],
+            "retry":"2"
+        },
 		{
 			"apiRequest": {
-				"apiKey": "1",
-				"url": "https://login.salesforce.com/services/Soap/u/51.0",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "POST",
-				"headers": [
-					{
-						"name": "Accept",
-						"value": "*/*"
-					},
-					{
-						"name": "Content-Type",
-						"value": "text/xml; charset=UTF-8"
-					},
-					{
-						"name": "SOAPAction",
-						"value": "login"
-					}
-				],
-				"requestBody": "<?xml version=\"1.0\" encoding=\"utf-8\" ?> <env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"> <env:Body> <n1:login xmlns:n1=\"urn:partner.soap.sforce.com\">  <n1:username>jayaram@accolitedigital.com</n1:username>      <n1:password>Accolite@123Ljmq16LqC8ndmxau4fTKLhsQS</n1:password> </n1:login>  </env:Body> </env:Envelope>",
-				"store": [
-					"sessionId"
-				]
-			},
-			"onSuccess": [
-				"2"
-			],
-			"onFailure": [],
-			"retry": "4"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "2",
-				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "POST",
-				"headers": [
-					{
-						"name": "Content-Type",
-						"value": "application/xml; charset=UTF-8",
-						"scope": "static"
-					},
-					{
-						"name": "X-SFDC-Session",
-						"value": "{1.sessionId}",
-						"scope": "runtime"
-					}
-				],
-				"requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Account</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
-				"store": [
-					"id"
-				]
-			},
-			"onSuccess": [
-				"3"
-			],
-			"onFailure": [],
-			"retry": "2"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "3",
-				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch",
+				"apiKey": "10",
+				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{9.id}/batch",
 				"pathParams": [],
 				"requestParams": [],
 				"requestType": "REST",
@@ -82,351 +285,457 @@
 						"value": "{1.sessionId}"
 					}
 				],
-				"requestBody": "SELECT Id, Name, CleanStatus, Description, Website, OwnerId, Phone, ShippingCity, ShippingCountry, ShippingStreet, ShippingState, ShippingPostalCode, BillingCity, BillingCountry, BillingPostalCode, BillingState, BillingStreet FROM Account",
+				"requestBody": "SELECT Id, ActualEndTime FROM ServiceAppointment",
 				"store": [
 					"id"
 				]
 			},
 			"onSuccess": [
-				"6"
-			],
-			"onFailure": [
-				"-1"
-			],
-			"retry": "2"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "4",
-				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "POST",
-				"headers": [
-					{
-						"name": "Content-Type",
-						"value": "text/csv; charset=UTF-8",
-						"scope": "static"
-					},
-					{
-						"name": "X-SFDC-Session",
-						"value": "{1.sessionId}",
-						"scope": "runtime"
-					}
-				],
-				"requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
-			},
-			"onSuccess": [
-				"-1"
-			],
-			"onFailure": [],
-			"retry": "2"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "5",
-				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "GET",
-				"headers": [
-					{
-						"name": "X-SFDC-Session",
-						"value": "{1.sessionId}",
-						"scope": "runtime"
-					}
-				]
-			},
-			"onSuccess": [
-				"7"
-			],
-			"onFailure": [],
-			"retry": "2"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "6",
-				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "GET",
-				"headers": [
-					{
-						"name": "X-SFDC-Session",
-						"value": "{1.sessionId}",
-						"scope": "runtime"
-					}
-				],
-				"store": [
-					"state"
-				],
-				"successHandlers": [
-					{
-						"handlerId": 1,
-						"operand1": "{6.state}",
-						"operand2": "Completed",
-						"operator": "EQUALS",
-						"result": ""
-					}
-				]
-			},
-			"onSuccess": [
-				"7"
-			],
-			"onFailure": [
-				"-1"
-			],
-			"retry": "2"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "7",
-				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "GET",
-				"headers": [
-					{
-						"name": "X-SFDC-Session",
-						"value": "{1.sessionId}",
-						"scope": "runtime"
-					}
-				],
-				"store": [
-					"result"
-				]
-			},
-			"onSuccess": [
-				"8"
-			],
-			"onFailure": [
-				"-1"
-			],
-			"retry": "2"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "8",
-				"url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result/{7.result}",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "GET",
-				"headers": [
-					{
-						"name": "X-SFDC-Session",
-						"value": "{1.sessionId}",
-						"scope": "runtime"
-					}
-				],
-				"procKeyOnSuccess": [
-					"LocationConversion",
-					"ContactInfoConversion",
-					"FacilityConversion",
-					"GroupConversion"
-				],
-				"procKeyOnFailure": []
-			},
-			"onSuccess": [
-				"9"
-			],
-			"onFailure": [
-				"-1"
-			],
-			"retry": "2"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "9",
-				"url": "ftp.turvo.com",
-				"pathParams": [],
-				"requestParams": [
-					{
-						"name": "ftp.username",
-						"value": "test"
-					},
-					{
-						"name": "ftp.password",
-						"value": "kindCh3etah95"
-					},
-					{
-						"name": "apiKey",
-						"value": "8"
-					},
-					{
-						"name": "processKey",
-						"value": "LocationConversion"
-					},
-					{
-						"name": "ftp.remoteUri",
-						"value": "/solo/location/location_"
-					}
-				],
-				"requestType": "FTP",
-				"methodType": "UPLOAD",
-				"headers": []
-			},
-			"onSuccess": [
-				"10"
-			],
-			"onFailure": [],
-			"retry": "1"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "10",
-				"url": "ftp.turvo.com",
-				"pathParams": [],
-				"requestParams": [
-					{
-						"name": "ftp.username",
-						"value": "test"
-					},
-					{
-						"name": "ftp.password",
-						"value": "kindCh3etah95"
-					},
-					{
-						"name": "apiKey",
-						"value": "8"
-					},
-					{
-						"name": "processKey",
-						"value": "ContactInfoConversion"
-					},
-					{
-						"name": "ftp.remoteUri",
-						"value": "/solo/location/contact_info_"
-					}
-				],
-				"requestType": "FTP",
-				"methodType": "UPLOAD",
-				"headers": []
-			},
-			"onSuccess": [
-				"11"
-			],
-			"onFailure": [],
-			"retry": "1"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "11",
-				"url": "ftp.turvo.com",
-				"pathParams": [],
-				"requestParams": [
-					{
-						"name": "ftp.username",
-						"value": "test"
-					},
-					{
-						"name": "ftp.password",
-						"value": "kindCh3etah95"
-					},
-					{
-						"name": "apiKey",
-						"value": "8"
-					},
-					{
-						"name": "processKey",
-						"value": "FacilityConversion"
-					},
-					{
-						"name": "ftp.remoteUri",
-						"value": "/solo/location/facility_"
-					}
-				],
-				"requestType": "FTP",
-				"methodType": "UPLOAD",
-				"headers": []
-			},
-			"onSuccess": [
-				"12"
-			],
-			"onFailure": [],
-			"retry": "1"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "12",
-				"url": "ftp.turvo.com",
-				"pathParams": [],
-				"requestParams": [
-					{
-						"name": "ftp.username",
-						"value": "test"
-					},
-					{
-						"name": "ftp.password",
-						"value": "kindCh3etah95"
-					},
-					{
-						"name": "apiKey",
-						"value": "8"
-					},
-					{
-						"name": "processKey",
-						"value": "GroupConversion"
-					},
-					{
-						"name": "ftp.remoteUri",
-						"value": "/solo/location/group_"
-					}
-				],
-				"requestType": "FTP",
-				"methodType": "UPLOAD",
-				"headers": []
-			},
-			"onSuccess": [
 				"13"
 			],
-			"onFailure": [],
-			"retry": "1"
-		},
-		{
-			"apiRequest": {
-				"apiKey": "13",
-				"url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/location",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "POST",
-				"headers": [
-					{
-						"name": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"store": [],
-				"requestBody": "{ \"dataPath\" : \"/solo/\"}"
-			},
-			"onSuccess": [
-				"4"
+			"onFailure": [
+				"-1"
 			],
-			"onFailure": [],
-			"retry": "1"
+			"retry": "2"
 		},
-		{
-			"apiRequest": {
-				"apiKey": "14",
-				"url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
-				"pathParams": [],
-				"requestParams": [],
-				"requestType": "REST",
-				"methodType": "PUT",
-				"headers": [],
-				"store": [],
-				"requestBody": ""
-			},
-			"onSuccess": [
-				"4"
-			],
-			"onFailure": [],
-			"retry": "1"
-		}
-	]
+        {
+            "apiRequest": {
+                "apiKey": "11",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{9.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv; charset=UTF-8",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
+            },
+            "onSuccess": [
+                "-1"
+            ],
+            "onFailure": [],
+            "retry":"2"
+        },{
+            "apiRequest": {
+                "apiKey": "12",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{9.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ]
+            },
+            "onSuccess": [
+                "14"
+            ],
+            "onFailure": [],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "13",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{9.id}/batch/{10.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "store": [
+                    "state"
+                ],
+                "successHandlers": [
+                    {
+                        "handlerId": 1,
+                        "operand1": "{6.state}",
+                        "operand2": "Completed",
+                        "operator": "EQUALS",
+                        "result": ""
+                    }
+                ]
+            },
+            "onSuccess": [
+                "14"
+            ],
+            "onFailure": ["-1"],
+            "retry":"*"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "14",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{9.id}/batch/{10.id}/result",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "store": [
+                    "result"
+                ]
+            },
+            "onSuccess": [
+                "15"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "15",
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{9.id}/batch/{10.id}/result/{14.result}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "procKeyOnSuccess": [
+                    "AccountSettingsConversion"
+                ],
+                "procKeyOnFailure": []
+            },
+            "onSuccess": [
+                "16"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "16",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountCustomerConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/customer_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "17"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "17",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountCommChannelConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/communication_channel_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "18"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "18",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountUserCommisionConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/user_commissions_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "19"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "19",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "15"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountSettingsConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/settings_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "20"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "20",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountGroupConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/group_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "21"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "21",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountExternalIdsConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/externalIds_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "22"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "22",
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountBillingConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/billing_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "23"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "23",
+                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/customer",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "name": "nonce",
+                        "value": "salesforce-testing-15302021"
+                    }
+
+                ],
+                "store": [],
+                "requestBody": "{ \"dataPath\" : \"/solo/\"}"
+            },
+            "onSuccess": [
+                "24"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        },
+        {
+            "apiRequest": {
+                "apiKey": "24",
+                "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "PUT",
+                "headers": [],
+                "store": [],
+                "requestBody": ""
+            },
+            "onSuccess": [
+                "4"
+            ],
+            "onFailure": [],
+            "retry":"1"
+        }
+    ]
 }
