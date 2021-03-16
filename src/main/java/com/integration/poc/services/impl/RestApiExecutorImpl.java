@@ -6,7 +6,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
-import com.integration.poc.dtos.internal.GenericApiRequest;
 import com.integration.poc.dtos.internal.NameValuePair;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.services.IMapBuilder;
@@ -31,34 +30,34 @@ public class RestApiExecutorImpl implements IApiExecutor {
   IMapBuilder mapBuilder;
 
   @Override
-  public String executeApi( ApiRequestConfig apiRequest , String apiKey) {
+  public String executeApi(ApiRequestConfig apiRequest, String apiKey) {
     switch (apiRequest.getMethodType()) {
       case "GET":
-        return executeGet(apiRequest,apiKey);
+        return executeGet(apiRequest, apiKey);
       case "POST":
-        return executePost(apiRequest,apiKey);
+        return executePost(apiRequest, apiKey);
       case "PUT":
-        return executePut(apiRequest,apiKey);
+        return executePut(apiRequest, apiKey);
       default:
         return null;
     }
 
   }
 
-  private String executePut(ApiRequestConfig apiRequest,String apiKey) {
-    
+  private String executePut(ApiRequestConfig apiRequest, String apiKey) {
+
     prepareApiConfigForExecution(apiRequest);
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.putForEntity(String.class, url, apiRequest.getRequestBody());
-    
+
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }
 
-  private String executeGet(ApiRequestConfig apiRequest,String apiKey) {
-   
+  private String executeGet(ApiRequestConfig apiRequest, String apiKey) {
+
     prepareApiConfigForExecution(apiRequest);
 
     // Build and execute external api
@@ -68,8 +67,8 @@ public class RestApiExecutorImpl implements IApiExecutor {
     return response;
   }
 
-  private String executePost(ApiRequestConfig apiRequest,String apiKey) {
-    
+  private String executePost(ApiRequestConfig apiRequest, String apiKey) {
+
     prepareApiConfigForExecution(apiRequest);
 
     // Build and execute external api

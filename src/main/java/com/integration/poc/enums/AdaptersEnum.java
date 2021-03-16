@@ -1,16 +1,15 @@
 package com.integration.poc.enums;
 
 import com.integration.poc.services.IApiExecutor;
-
+import com.integration.poc.services.impl.DatabaseExecutorImpl;
 import com.integration.poc.services.impl.FtpApiExecutorImpl;
 import com.integration.poc.services.impl.RestApiExecutorImpl;
-import com.integration.poc.services.impl.DatabaseExecutorImpl;
 
 public enum AdaptersEnum {
 
   REST_ADAPTER("REST", RestApiExecutorImpl.class),
   FTP_ADAPTER("FTP", FtpApiExecutorImpl.class),
-  DB_ADAPTER("DATABASE" ,DatabaseExecutorImpl.class );
+  DB_ADAPTER("DATABASE", DatabaseExecutorImpl.class);
 
   private final String requestType;
   private final Class<? extends IApiExecutor> adapter;

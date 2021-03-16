@@ -60,21 +60,24 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     }
   }
 
-  private boolean executeCurrentApi( GenericApiRequest genericApiRequest) {
+  private boolean executeCurrentApi(GenericApiRequest genericApiRequest) {
     ApiRequestConfig currentApiConfig = genericApiRequest.getApiRequest();
     LOGGER.info("API with Key: {} ready for execution", genericApiRequest.getApiKey());
     String response = findAdapterAndExecuteApi(genericApiRequest);
     List<Handle> successHandlers = currentApiConfig.getSuccessHandlers();
     boolean success = handleExecutor.executeHandles(genericApiRequest.getApiKey(), successHandlers);
-    LOGGER.info("API with Key: {} executed and status: {} ", genericApiRequest.getApiKey(), success);
-    genericResultProcessor.process(genericApiRequest.getApiRequest(),genericApiRequest.getApiKey(), response, success);
+    LOGGER.info("API with Key: {} executed and status: {} ", genericApiRequest.getApiKey(),
+        success);
+    genericResultProcessor.process(genericApiRequest.getApiRequest(), genericApiRequest.getApiKey(),
+        response, success);
     return success;
   }
 
   private String findAdapterAndExecuteApi(GenericApiRequest genericApiRequest) {
-    String requestType = genericApiRequest.getApiRequest().getRequestType();
+    String requestType = genericApiRequest.getApiRequest()
+        .getRequestType();
     IApiExecutor apiExecutor = factory.getBeanForClass(AdaptersEnum.getAdapterByKey(requestType));
-    return apiExecutor.executeApi(genericApiRequest.getApiRequest(),genericApiRequest.getApiKey());
+    return apiExecutor.executeApi(genericApiRequest.getApiRequest(), genericApiRequest.getApiKey());
   }
 
   private GenericApiRequest decideNextApi(List<GenericApiRequest> apiRequestList,
