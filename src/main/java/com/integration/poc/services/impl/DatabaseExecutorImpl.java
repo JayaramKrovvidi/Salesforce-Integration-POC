@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
+import com.integration.poc.dtos.internal.GenericApiRequest;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.utils.Util;
 
@@ -23,7 +24,7 @@ public class DatabaseExecutorImpl implements IApiExecutor {
   private static final String DRIVER = "driver";
 
   @Override
-  public String executeApi(ApiRequestConfig apiRequest) {
+  public String executeApi(ApiRequestConfig apiRequest , String apiKey) {
     switch (apiRequest.getMethodType()) {
       case "SELECT":
         return extractDataAndExecute(apiRequest);

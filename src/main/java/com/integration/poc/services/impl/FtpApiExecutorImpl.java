@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
+import com.integration.poc.dtos.internal.GenericApiRequest;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.utils.Util;
 
@@ -23,7 +24,7 @@ public class FtpApiExecutorImpl implements IApiExecutor {
   private String localFilePath;
 
   @Override
-  public String executeApi(ApiRequestConfig apiRequest) {
+  public String executeApi(ApiRequestConfig apiRequest , String apiKey) {
     switch (apiRequest.getMethodType()) {
       case "UPLOAD":
         return interpretRequestAndUpload(apiRequest);

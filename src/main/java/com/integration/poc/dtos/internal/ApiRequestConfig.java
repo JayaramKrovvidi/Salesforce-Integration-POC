@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApiRequestConfig {
-  private String apiKey;
   private String url;
   private List<NameValuePair<String, String>> pathParams;
   private List<NameValuePair<String, String>> requestParams;

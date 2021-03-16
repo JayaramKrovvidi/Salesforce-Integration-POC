@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
+import com.integration.poc.dtos.internal.GenericApiRequest;
 import com.integration.poc.dtos.internal.Node;
 import com.integration.poc.dtos.internal.PostProcessConfig;
 import com.integration.poc.enums.PostProcessEnum;
@@ -35,7 +36,8 @@ public class GenericResultProcessorImpl implements IResultProcessor {
   FileManagerServiceImpl fileManager;
 
   @Override
-  public void process(ApiRequestConfig request, String response, boolean success) {
+  public void process(ApiRequestConfig request,String apiKey, String response, boolean success) {
+    
     List<String> keys = success ? request.getProcKeyOnSuccess() : request.getProcKeyOnFailure();
     if (CollectionUtils.isEmpty(keys)) {
       return;
@@ -62,7 +64,7 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       // Node.printNodes(nodes);
       LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
 
-      saveFileLocally(processedResponse, request.getApiKey(), key);
+      saveFileLocally(processedResponse, apiKey, key);
     }
   }
 
