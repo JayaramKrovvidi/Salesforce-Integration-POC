@@ -55,7 +55,7 @@
                         "scope": "runtime"
                     }
                 ],
-                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Asset</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Order</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
                 "store": [
                     "id"
                 ]
@@ -63,7 +63,7 @@
             "onSuccess": [
                 "3"
             ],
-            "onFailure": [],
+            "onFailure": ["-1"],
             "retry":"2",
             "apiKey": "2"
         },
@@ -84,7 +84,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, AccountId, Status FROM Asset",
+                "requestBody": "SELECT Id, AccountId, ActivatedDate, EndDate FROM Order",
                 "store": [
                     "id"
                 ]
@@ -220,7 +220,7 @@
                     }
                 ],
                 "procKeyOnSuccess": [
-                    "AssetConversion"       
+                    "OrderConversion"       
                 ],
                 "procKeyOnFailure": []
             },
@@ -250,11 +250,11 @@
                     },
                     {
                         "name": "processKey",
-                        "value": "AssetConversion"
+                        "value": "OrderConversion"
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/asset/asset_"
+                        "value": "/solo/order/order_"
                     }
                 ],
                 "requestType": "FTP",
@@ -270,7 +270,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/asset",
+                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/order",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",

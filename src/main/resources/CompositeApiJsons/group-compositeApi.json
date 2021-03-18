@@ -55,7 +55,7 @@
                         "scope": "runtime"
                     }
                 ],
-                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Asset</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Group</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
                 "store": [
                     "id"
                 ]
@@ -84,7 +84,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, AccountId, Status FROM Asset",
+                "requestBody": "SELECT Id, Name, OwnerId FROM Group",
                 "store": [
                     "id"
                 ]
@@ -220,7 +220,7 @@
                     }
                 ],
                 "procKeyOnSuccess": [
-                    "AssetConversion"       
+                    "GroupObjectConversion"       
                 ],
                 "procKeyOnFailure": []
             },
@@ -254,7 +254,7 @@
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/asset/asset_"
+                        "value": "/solo/group/group_"
                     }
                 ],
                 "requestType": "FTP",
@@ -270,7 +270,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/asset",
+                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/group",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",

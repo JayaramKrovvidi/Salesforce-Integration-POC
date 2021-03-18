@@ -12,7 +12,7 @@ public enum PostProcessEnum {
   INVOICE_LINES_OBJ_CONVERSION("InvoiceLinesConversion", "src\\main\\resources\\lib\\invoice-lines-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   PAYMENT_CONVERSION("PaymentConversion", "src\\main\\resources\\lib\\payment-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   LOCATION_OBJ_CONVERSION("LocationConversion", "src\\main\\resources\\lib\\location-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
-  GROUP_OBJ_CONVERSION("GroupConversion", "src\\main\\resources\\lib\\group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  GROUP_OBJ_CONVERSION("GroupConversion", "src\\main\\resources\\lib\\location-group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   CONTACT_INFO_OBJ_CONVERSION("ContactInfoConversion", "src\\main\\resources\\lib\\contact-info-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   FACILITY_OBJ_CONVERSION("FacilityConversion", "src\\main\\resources\\lib\\facility-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   ACCOUNT_CUSTOMER_OBJ_CONVERSION("AccountCustomerConversion", "src\\main\\resources\\lib\\account-customer-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
@@ -22,9 +22,9 @@ public enum PostProcessEnum {
   ACCOUNT_SETTINGS_CONVERSION("AccountSettingsConversion", "src\\main\\resources\\lib\\account-settings-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   ACCOUNT_GROUP_OBJ_CONVERSION("AccountGroupConversion", "src\\main\\resources\\lib\\account-group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   ACCOUNT_EXTERNAL_IDS_CONVERSION("AccountExternalIdsConversion", "src\\main\\resources\\lib\\account-externalIds-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
-  ACCOUNT_BILLING_CONVERSION("AccountBillingConversion", "src\\main\\resources\\lib\\account-billing-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
-
-
+  ACCOUNT_BILLING_CONVERSION("AccountBillingConversion", "src\\main\\resources\\lib\\account-billing-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  ORDER_CONVERSION("OrderConversion", "src\\main\\resources\\lib\\order-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  GROUP_CONVERSION("GroupObjectConversion", "src\\main\\resources\\lib\\group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
 
 
 
