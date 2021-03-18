@@ -112,6 +112,11 @@
 			"destId": "dim.length"
 		},
 		{
+			"sourceId": "DimWidth",
+			"destId": "dim.width"
+		}
+		,
+		{
 			"sourceId": "DimHeight",
 			"destId": "dim.height"
 		},

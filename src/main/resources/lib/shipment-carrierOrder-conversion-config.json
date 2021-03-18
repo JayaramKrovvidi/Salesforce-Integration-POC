@@ -9,8 +9,9 @@
 			"destId": "shipment.id"
 		},
 		{
-			"sourceId": "Provider",
-			"destId": "carrier.id"
+			"sourceId": "CarrierId",
+			"destId": "carrier.id",
+			"defaultValue":"607999"
 		},
 		{
 			"sourceId": "OwnerId",
