@@ -3,16 +3,24 @@
 		{
 			"sourceId": "Id",
 			"destId": "id"
-			
 		},
-		{
-			"sourceId": "Id",
-			"destId": "contextId"
+        {
+			"sourceId": "Name",
+			"destId": "name",
+            "defaultValue":"nameDefaultValue"
 		},
-		{
-			"sourceId": "GroupId",
-			"destId": "groupId",
-			"defaultValue": "grpId"
+        {
+			"sourceId": "Description",
+			"destId": "description"
+		},
+        {
+			"sourceId": "OwnerId",
+			"destId": "userId"
+		},
+        {
+			"sourceId": "Permission",
+			"destId": "permission"
 		}
+		
 	]
 }

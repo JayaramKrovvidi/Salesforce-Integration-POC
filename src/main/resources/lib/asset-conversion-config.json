@@ -1,24 +1,80 @@
 {
 	"mappers": [
 		{
-			"sourceId": "id__c",
-			"destId": "idjhajj"
+			"sourceId": "Id",
+			"destId": "id"
 		},
 		{
-			"sourceId": "newsourceId",
-			"destId": "nandy"
+			"sourceId": "VehicleType",
+			"destId": "vehicle_type"
 		},
 		{
-			"sourceId": "vehicle_type__c",
-			"destId": "vehicle"
+			"sourceId": "Vin",
+			"destId": "vin"
 		},
 		{
-			"sourceId": "checking",
-			"destId": "checkdestId"
+			"sourceId": "Notes",
+			"destId": "notes"
 		},
 		{
-			"sourceId": "vin__c",
-			"destId": "vinner"
+			"sourceId": "AccountId",
+			"destId": "account.id"
+		},
+		{
+			"sourceId": "license.number",
+			"destId": "license.number"
+		},
+		{
+			"sourceId": "license.country",
+			"destId": "license.country"
+		},
+		{
+			"sourceId": "license.state",
+			"destId": "license.state"
+		},
+		{
+			"sourceId": "asset.number",
+			"destId": "asset.number"
+		},
+		{
+			"sourceId": "make",
+			"destId": "make"
+		},
+		{
+			"sourceId": "Model",
+			"destId": "model"
+		},
+		{
+			"sourceId": "Size",
+			"destId": "size"
+		},
+		{
+			"sourceId": "Class",
+			"destId": "class"
+		},
+		{
+			"sourceId": "Color",
+			"destId": "color"
+		},
+		{
+			"sourceId": "Weight",
+			"destId": "weight"
+		},
+		{
+			"sourceId": "Status",
+			"destId": "status"
+		},
+		{
+			"sourceId": "SensorProvider",
+			"destId": "sensor.provider"
+		},
+		{
+			"sourceId": "SensorDeviceId",
+			"destId": "sensor.deviceId"
+		},
+		{
+			"sourceId": "SensorCustomId",
+			"destId": "sensor.customId"
 		}
 	]
 }
