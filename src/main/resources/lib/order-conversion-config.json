@@ -6,7 +6,8 @@
 		},
 		{
 			"sourceId": "OrderKey",
-			"destId": "Order.Key"
+			"destId": "Order.Key",
+			"defaultValue":"4pf7jfTwon-85165658801"
 		},
 		{
 			"sourceId": "CustomerKey",

@@ -279,17 +279,21 @@
                     {
                         "name": "Content-Type",
                         "value": "application/json"
+                    },
+                    {
+                        "name": "nonce",
+                        "value": "180320211742"
                     }
                 ],
                 "store": [],
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
             "onSuccess": [
-                "4"
+                "11"
             ],
             "onFailure": [],
             "retry":"1",
-            "apiKey": "11"
+            "apiKey": "10"
         },
         {
             "apiRequest": {
@@ -307,7 +311,7 @@
             ],
             "onFailure": [],
             "retry":"1",
-             "apiKey": "12"
+             "apiKey": "11"
         }
     ]
 }

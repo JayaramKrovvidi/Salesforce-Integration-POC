@@ -285,11 +285,11 @@
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
             "onSuccess": [
-                "4"
+                "11"
             ],
             "onFailure": [],
             "retry":"1",
-            "apiKey": "11"
+            "apiKey": "10"
         },
         {
             "apiRequest": {
@@ -307,7 +307,7 @@
             ],
             "onFailure": [],
             "retry":"1",
-             "apiKey": "12"
+             "apiKey": "11"
         }
     ]
 }
