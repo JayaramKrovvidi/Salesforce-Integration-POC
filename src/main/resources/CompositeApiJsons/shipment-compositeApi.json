@@ -1,0 +1,734 @@
+{
+    "requestList": [
+        {
+            "apiRequest": {
+                "url": "https://login.salesforce.com/services/Soap/u/51.0",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Accept",
+                        "value": "*/*"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "value": "text/xml; charset=UTF-8"
+                    },
+                    {
+                        "name": "SOAPAction",
+                        "value": "login"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"utf-8\" ?> <env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"> <env:Body> <n1:login xmlns:n1=\"urn:partner.soap.sforce.com\">  <n1:username>jayaram@accolitedigital.com</n1:username>      <n1:password>Accolite@123Ljmq16LqC8ndmxau4fTKLhsQS</n1:password> </n1:login>  </env:Body> </env:Envelope>",
+                "store": [
+                    "sessionId"
+                ]
+            },
+            "retry": "*",
+            "apiKey": "1",
+            "onSuccess": [
+                "2"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {          
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/xml; charset=UTF-8",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Shipment</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "store": [
+                    "id"
+                ]
+            },
+            "retry": "*",
+            "apiKey": "2",
+            "onSuccess": [
+                "3"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {              
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv; charset=UTF-8"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "requestBody": "SELECT Id, ActualDeliveryDate, CreatedDate, ShipmentNumber, Status, DeliveredToId, Provider, SourceLocationId, OwnerId, Description, TrackingNumber, ShipToName, ExpectedDeliveryDate FROM Shipment",
+                "store": [
+                    "id"
+                ]
+            },
+            "retry": "*",
+            "apiKey": "3",
+            "onSuccess": [
+                "6"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {             
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv; charset=UTF-8",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
+            },
+            "retry": "*",
+            "apiKey": "4",
+            "onSuccess": [
+                "-1"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {                
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ]
+            },
+            "retry": "*",
+            "apiKey": "5",
+            "onSuccess": [
+                "7"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "store": [
+                    "state"
+                ],
+                "successHandlers": [
+                    {
+                        "handlerId": 1,
+                        "operand1": "{6.state}",
+                        "operand2": "Completed",
+                        "operator": "EQUALS",
+                        "result": ""
+                    }
+                ]
+            },
+            "retry": "*",
+            "apiKey": "6",
+            "onSuccess": [
+                "7"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "store": [
+                    "result"
+                ]
+            },
+            "retry": "*",
+            "apiKey": "7",
+            "onSuccess": [
+                "8"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result/{7.result}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "procKeyOnSuccess": [
+                    "ShipmentConversion",
+                    "ShipmentRouteConversion",
+                    "ShipmentCustomerOrderConversion",
+                    "ShipmentCarrierOrderConversion",
+                    "ShipmentEquipmentConversion",
+                    "ShipmentExternalIdConversion",
+                    "ShipmentContactConversion",
+                    "ShipmentItemConversion",
+                    "ShipmentCostConversion",
+                    "ShipmentInvoiceConversion",
+                    "ShipmentPaymentConversion",
+                    "ShipmentDeductionConversion"
+
+                ],
+                "procKeyOnFailure": []
+            },
+            "retry": "*",
+            "apiKey": "8",
+            "onSuccess": [
+                "9"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {              
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/shipment_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "9",
+            "onSuccess": [
+                "10"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentRouteConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/route_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "10",
+            "onSuccess": [
+                "11"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentCustomerOrderConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/customerOrder_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "11",
+            "onSuccess": [
+                "12"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentCarrierOrderConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/carrierOrder_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "12",
+            "onSuccess": [
+                "13"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentEquipmentConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/equipment_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "13",
+            "onSuccess": [
+                "14"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentExternalIdConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/externalIds_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "14",
+            "onSuccess": [
+                "15"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentContactConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/contact_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "15",
+            "onSuccess": [
+                "16"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentItemConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/items_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "16",
+            "onSuccess": [
+                "17"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentCostConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/costs_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "17",
+            "onSuccess": [
+                "18"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentInvoiceConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/invoice_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "18",
+            "onSuccess": [
+                "19"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentPaymentConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/payment_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "19",
+            "onSuccess": [
+                "20"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {               
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "ShipmentDeductionConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/shipment/deduction_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "retry": "*",
+            "apiKey": "20",
+            "onSuccess": [
+                "21"
+            ],
+            "onFailure": []
+        },
+        {
+            "apiRequest": {
+                "url": "http://dev-cr-7769.turvo.net:8080/bdi/bdi/pacific/shipment",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "name": "nonce",
+                        "value": "salesforce-testing-180320211417"
+                    }
+
+                ],
+                "store": [],
+                "requestBody": "{ \"dataPath\" : \"/solo/\"}"
+            },
+            "onSuccess": [
+                "22"
+            ],
+            "onFailure": [],
+            "retry":"1",
+            "apiKey": "21"
+        },
+        {
+            "apiRequest": {
+                "url": "http://dev-cr-7769.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "PUT",
+                "headers": [],
+                "store": [],
+                "requestBody": ""
+            },
+            "onSuccess": [
+                "4"
+            ],
+            "onFailure": [],
+            "retry":"1",
+            "apiKey": "22"
+        }
+    ]
+}

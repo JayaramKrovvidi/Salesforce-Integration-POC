@@ -1,0 +1,45 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "ActualDeliveryDate",
+			"destId": "startDate"
+		},
+		{
+			"sourceId": "CreatedDate",
+			"destId": "endDate"
+		},
+		{
+			"sourceId": "ShipmentNumber",
+			"destId": "customId"
+		},
+		{
+			"sourceId": "status",
+			"destId": "status.code"
+		},
+		{
+			"sourceId": "StatusNotes",
+			"destId": "status.notes"
+		},
+		{
+			"sourceId": "MinPay",
+			"destId": "minPay"
+		},
+		{
+			"sourceId": "MaxPay",
+			"destId": "maxPay"
+		},
+		{
+			"sourceId": "TagsValue",
+			"destId": "tags.value"
+		},
+		{
+			"sourceId": "isLtl",
+			"destId": "isLtl"
+		}
+		
+	]
+}

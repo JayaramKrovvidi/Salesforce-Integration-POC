@@ -1,0 +1,51 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id"
+		},
+		{
+			"sourceId": "CarrierOrderId",
+			"destId": "carrierOrder.id"
+		},
+        {
+			"sourceId": "Date",
+			"destId": "date",
+            "defaultValue":"date"
+		},
+        {
+			"sourceId": "InvoiceNum",
+			"destId": "invoiceNum",
+            "defaultValue":"invoiceNum"
+		},
+        {
+			"sourceId": "ExpectedDeliveyDate",
+			"destId": "dueDate"
+		},
+        {
+			"sourceId": "Status",
+			"destId": "status"
+		},
+        {
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+        {
+			"sourceId": "Amount",
+			"destId": "amount",
+            "defaultValue":"amount"
+		},
+        {
+			"sourceId": "DocumentId",
+			"destId": "document.id"
+		}
+    ]
+}

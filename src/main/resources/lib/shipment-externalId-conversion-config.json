@@ -1,0 +1,34 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id"
+		},
+		{
+			"sourceId": "carrierOrder.id",
+			"destId": "carrierOrder.id"
+		},
+		{
+			"sourceId": "externalId.type",
+			"destId": "externalId.type",
+            "defaultValue":"externalType"
+		},
+		{
+			"sourceId": "externalId.value",
+			"destId": "externalId.value",
+            "defaultValue":"externalValue"
+		},
+		{
+			"sourceId": "FragmentSequence",
+			"destId": "fragmentSequence"
+		}
+    ]
+}

@@ -22,7 +22,20 @@ public enum PostProcessEnum {
   ACCOUNT_SETTINGS_CONVERSION("AccountSettingsConversion", "src\\main\\resources\\lib\\account-settings-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   ACCOUNT_GROUP_OBJ_CONVERSION("AccountGroupConversion", "src\\main\\resources\\lib\\account-group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   ACCOUNT_EXTERNAL_IDS_CONVERSION("AccountExternalIdsConversion", "src\\main\\resources\\lib\\account-externalIds-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
-  ACCOUNT_BILLING_CONVERSION("AccountBillingConversion", "src\\main\\resources\\lib\\account-billing-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
+  ACCOUNT_BILLING_CONVERSION("AccountBillingConversion", "src\\main\\resources\\lib\\account-billing-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_CONVERSION("ShipmentConversion", "src\\main\\resources\\lib\\shipment-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_ROUTE_CONVERSION("ShipmentRouteConversion", "src\\main\\resources\\lib\\shipment-route-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_CUSTOMER_ORDER_CONVERSION("ShipmentCustomerOrderConversion", "src\\main\\resources\\lib\\shipment-customerOrder-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_CARRIER_ORDER_CONVERSION("ShipmentCarrierOrderConversion", "src\\main\\resources\\lib\\shipment-carrierOrder-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_EQUIPMENT_CONVERSION("ShipmentEquipmentConversion", "src\\main\\resources\\lib\\shipment-equipment-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_EXTERNALID_CONVERSION("ShipmentExternalIdConversion", "src\\main\\resources\\lib\\shipment-externalId-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_CONTACT_CONVERSION("ShipmentContactConversion", "src\\main\\resources\\lib\\shipment-contact-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_ITEM_CONVERSION("ShipmentItemConversion", "src\\main\\resources\\lib\\shipment-item-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_COST_CONVERSION("ShipmentCostConversion", "src\\main\\resources\\lib\\shipment-cost-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_INVOICE_CONVERSION("ShipmentInvoiceConversion", "src\\main\\resources\\lib\\shipment-invoice-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_PAYMENT_CONVERSION("ShipmentPaymentConversion", "src\\main\\resources\\lib\\shipment-payment-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  SHIPMENT_DEDUCTION_CONVERSION("ShipmentDeductionConversion", "src\\main\\resources\\lib\\shipment-deduction-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
+
 
 
 

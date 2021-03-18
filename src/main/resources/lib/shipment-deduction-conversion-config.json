@@ -1,0 +1,35 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CarrierOrderId",
+			"destId": "carrierOrder.id",
+            "defaultValue":"carrierOrderId"
+		},
+        {
+			"sourceId": "Amount",
+			"destId": "amount",
+            "defaultValue":"amount"
+		},
+        {
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+        {
+			"sourceId": "Description",
+			"destId": "description"
+		}
+        ,{
+			"sourceId": "Date",
+			"destId": "date",
+            "defaultValue":"date"
+		}
+    ]
+}

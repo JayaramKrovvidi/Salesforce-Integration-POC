@@ -1,0 +1,24 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "Provider",
+			"destId": "carrier.id"
+		},
+		{
+			"sourceId": "OwnerId",
+			"destId": "accountOwner.id"
+		},
+		{
+			"sourceId": "EnableSharing",
+			"destId": "enableSharing"
+		}
+    ]
+}

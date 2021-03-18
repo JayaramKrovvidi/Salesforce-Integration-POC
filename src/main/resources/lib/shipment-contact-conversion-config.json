@@ -1,0 +1,42 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id"
+		},
+		{
+			"sourceId": "carrierOrderId",
+			"destId": "carrierOrder.id"
+		},
+		{
+			"sourceId": "ContactId",
+			"destId": "contact.id",
+            "defaultValue":"contactId"
+		},
+		{
+			"sourceId": "role",
+			"destId": "role",
+            "defaultValue":"role"
+		},
+		{
+			"sourceId": "FragmentSequence",
+			"destId": "fragmentSequence"
+		},
+		{
+			"sourceId": "TrackMethod",
+			"destId": "trackMethod"
+		},
+		{
+			"sourceId": "EnableSharing",
+			"destId": "enableSharing"
+		}
+    ]
+}

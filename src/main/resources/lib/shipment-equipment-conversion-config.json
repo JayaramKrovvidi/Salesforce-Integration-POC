@@ -1,0 +1,56 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CarrierOrderId",
+			"destId": "carrierOrder.id"
+		},
+		{
+			"sourceId": "Type",
+			"destId": "type"
+		},
+		{
+			"sourceId": "Size",
+			"destId": "size"
+		},
+		{
+			"sourceId": "Temp",
+			"destId": "temp"
+		},
+		{
+			"sourceId": "Weight",
+			"destId": "weight"
+		},
+		{
+			"sourceId": "Services",
+			"destId": "services"
+		},
+		{
+			"sourceId": "Description",
+			"destId": "description"
+		},
+		{
+			"sourceId": "FragmentSequence",
+			"destId": "fragmentSequence"
+		},
+		{
+			"sourceId": "Vin",
+			"destId": "vin"
+		},
+		{
+			"sourceId": "AssetNumber",
+			"destId": "assetNumber"
+		},
+		{
+			"sourceId": "LicenseNumber",
+			"destId": "licenseNumber"
+		}
+    ]
+}

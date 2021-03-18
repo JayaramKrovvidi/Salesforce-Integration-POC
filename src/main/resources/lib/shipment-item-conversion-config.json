@@ -1,0 +1,143 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id",
+            "defaultValue":"customerOrderId"
+		},
+		{
+			"sourceId": "RouteStartId",
+			"destId": "routeStart.id",
+            "defaultValue":"routeStartId"
+		},
+		{
+			"sourceId": "RouteEndId",
+			"destId": "routeEnd.id",
+            "defaultValue":"routeEndId"
+		},
+		{
+			"sourceId": "Name",
+			"destId": "name",
+            "defaultValue":"name"
+		},
+		{
+			"sourceId": "TrackingNumber",
+			"destId": "refNumber"
+		},
+		{
+			"sourceId": "LotNumber",
+			"destId": "lotNumber"
+		},
+		{
+			"sourceId": "Category",
+			"destId": "category",
+            "defaultValue":"category"
+		},
+		{
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+		{
+			"sourceId": "Qty",
+			"destId": "qty",
+            "defaultValue":"qty"
+		},
+		{
+			"sourceId": "QtyUnit",
+			"destId": "qty.unit",
+            "defaultValue":"qtyUnit"
+		},
+		{
+			"sourceId": "Weight",
+			"destId": "weight"
+		},
+		{
+			"sourceId": "Temp",
+			"destId": "temp"
+		},
+		{
+			"sourceId": "Value",
+			"destId": "value"
+		},
+		{
+			"sourceId": "FreightClass",
+			"destId": "freightClass"
+		},
+		{
+			"sourceId": "Nmfc",
+			"destId": "nmfc"
+		},
+		{
+			"sourceId": "NmfcSub",
+			"destId": "nmfcSub"
+		},
+		{
+			"sourceId": "IsHazmat",
+			"destId": "isHazmat"
+		},
+		{
+			"sourceId": "IsStackable",
+			"destId": "isStackable"
+		},
+		{
+			"sourceId": "VinId",
+			"destId": "vin.id"
+		},
+		{
+			"sourceId": "VinYear",
+			"destId": "vin.year"
+		},
+		{
+			"sourceId": "VinMake",
+			"destId": "vin.make"
+		},
+		{
+			"sourceId": "VinModel",
+			"destId": "vin.model"
+		},
+		{
+			"sourceId": "VinColor",
+			"destId": "vin.color"
+		},
+		{
+			"sourceId": "DimLength",
+			"destId": "dim.length"
+		},
+		{
+			"sourceId": "DimHeight",
+			"destId": "dim.height"
+		},
+		{
+			"sourceId": "WheelBase",
+			"destId": "wheelBase"
+		},
+		{
+			"sourceId": "Identification",
+			"destId": "identification"
+		},
+		{
+			"sourceId": "ShipToName",
+			"destId": "shippingName"
+		},
+		{
+			"sourceId": "HazardClass",
+			"destId": "hazardClass"
+		},
+		{
+			"sourceId": "PackingGroup",
+			"destId": "packingGroup"
+		},
+		{
+			"sourceId": "EmergencyContactId",
+			"destId": "emergencyContact.id"
+		}
+    ]
+}

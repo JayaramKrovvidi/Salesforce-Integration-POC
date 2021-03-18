@@ -1,0 +1,52 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id"
+		},
+		{
+			"sourceId": "CarrierOrderId",
+			"destId": "carrierOrder.id"
+		},
+		{
+			"sourceId": "LineItemCode",
+			"destId": "lineItem.code",
+            "defaultValue":"lineItemCode"
+		},
+		{
+			"sourceId": "LineItemQty",
+			"destId": "lineItem.qty",
+            "defaultValue":"lineItemQty"
+		},
+		{
+			"sourceId": "LineItemPrice",
+			"destId": "lineItem.price",
+            "defaultValue":"lineItemPrice"
+		},
+		{
+			"sourceId": "LineItemAmount",
+			"destId": "lineItem.amount",
+            "defaultValue":"lineItemAmount"
+		},
+		{
+			"sourceId": "LineItemNotes",
+			"destId": "lineItem.notes"
+		},
+		{
+			"sourceId": "LineItemBillable",
+			"destId": "lineItem.billable"
+		},
+		{
+			"sourceId": "LineItemPayable",
+			"destId": "lineItem.payable"
+		}
+    ]
+}

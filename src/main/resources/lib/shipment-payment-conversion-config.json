@@ -1,0 +1,56 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id"
+		},
+		{
+			"sourceId": "CarrierOrderId",
+			"destId": "carrierOrder.id"
+		},
+        {
+			"sourceId": "InvoiceId",
+			"destId": "invoice.id",
+            "defaultValue":"invoiceId"
+		},
+        {
+			"sourceId": "TrackingNumber",
+			"destId": "referenceNum"
+		},
+        {
+			"sourceId": "PaymentDate",
+			"destId": "paymentDate",
+            "defaultValue":"paymentDate"
+		},
+        {
+			"sourceId": "Method",
+			"destId": "method",
+            "defaultValue":"method"
+		},
+        {
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+        {
+			"sourceId": "Amount",
+			"destId": "amount",
+            "defaultValue":"amount"
+		},
+        {
+			"sourceId": "PaymentTerm",
+			"destId": "paymentTerm",
+            "defaultValue":"paymentTerm"
+		},{
+			"sourceId": "Fee",
+			"destId": "fee"
+		}
+    ]
+}

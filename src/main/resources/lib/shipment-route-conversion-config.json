@@ -1,0 +1,96 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "DeliveredToId",
+			"destId": "customer.id",
+			"defaultValue":"customerId"
+		},
+		{
+			"sourceId": "Provider",
+			"destId": "carrier.id"
+		},
+		{
+			"sourceId": "SourceLocationId",
+			"destId": "location.id"
+		},
+		{
+			"sourceId": "ContactId",
+			"destId": "contact.id"
+		},
+		{
+			"sourceId": "FragmentSequence",
+			"destId": "fragmentSequence",
+            "defaultValue":"frgseq"
+		},
+		{
+			"sourceId": "Sequence",
+			"destId": "sequence",
+            "defaultValue":"seq"
+		},
+		{
+			"sourceId": "TimeZone",
+			"destId": "timezone",
+            "defaultValue":"timeZone"
+		},
+		{
+			"sourceId": "Services",
+			"destId": "services"
+		},
+		{
+			"sourceId": "StopType",
+			"destId": "stopType"
+		},
+		{
+			"sourceId": "SchedulingType",
+			"destId": "schedulingType"
+		},
+		{
+			"sourceId": "PoNumbers",
+			"destId": "poNumbers"
+		},
+		{
+			"sourceId": "AppointmentNumber",
+			"destId": "appointment.number"
+		},
+		{
+			"sourceId": "AppointmentStart",
+			"destId": "appointment.start"
+		},
+		{
+			"sourceId": "AppointmentEnd",
+			"destId": "appointment.end"
+		},
+		{
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+		{
+			"sourceId": "CarrierOrderId",
+			"destId": "carrierOrder.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id"
+		},
+		{
+			"sourceId": "TransportationMode",
+			"destId": "transportation.mode",
+            "defaultValue":"transporationMode"
+		},
+		{
+			"sourceId": "TransportationType",
+			"destId": "transportation.type",
+            "defaultValue":"transporationType"
+
+		}
+		
+	]
+}
