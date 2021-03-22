@@ -11,7 +11,7 @@
 		{
 			"sourceId": "DeliveredToId",
 			"destId": "customer.id",
-			"defaultValue":"customerId"
+			"defaultValue":"customer_id_IDE_0Qs5_775"
 		},
 		{
 			"sourceId": "CarrierId",
@@ -20,7 +20,8 @@
 		},
 		{
 			"sourceId": "SourceLocationId",
-			"destId": "location.id"
+			"destId": "location.id",
+			"defaultValue":"location_id_0AAr_174"
 		},
 		{
 			"sourceId": "ContactId",
@@ -29,17 +30,17 @@
 		{
 			"sourceId": "FragmentSequence",
 			"destId": "fragmentSequence",
-            "defaultValue":"frgseq"
+            "defaultValue":"0"
 		},
 		{
 			"sourceId": "Sequence",
 			"destId": "sequence",
-            "defaultValue":"seq"
+            "defaultValue":"0"
 		},
 		{
 			"sourceId": "TimeZone",
 			"destId": "timezone",
-            "defaultValue":"timeZone"
+            "defaultValue":"America/New_York"
 		},
 		{
 			"sourceId": "Services",
@@ -75,21 +76,23 @@
 		},
 		{
 			"sourceId": "CarrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"756326833140112"
 		},
 		{
 			"sourceId": "CustomerOrderId",
-			"destId": "customerOrder.id"
+			"destId": "customerOrder.id",
+            "defaultValue":"100080786"
 		},
 		{
 			"sourceId": "TransportationMode",
 			"destId": "transportation.mode",
-            "defaultValue":"transporationMode"
+            "defaultValue":"TL"
 		},
 		{
 			"sourceId": "TransportationType",
 			"destId": "transportation.type",
-            "defaultValue":"transporationType"
+            "defaultValue":"Any"
 
 		}
 		

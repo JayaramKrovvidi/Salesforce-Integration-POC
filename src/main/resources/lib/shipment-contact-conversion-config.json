@@ -10,29 +10,33 @@
 		},
 		{
 			"sourceId": "CustomerOrderId",
-			"destId": "customerOrder.id"
+			"destId": "customerOrder.id",
+            "defaultValue":"100080786"
 		},
 		{
 			"sourceId": "carrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"756326833140112"
 		},
 		{
 			"sourceId": "ContactId",
 			"destId": "contact.id",
-            "defaultValue":"contactId"
+            "defaultValue":"contact_id_IDE_Eh8V_920"
 		},
 		{
 			"sourceId": "role",
 			"destId": "role",
-            "defaultValue":"role"
+            "defaultValue":"1991"
 		},
 		{
 			"sourceId": "FragmentSequence",
-			"destId": "fragmentSequence"
+			"destId": "fragmentSequence",
+			"defaultValue":"0"
 		},
 		{
 			"sourceId": "TrackMethod",
-			"destId": "trackMethod"
+			"destId": "trackMethod",
+			"defaultValue":"31300"
 		},
 		{
 			"sourceId": "EnableSharing",

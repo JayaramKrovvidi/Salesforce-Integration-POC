@@ -10,31 +10,33 @@
 		},
 		{
 			"sourceId": "CustomerOrderId",
-			"destId": "customerOrder.id"
+			"destId": "customerOrder.id",
+            "defaultValue":"100080786"
 		},
 		{
 			"sourceId": "CarrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"756326833140112"
 		},
 		{
 			"sourceId": "LineItemCode",
 			"destId": "lineItem.code",
-            "defaultValue":"lineItemCode"
+            "defaultValue":"23006"
 		},
 		{
 			"sourceId": "LineItemQty",
 			"destId": "lineItem.qty",
-            "defaultValue":"lineItemQty"
+            "defaultValue":"1"
 		},
 		{
 			"sourceId": "LineItemPrice",
 			"destId": "lineItem.price",
-            "defaultValue":"lineItemPrice"
+            "defaultValue":"80"
 		},
 		{
 			"sourceId": "LineItemAmount",
 			"destId": "lineItem.amount",
-            "defaultValue":"lineItemAmount"
+            "defaultValue":"80"
 		},
 		{
 			"sourceId": "LineItemNotes",

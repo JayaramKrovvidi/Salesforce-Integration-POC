@@ -11,22 +11,22 @@
 		{
 			"sourceId": "CustomerOrderId",
 			"destId": "customerOrder.id",
-            "defaultValue":"customerOrderId"
+            "defaultValue":"100080786"
 		},
 		{
 			"sourceId": "RouteStartId",
 			"destId": "routeStart.id",
-            "defaultValue":"routeStartId"
+            "defaultValue":"312658"
 		},
 		{
 			"sourceId": "RouteEndId",
 			"destId": "routeEnd.id",
-            "defaultValue":"routeEndId"
+            "defaultValue":"312659"
 		},
 		{
 			"sourceId": "Name",
 			"destId": "name",
-            "defaultValue":"name"
+            "defaultValue":"Itemname"
 		},
 		{
 			"sourceId": "TrackingNumber",
@@ -39,7 +39,7 @@
 		{
 			"sourceId": "Category",
 			"destId": "category",
-            "defaultValue":"category"
+            "defaultValue":"22300"
 		},
 		{
 			"sourceId": "Notes",
@@ -48,12 +48,12 @@
 		{
 			"sourceId": "Qty",
 			"destId": "qty",
-            "defaultValue":"qty"
+            "defaultValue":"200"
 		},
 		{
 			"sourceId": "QtyUnit",
 			"destId": "qty.unit",
-            "defaultValue":"qtyUnit"
+            "defaultValue":"6001"
 		},
 		{
 			"sourceId": "Weight",

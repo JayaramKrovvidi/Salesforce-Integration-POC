@@ -11,12 +11,12 @@
 		{
 			"sourceId": "CarrierOrderId",
 			"destId": "carrierOrder.id",
-            "defaultValue":"carrierOrderId"
+            "defaultValue":"756326833140112"
 		},
         {
 			"sourceId": "Amount",
 			"destId": "amount",
-            "defaultValue":"amount"
+            "defaultValue":"20"
 		},
         {
 			"sourceId": "Notes",
@@ -29,7 +29,7 @@
         ,{
 			"sourceId": "Date",
 			"destId": "date",
-            "defaultValue":"date"
+            "defaultValue":"2021-02-27"
 		}
     ]
 }

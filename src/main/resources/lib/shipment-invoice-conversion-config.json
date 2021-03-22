@@ -10,29 +10,32 @@
 		},
 		{
 			"sourceId": "CustomerOrderId",
-			"destId": "customerOrder.id"
+			"destId": "customerOrder.id",
+            "defaultValue":"100080786"
 		},
 		{
 			"sourceId": "CarrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"756326833140112"
 		},
         {
 			"sourceId": "Date",
 			"destId": "date",
-            "defaultValue":"date"
+            "defaultValue":"2019-05-15"
 		},
         {
 			"sourceId": "InvoiceNum",
 			"destId": "invoiceNum",
-            "defaultValue":"invoiceNum"
+            "defaultValue":"233181"
 		},
         {
-			"sourceId": "ExpectedDeliveyDate",
+			"sourceId": "ExpectedDeliveryDate",
 			"destId": "dueDate"
 		},
         {
 			"sourceId": "Status",
-			"destId": "status"
+			"destId": "status",
+			"defaultValue":"2806"
 		},
         {
 			"sourceId": "Notes",
@@ -41,7 +44,7 @@
         {
 			"sourceId": "Amount",
 			"destId": "amount",
-            "defaultValue":"amount"
+            "defaultValue":"100"
 		},
         {
 			"sourceId": "DocumentId",
