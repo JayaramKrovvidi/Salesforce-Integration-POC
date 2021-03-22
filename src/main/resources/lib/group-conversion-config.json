@@ -6,20 +6,21 @@
 		},
         {
 			"sourceId": "Name",
-			"destId": "name",
-            "defaultValue":"nameDefaultValue"
+			"destId": "name"
 		},
         {
 			"sourceId": "Description",
 			"destId": "description"
 		},
         {
-			"sourceId": "OwnerId",
-			"destId": "userId"
+			"sourceId": "",
+			"destId": "userId",
+			"defaultValue":"81"
 		},
         {
 			"sourceId": "Permission",
-			"destId": "permission"
+			"destId": "permission",
+			"defaultValue":"Admin"
 		}
 		
 	]
