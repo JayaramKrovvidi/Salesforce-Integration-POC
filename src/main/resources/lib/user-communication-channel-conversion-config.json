@@ -1,0 +1,82 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "EmailType",
+			"destId": "email.type",
+			"defaultValue":"1097"
+		},
+		{
+			"sourceId": "Email",
+			"destId": "email"
+		},
+		{
+			"sourceId": "PhoneType",
+			"destId": "phone.type",
+			"defaultValue": "1015"
+		},
+		{
+			"sourceId": "Phone",
+			"destId": "phone"
+		},
+		{
+			"sourceId": "Extension",
+			"destId": "phone.extension"
+		},
+		{
+			"sourceId": "PhoneCountry",
+			"destId": "phone.country"
+		},
+		{
+			"sourceId": "MailingType",
+			"destId": "address.type",
+			"defaultValue": "1182"
+		},
+		{
+			"sourceId": "Street",
+			"destId": "address.line1"
+		},
+		{
+			"sourceId": "MailingLine2",
+			"destId": "address.line2"
+		},
+		{
+			"sourceId": "City",
+			"destId": "address.city"
+		},
+		{
+			"sourceId": "State",
+			"destId": "address.state"
+		},
+		{
+			"sourceId": "PostalCode",
+			"destId": " address.zip"
+		},
+		{
+			"sourceId": "Country",
+			"destId": "address.country"
+		},
+		{
+			"sourceId": "IsPrimaryAddress",
+			"destId": "isPrimaryAddress",
+			"defaultValue": "true"
+		},
+		{
+			"sourceId": "IsPrimaryEmail",
+			"destId": "isPrimaryEmail",
+			"defaultValue": "true"
+		},
+		{
+			"sourceId": "IsPrimaryPhone",
+			"destId": "isPrimaryPhone",
+			"defaultValue": "true"
+		}
+	]
+}

@@ -1,0 +1,34 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Name",
+			"destId": "name"
+		},
+		{
+			"sourceId": "Title",
+			"destId": "title"
+		},
+		{
+			"sourceId": "Permission",
+			"destId": "permission",
+			"defaultValue":"Admin"
+		},
+		{
+			"sourceId": "StatusCode",
+			"destId": "status.code",
+			"defaultValue":"2450"
+		},
+		{
+			"sourceId": "TimeZoneSidKey",
+			"destId": "timezone"
+		},
+		{
+			"sourceId": "Email",
+			"destId": "userEmail"
+		}
+	]
+}
