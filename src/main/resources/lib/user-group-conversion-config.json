@@ -13,6 +13,11 @@
 			"sourceId": "GroupId",
 			"destId": "groupId",
 			"defaultValue": "grpId"
+		},
+		{
+			"sourceId": "Permission",
+			"destId": "permission",
+			"defaultValue": "Admin"
 		}
 	]
 }
