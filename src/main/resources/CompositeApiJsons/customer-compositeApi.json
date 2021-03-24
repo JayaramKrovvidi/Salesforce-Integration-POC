@@ -693,6 +693,43 @@
         },
         {
             "apiRequest": {
+                "url": "ftp.turvo.com",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "ftp.username",
+                        "value": "test"
+                    },
+                    {
+                        "name": "ftp.password",
+                        "value": "kindCh3etah95"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    },
+                    {
+                        "name": "processKey",
+                        "value": "AccountDistributionConversion"
+                    },
+                    {
+                        "name": "ftp.remoteUri",
+                        "value": "/solo/customer/account_distribution_"
+                    }
+                ],
+                "requestType": "FTP",
+                "methodType": "UPLOAD",
+                "headers": []
+            },
+            "onSuccess": [
+                "24"
+            ],
+            "onFailure": [],
+            "retry":"1",
+            "apiKey": "23"
+        },
+        {
+            "apiRequest": {
                 "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/customer",
                 "pathParams": [],
                 "requestParams": [],
@@ -705,7 +742,7 @@
                     },
                     {
                         "name": "nonce",
-                        "value": "salesforce-testing-15302021"
+                        "value": "salesforce-testing-243020211204"
                     }
 
                 ],
@@ -713,11 +750,11 @@
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
             "onSuccess": [
-                "24"
+                "25"
             ],
             "onFailure": [],
             "retry":"1",
-            "apiKey": "23"
+            "apiKey": "24"
         },
         {
             "apiRequest": {
@@ -735,7 +772,7 @@
             ],
             "onFailure": [],
             "retry":"1",
-            "apiKey": "24"
+            "apiKey": "25"
         }
     ]
 }

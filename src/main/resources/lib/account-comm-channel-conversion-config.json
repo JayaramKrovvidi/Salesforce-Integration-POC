@@ -58,7 +58,7 @@
 		{
 			"sourceId": "ShippingPostalCode",
 			"destId": "address.zip",
-			"defaultValue":"AddressZip"
+			"defaultValue":"6778"
 		},
 		{
 			"sourceId": "ShippingCountry",

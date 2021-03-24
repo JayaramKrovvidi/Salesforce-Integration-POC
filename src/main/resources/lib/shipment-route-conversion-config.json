@@ -11,21 +11,22 @@
 		{
 			"sourceId": "DeliveredToId",
 			"destId": "customer.id",
-			"defaultValue":"customer_id_IDE_0Qs5_775"
+			"defaultValue":"1"
 		},
 		{
 			"sourceId": "CarrierId",
 			"destId": "carrier.id",
-			"defaultValue":"607999"
+			"defaultValue":"1000"
 		},
 		{
 			"sourceId": "SourceLocationId",
 			"destId": "location.id",
-			"defaultValue":"location_id_0AAr_174"
+			"defaultValue":"1315g000000kKv8AAE"
 		},
 		{
 			"sourceId": "ContactId",
-			"destId": "contact.id"
+			"destId": "contact.id",
+			"defaultValue":"0035g0000038pLxAAI"
 		},
 		{
 			"sourceId": "FragmentSequence",
@@ -77,12 +78,12 @@
 		{
 			"sourceId": "CarrierOrderId",
 			"destId": "carrierOrder.id",
-            "defaultValue":"756326833140112"
+            "defaultValue":"1"
 		},
 		{
 			"sourceId": "CustomerOrderId",
 			"destId": "customerOrder.id",
-            "defaultValue":"100080786"
+            "defaultValue":"1"
 		},
 		{
 			"sourceId": "TransportationMode",
