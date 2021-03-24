@@ -11,7 +11,7 @@
 		{
 			"sourceId": "CustomerKey",
 			"destId": "Customer.Key *",
-			"defaultValue": "2"
+			"defaultValue": "1"
 		},
 		
 		{
