@@ -81,7 +81,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, ActualDeliveryDate, CreatedDate, ShipmentNumber, Status, DeliveredToId, Provider, SourceLocationId, OwnerId, Description, TrackingNumber, ShipToName, ExpectedDeliveryDate FROM Shipment",
+                "requestBody": "SELECT Id, ShipmentNumber,SourceLocationId,DestinationLocationId, Status, DeliveredToId, Provider, SourceLocationId, OwnerId, Description, TrackingNumber, ShipToName FROM Shipment",
                 "store": [
                     "id"
                 ]
@@ -698,7 +698,7 @@
                     },
                     {
                         "name": "nonce",
-                        "value": "salesforce-testing-220320211854"
+                        "value": "salesforce-testing-260320211034"
                     }
 
                 ],
