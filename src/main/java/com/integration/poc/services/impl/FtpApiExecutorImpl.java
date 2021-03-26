@@ -55,7 +55,9 @@ public class FtpApiExecutorImpl implements IApiExecutor {
       ftp.setFileType(FTP.BINARY_FILE_TYPE);
       ftp.enterLocalPassiveMode();
       InputStream input = new FileInputStream(new File(localFilePath));
-      String remoteFileDesc = remoteUri + Util.getDateEnding() + ".csv";
+//      String remoteFileDesc = remoteUri + Util.getDateEnding() + ".csv";
+      String remoteFileDesc = remoteUri +  "250320212052.csv";
+
       status = ftp.storeFile(remoteFileDesc, input);
       if (status) {
         LOGGER.info("Upload File with Name: {} Successful", remoteFileDesc);

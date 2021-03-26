@@ -11,26 +11,26 @@
 		{
 			"sourceId": "CustomerOrderId",
 			"destId": "customerOrder.id",
-            "defaultValue":"1"
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
 			"sourceId": "CarrierOrderId",
 			"destId": "carrierOrder.id",
-            "defaultValue":"1"
+            "defaultValue":"8015g000000bsTDAAY"
 		},
         {
 			"sourceId": "Date",
 			"destId": "date",
-            "defaultValue":"2019-05-15"
+            "defaultValue":"2021-05-15"
 		},
         {
 			"sourceId": "InvoiceNum",
-			"destId": "invoiceNum",
-            "defaultValue":"233181"
+			"destId": "invoiceNum"
 		},
         {
 			"sourceId": "ExpectedDeliveryDate",
-			"destId": "dueDate"
+			"destId": "dueDate",
+			"defaultValue":"2021-05-15"
 		},
         {
 			"sourceId": "Status",

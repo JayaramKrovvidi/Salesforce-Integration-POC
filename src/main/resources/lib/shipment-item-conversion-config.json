@@ -11,17 +11,17 @@
 		{
 			"sourceId": "CustomerOrderId",
 			"destId": "customerOrder.id",
-            "defaultValue":"1"
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
-			"sourceId": "RouteStartId",
+			"sourceId": "SourceLocationId",
 			"destId": "routeStart.id",
-            "defaultValue":"312658"
+            "defaultValue":"1315g000000kKv8AAE"
 		},
 		{
-			"sourceId": "RouteEndId",
+			"sourceId": "DestinationLocationId",
 			"destId": "routeEnd.id",
-            "defaultValue":"312659"
+            "defaultValue":"1315g000000kNTAAA2"
 		},
 		{
 			"sourceId": "Name",

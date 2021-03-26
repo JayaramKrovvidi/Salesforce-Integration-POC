@@ -11,17 +11,16 @@
 		{
 			"sourceId": "CustomerOrderId",
 			"destId": "customerOrder.id",
-            "defaultValue":"1"
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
 			"sourceId": "CarrierOrderId",
 			"destId": "carrierOrder.id",
-            "defaultValue":"1"
+            "defaultValue":"8015g000000bsTDAAY"
 		},
         {
 			"sourceId": "InvoiceId",
-			"destId": "invoice.id",
-            "defaultValue":"233454"
+			"destId": "invoice.id"
 		},
         {
 			"sourceId": "TrackingNumber",
