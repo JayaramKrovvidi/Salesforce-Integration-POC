@@ -1,0 +1,157 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "Order.Key *"
+		},
+		{
+			"sourceId": "CustomerKey",
+			"destId": "Customer.Key *",
+			"defaultValue": "1"
+		},
+		
+		{
+			"sourceId": "ActivatedDate",
+			"destId": "Start.Date"
+		},
+		{
+			"sourceId": "EndDate",
+			"destId": "End.Date",
+			"defaultValue": "2021-03-23T11:24:17.000Z"
+		},
+		{
+			"sourceId": "CarrierKey",
+			"destId": "Carrier.Key"
+		},
+		{
+			"sourceId": "OriginKey",
+			"destId": "Origin.Key"
+		},
+		{
+			"sourceId": "DestinationKey",
+			"destId": "Destination.Key"
+		},
+		{
+			"sourceId": "EquipmentTypeKey",
+			"destId": "Equipment.Type.Key"
+		},
+		{
+			"sourceId": "ItemId",
+			"destId": "Item.Id",
+			"defaultValue":"10"
+		},
+		{
+			"sourceId": "Item.Key",
+			"destId": "Item.Key"
+		},
+		{
+			"sourceId": "Item.Quantity",
+			"destId": "Item.Quantity"
+		},
+		{
+			"sourceId": "ItemLotNumber",
+			"destId": "Item.Lot.Number"
+		},
+		{
+			"sourceId": "ItemQuantityUnit",
+			"destId": "Item.Quantity.Unit"
+		},
+		{
+			"sourceId": "ItemLineNo",
+			"destId": "Item.Line.No"
+		},
+		{
+			"sourceId": "ItemIsHazmat",
+			"destId": "Item.Is.Hazmat"
+		},
+		{
+			"sourceId": "ItemPerishable",
+			"destId": "Item.Perishable"
+		},
+		{
+			"sourceId": "ItemStackable",
+			"destId": "Item.Stackable"
+		},
+		{
+			"sourceId": "CostsLineAmount",
+			"destId": "Costs.Line.Amount"
+		},
+		{
+			"sourceId": "CostsItemId",
+			"destId": "Costs.Item.Id",
+			"defaultValue":"23002"
+		},
+		{
+			"sourceId": "CostsItemPrice",
+			"destId": "Costs.Item.Price"
+		},
+		{
+			"sourceId": "CostsItemQty",
+			"destId": "Costs.Item.Qty"
+		},
+		{
+			"sourceId": "CostsItemTypeKey",
+			"destId": "Costs.Item.Type.Key"
+		},
+		{
+			"sourceId": "ExternalIdCustomerPONo",
+			"destId": "External.Id.Customer.PO.No"
+		},
+		{
+			"sourceId": "ExternalIdReferenceNo",
+			"destId": "External.Id.Reference.No"
+		},
+		{
+			"sourceId": "ExternalIdBOLNo",
+			"destId": "External.Id.BOL.No"
+		},
+		{
+			"sourceId": "ExternalIdScacNo",
+			"destId": "External.Id.Scac.No"
+		},
+		{
+			"sourceId": "ExternalIdRouteNo",
+			"destId": "External.Id.Route.No"
+		},
+		{
+			"sourceId": "ExternalIdPRONo",
+			"destId": "External.Id.PRO.No"
+		},
+		{
+			"sourceId": "ExternalIdTrackingNo",
+			"destId": "External.Id.Tracking.No"
+		},
+		{
+			"sourceId": "ExternalIdContainerNo",
+			"destId": "External.Id.Container.No"
+		},
+		{
+			"sourceId": "ExternalIdOrderNo",
+			"destId": "External.Id.Order.No"
+		},
+		{
+			"sourceId": "ExternalIdBatchInvoiceNo",
+			"destId": "External.Id.Batch.Invoice.No"
+		},
+		{
+			"sourceId": "ExternalIdSalesOrderNo",
+			"destId": "External.Id.Sales.Order.No"
+		},
+		{
+			"sourceId": "ExternalIdWarehouseOrderNo",
+			"destId": "External.Id.Warehouse.Order.No"
+		},
+		{
+			"sourceId": "ExternalIdService_OrderNo",
+			"destId": "External.Id.Service_Order.No"
+		},
+		{
+			"sourceId": "ExternalIdOtherNo",
+			"destId": "External.Id.Other.No"
+		}
+	]
+}

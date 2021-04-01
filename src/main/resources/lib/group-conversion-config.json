@@ -3,16 +3,26 @@
 		{
 			"sourceId": "Id",
 			"destId": "id"
+		},
+        {
+			"sourceId": "Name",
+			"destId": "name"
+		},
+        {
+			"sourceId": "Description",
+			"destId": "description"
+		},
+        {
+			"sourceId": "CreatedById",
+			"destId": "userId",
+			"defaultValue":"1"
+		},
+        {
+			"sourceId": "Permission",
+			"destId": "permission",
+			"defaultValue":"Admin"
 			
-		},
-		{
-			"sourceId": "Id",
-			"destId": "contextId"
-		},
-		{
-			"sourceId": "GroupId",
-			"destId": "groupId",
-			"defaultValue": "grpId"
 		}
+		
 	]
 }
