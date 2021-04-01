@@ -78,7 +78,8 @@
 		},
 		{
 			"sourceId": "Address__r.AddressType",
-			"destId": "address.type"
+			"destId": "address.type",
+			"defaultValue": "1153"
 		},
 		{
 			"sourceId": "CreatedBy.Street",

@@ -10,7 +10,8 @@
 		},
 		{
 			"sourceId": "EmailType",
-			"destId": "email.type"
+			"destId": "email.type",
+			"defaultValue": "1085"
 		},
 		{
 			"sourceId": "Email",
@@ -18,7 +19,8 @@
 		},
 		{
 			"sourceId": "PhoneType",
-			"destId": "phone.type"
+			"destId": "phone.type",
+			"defaultValue": "1010"
 		},
 		{
 			"sourceId": "Phone",
@@ -35,7 +37,7 @@
 		{
 			"sourceId": "AddressType",
 			"destId": "address.type",
-			"defaultValue": "Work"
+			"defaultValue": "1160"
 		},
 		{
 			"sourceId": "ShippingStreet",
@@ -58,7 +60,7 @@
 		{
 			"sourceId": "ShippingPostalCode",
 			"destId": "address.zip",
-			"defaultValue":"AddressZip"
+			"defaultValue":"6778"
 		},
 		{
 			"sourceId": "ShippingCountry",

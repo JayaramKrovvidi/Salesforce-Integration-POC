@@ -51,8 +51,9 @@
 			"destId": "phone.extension"
 		},
 		{
-			"sourceId": "PhoneCountry",
-			"destId": "phone.country"
+			"sourceId": "Phone.Country",
+			"destId": "phone.country",
+			"defaultValue": "IN"
 		},
 		{
 			"sourceId": "Emails",
@@ -68,7 +69,8 @@
 		},
 		{
 			"sourceId": "PayTerms",
-			"destId": "payTerms"
+			"destId": "payTerms",
+			"defaultValue": "7100"
 		},
 		{
 			"sourceId": "Instructions",

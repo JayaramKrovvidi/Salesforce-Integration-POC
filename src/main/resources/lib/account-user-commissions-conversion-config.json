@@ -10,8 +10,8 @@
 		},
 		{
 			"sourceId": "OwnerId",
-			"destId": "user.id"
-            
+			"destId": "user.id",
+            "defaultValue": "3"
 		},
 		{
 			"sourceId": "UserCommision",

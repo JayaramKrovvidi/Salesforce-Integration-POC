@@ -11,8 +11,7 @@
 		},
 		{
 			"sourceId": "GroupId",
-			"destId": "groupId",
-			"defaultValue": "grpId"
+			"destId": "groupId"
 		}
 	]
 }

@@ -9,8 +9,9 @@
 			"destId": "name"
 		},
 		{
-			"sourceId": "CleanStatus",
-			"destId": "status.code"
+			"sourceId": "Clean.Status",
+			"destId": "status.code",
+			"defaultValue": "2202"
 		},
 		{
 			"sourceId": "Description",
@@ -34,7 +35,8 @@
 		},
 		{
 			"sourceId": "OwnerId",
-			"destId": "owner.id"
+			"destId": "owner.id",
+            "defaultValue": "3"
 		},
 		{
 			"sourceId": "CompanyId",

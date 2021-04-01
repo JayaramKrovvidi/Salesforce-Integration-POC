@@ -9,8 +9,9 @@
 			"destId": "contextId"
 		},
 		{
-			"sourceId": "Type",
-			"destId": "type"
+			"sourceId": "_Type",
+			"destId": "type",
+			"defaultValue": "crm_id"
 		},
 		{
 			"sourceId": "Value",
