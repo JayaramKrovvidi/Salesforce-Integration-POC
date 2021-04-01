@@ -81,7 +81,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, ShipmentNumber,SourceLocationId,DestinationLocationId, Status, DeliveredToId, Provider, SourceLocationId, OwnerId, Description, TrackingNumber, ShipToName FROM Shipment",
+                "requestBody": "SELECT Id, ShipmentNumber,SourceLocationId,DestinationLocationId, Status, DeliveredToId, Provider, OwnerId, Description, TrackingNumber, ShipToName FROM Shipment",
                 "store": [
                     "id"
                 ]
@@ -686,7 +686,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/shipment",
+                "url": "http://dev-cr-7769.turvo.net:8080/bdi/bdi/pacific/shipment",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -698,7 +698,7 @@
                     },
                     {
                         "name": "nonce",
-                        "value": "salesforce-testing-260320211034"
+                        "value": "salesforce-testing-010420211204"
                     }
 
                 ],
@@ -714,7 +714,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
+                "url": "http://dev-cr-7769.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",

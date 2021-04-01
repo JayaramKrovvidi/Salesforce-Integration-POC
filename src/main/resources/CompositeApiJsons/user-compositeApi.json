@@ -343,7 +343,7 @@
         },
         {
             "apiRequest": {            
-                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/user",
+                "url": "http://dev-cr-7769.turvo.net:8080/bdi/bdi/pacific/user",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -370,7 +370,7 @@
         },
         {
             "apiRequest": {        
-                "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
+                "url": "http://dev-cr-7769.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
