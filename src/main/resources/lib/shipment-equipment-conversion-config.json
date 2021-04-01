@@ -10,7 +10,8 @@
 		},
 		{
 			"sourceId": "CarrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
 			"sourceId": "Type",
@@ -38,7 +39,8 @@
 		},
 		{
 			"sourceId": "FragmentSequence",
-			"destId": "fragmentSequence"
+			"destId": "fragmentSequence",
+			"defaultValue":"0"
 		},
 		{
 			"sourceId": "Vin",

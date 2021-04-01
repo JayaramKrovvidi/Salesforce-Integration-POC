@@ -270,7 +270,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/order",
+                "url": "http://dev-cr-7769.turvo.net:8080/bdi/bdi/pacific/order",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -279,6 +279,10 @@
                     {
                         "name": "Content-Type",
                         "value": "application/json"
+                    },
+                    {
+                        "name": "nonce",
+                        "value": "240320211115"
                     }
                 ],
                 "store": [],
@@ -293,7 +297,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
+                "url": "http://dev-cr-7769.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",

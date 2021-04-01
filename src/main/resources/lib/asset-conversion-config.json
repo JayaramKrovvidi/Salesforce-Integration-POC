@@ -6,7 +6,8 @@
 		},
 		{
 			"sourceId": "VehicleType",
-			"destId": "vehicle_type"
+			"destId": "vehicle_type",
+			"defaultValue":"1042"
 		},
 		{
 			"sourceId": "Vin",
@@ -17,7 +18,7 @@
 			"destId": "notes"
 		},
 		{
-			"sourceId": "AccountId",
+			"sourceId": "OwnerId",
 			"destId": "account.id"
 		},
 		{

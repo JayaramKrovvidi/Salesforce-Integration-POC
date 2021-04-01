@@ -26,17 +26,15 @@
                     "sessionId"
                 ]
             },
+            "retry": "*",
+            "apiKey": "1",
             "onSuccess": [
                 "2"
             ],
-            "onFailure": [
-               
-            ],
-            "retry":"4",
-             "apiKey": "1"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {          
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job",
                 "pathParams": [],
                 "requestParams": [],
@@ -54,20 +52,20 @@
                         "scope": "runtime"
                     }
                 ],
-                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Location</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>User</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
                 "store": [
                     "id"
                 ]
             },
+            "retry": "*",
+            "apiKey": "2",
             "onSuccess": [
                 "3"
             ],
-            "onFailure": [],
-            "retry":"2",
-             "apiKey": "2"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {              
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch",
                 "pathParams": [],
                 "requestParams": [],
@@ -83,20 +81,20 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id,Name,TimeZone,DrivingDirections,IsMobile,CreatedBy.Email,CreatedBy.Street,CreatedBy.PostalCode,CreatedBy.Extension, CreatedBy.MobilePhone,CreatedBy.State,CreatedBy.City,CreatedBy.Country FROM Location",
+                "requestBody": "SELECT Id, Name, TimeZoneSidKey, Email, Title, MobilePhone, Phone, Extension, Street, City, Country, State, PostalCode FROM User",
                 "store": [
                     "id"
                 ]
             },
+            "retry": "*",
+            "apiKey": "3",
             "onSuccess": [
                 "6"
             ],
-            "onFailure": ["-1"],
-            "retry":"2",
-            "apiKey": "3"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {             
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
                 "pathParams": [],
                 "requestParams": [],
@@ -116,15 +114,15 @@
                 ],
                 "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
             },
+            "retry": "*",
+            "apiKey": "4",
             "onSuccess": [
                 "-1"
             ],
-            "onFailure": [],
-            "retry":"2",
-            "apiKey": "4"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {                
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
                 "pathParams": [],
                 "requestParams": [],
@@ -138,15 +136,15 @@
                     }
                 ]
             },
+            "retry": "*",
+            "apiKey": "5",
             "onSuccess": [
-                "6"
+                "7"
             ],
-            "onFailure": [],
-            "retry":"2",
-            "apiKey": "5"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {               
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}",
                 "pathParams": [],
                 "requestParams": [],
@@ -172,15 +170,15 @@
                     }
                 ]
             },
+            "retry": "*",
+            "apiKey": "6",
             "onSuccess": [
                 "7"
             ],
-            "onFailure": ["-1"],
-            "retry":"2",
-            "apiKey": "6"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {               
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result",
                 "pathParams": [],
                 "requestParams": [],
@@ -197,15 +195,15 @@
                     "result"
                 ]
             },
+            "retry": "*",
+            "apiKey": "7",
             "onSuccess": [
                 "8"
             ],
-            "onFailure": ["-1"],
-            "retry":"2",
-            "apiKey": "7"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {               
                 "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result/{7.result}",
                 "pathParams": [],
                 "requestParams": [],
@@ -219,22 +217,21 @@
                     }
                 ],
                 "procKeyOnSuccess": [
-                    "LocationConversion",
-                    "ContactInfoConversion",
-                    "FacilityConversion",
-                    "GroupConversion"
+                    "UserConversion",
+                    "UserCommChannelConversion",
+                    "UserGroupConversion"
                 ],
                 "procKeyOnFailure": []
             },
+            "retry": "*",
+            "apiKey": "8",
             "onSuccess": [
                 "9"
             ],
-            "onFailure": ["-1"],
-            "retry":"2",
-            "apiKey": "8"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {              
                 "url": "ftp.turvo.com",
                 "pathParams": [],
                 "requestParams": [
@@ -252,26 +249,26 @@
                     },
                     {
                         "name": "processKey",
-                        "value": "LocationConversion"
+                        "value": "UserConversion"
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/location/location_"
+                        "value": "/solo/user/user_"
                     }
                 ],
                 "requestType": "FTP",
                 "methodType": "UPLOAD",
                 "headers": []
             },
+            "retry": "*",
+            "apiKey": "9",
             "onSuccess": [
                 "10"
             ],
-            "onFailure": [],
-            "retry":"1",
-            "apiKey": "9"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {               
                 "url": "ftp.turvo.com",
                 "pathParams": [],
                 "requestParams": [
@@ -289,26 +286,26 @@
                     },
                     {
                         "name": "processKey",
-                        "value": "ContactInfoConversion"
+                        "value": "UserCommChannelConversion"
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/location/contact_info_"
+                        "value": "/solo/user/communication_channel_"
                     }
                 ],
                 "requestType": "FTP",
                 "methodType": "UPLOAD",
                 "headers": []
             },
+            "retry": "*",
+            "apiKey": "10",
             "onSuccess": [
                 "11"
             ],
-            "onFailure": [],
-            "retry":"1",
-            "apiKey": "10"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {               
                 "url": "ftp.turvo.com",
                 "pathParams": [],
                 "requestParams": [
@@ -326,64 +323,27 @@
                     },
                     {
                         "name": "processKey",
-                        "value": "FacilityConversion"
+                        "value": "UserGroupConversion"
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/location/facility_"
+                        "value": "/solo/user/group_"
                     }
                 ],
                 "requestType": "FTP",
                 "methodType": "UPLOAD",
                 "headers": []
             },
+            "retry": "*",
+            "apiKey": "11",
             "onSuccess": [
                 "12"
             ],
-            "onFailure": [],
-            "retry":"1",
-            "apiKey": "11"
+            "onFailure": []
         },
         {
-            "apiRequest": {
-                "url": "ftp.turvo.com",
-                "pathParams": [],
-                "requestParams": [
-                    {
-                        "name": "ftp.username",
-                        "value": "test"
-                    },
-                    {
-                        "name": "ftp.password",
-                        "value": "kindCh3etah95"
-                    },
-                    {
-                        "name": "apiKey",
-                        "value": "8"
-                    },
-                    {
-                        "name": "processKey",
-                        "value": "GroupConversion"
-                    },
-                    {
-                        "name": "ftp.remoteUri",
-                        "value": "/solo/location/group_"
-                    }
-                ],
-                "requestType": "FTP",
-                "methodType": "UPLOAD",
-                "headers": []
-            },
-            "onSuccess": [
-                "13"
-            ],
-            "onFailure": [],
-            "retry":"1",
-            "apiKey": "12"
-        },
-        {
-            "apiRequest": {
-                "url": "http://dev-cr-7769.turvo.net:8080/bdi/bdi/pacific/location",
+            "apiRequest": {            
+                "url": "http://dev-cr-7769.turvo.net:8080/bdi/bdi/pacific/user",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -395,22 +355,21 @@
                     },
                     {
                         "name": "nonce",
-                        "value": "salesforce-testing-12302021"
+                        "value": "salesforce-testing-230320210013"
                     }
-
                 ],
                 "store": [],
                 "requestBody": "{ \"dataPath\" : \"/solo/\"}"
             },
+            "retry": "*",
+            "apiKey": "12",
             "onSuccess": [
-                "14"
+                "13"
             ],
-            "onFailure": [],
-            "retry":"1",
-            "apiKey": "13"
+            "onFailure": []
         },
         {
-            "apiRequest": {
+            "apiRequest": {        
                 "url": "http://dev-cr-7769.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
@@ -420,12 +379,12 @@
                 "store": [],
                 "requestBody": ""
             },
+            "retry": "*",
+            "apiKey": "13",
             "onSuccess": [
                 "4"
             ],
-            "onFailure": [],
-            "retry":"1",
-            "apiKey": "14"
+            "onFailure": []
         }
     ]
 }

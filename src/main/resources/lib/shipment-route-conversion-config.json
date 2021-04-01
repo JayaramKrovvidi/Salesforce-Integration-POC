@@ -11,35 +11,37 @@
 		{
 			"sourceId": "DeliveredToId",
 			"destId": "customer.id",
-			"defaultValue":"customerId"
+			"defaultValue":"0015g0000067KuaAAE"
 		},
 		{
 			"sourceId": "CarrierId",
 			"destId": "carrier.id",
-			"defaultValue":"607999"
+			"defaultValue":"1000"
 		},
 		{
 			"sourceId": "SourceLocationId",
-			"destId": "location.id"
+			"destId": "location.id",
+			"defaultValue":"1315g000000kKv8AAE"
 		},
 		{
 			"sourceId": "ContactId",
-			"destId": "contact.id"
+			"destId": "contact.id",
+			"defaultValue":"0035g0000038pLxAAI"
 		},
 		{
 			"sourceId": "FragmentSequence",
 			"destId": "fragmentSequence",
-            "defaultValue":"frgseq"
+            "defaultValue":"0"
 		},
 		{
 			"sourceId": "Sequence",
 			"destId": "sequence",
-            "defaultValue":"seq"
+            "defaultValue":"0"
 		},
 		{
 			"sourceId": "TimeZone",
 			"destId": "timezone",
-            "defaultValue":"timeZone"
+            "defaultValue":"America/New_York"
 		},
 		{
 			"sourceId": "Services",
@@ -47,11 +49,13 @@
 		},
 		{
 			"sourceId": "StopType",
-			"destId": "stopType"
+			"destId": "stopType",
+			"defaultValue":"1500"
 		},
 		{
 			"sourceId": "SchedulingType",
-			"destId": "schedulingType"
+			"destId": "schedulingType",
+			"defaultValue":"9400"
 		},
 		{
 			"sourceId": "PoNumbers",
@@ -75,21 +79,23 @@
 		},
 		{
 			"sourceId": "CarrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
 			"sourceId": "CustomerOrderId",
-			"destId": "customerOrder.id"
+			"destId": "customerOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
 			"sourceId": "TransportationMode",
 			"destId": "transportation.mode",
-            "defaultValue":"transporationMode"
+            "defaultValue":"TL"
 		},
 		{
 			"sourceId": "TransportationType",
 			"destId": "transportation.type",
-            "defaultValue":"transporationType"
+            "defaultValue":"Any"
 
 		}
 		

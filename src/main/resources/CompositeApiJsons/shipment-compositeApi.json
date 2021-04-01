@@ -81,7 +81,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, ActualDeliveryDate, CreatedDate, ShipmentNumber, Status, DeliveredToId, Provider, SourceLocationId, OwnerId, Description, TrackingNumber, ShipToName, ExpectedDeliveryDate FROM Shipment",
+                "requestBody": "SELECT Id, ShipmentNumber,SourceLocationId,DestinationLocationId, Status, DeliveredToId, Provider, OwnerId, Description, TrackingNumber, ShipToName FROM Shipment",
                 "store": [
                     "id"
                 ]
@@ -485,7 +485,7 @@
                     },
                     {
                         "name": "ftp.remoteUri",
-                        "value": "/solo/shipment/contact_"
+                        "value": "/solo/shipment/contacts_"
                     }
                 ],
                 "requestType": "FTP",
@@ -698,7 +698,7 @@
                     },
                     {
                         "name": "nonce",
-                        "value": "salesforce-testing-180320211417"
+                        "value": "salesforce-testing-010420211204"
                     }
 
                 ],

@@ -6,11 +6,13 @@
 		},
 		{
 			"sourceId": "ActualDeliveryDate",
-			"destId": "startDate"
+			"destId": "startDate",
+			"defaultValue":"2021-02-26"
 		},
 		{
 			"sourceId": "CreatedDate",
-			"destId": "endDate"
+			"destId": "endDate",
+			"defaultValue":"2021-02-22"
 		},
 		{
 			"sourceId": "ShipmentNumber",

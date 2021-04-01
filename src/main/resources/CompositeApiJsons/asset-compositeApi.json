@@ -84,7 +84,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, AccountId, Status FROM Asset",
+                "requestBody": "SELECT Id, Status FROM Asset",
                 "store": [
                     "id"
                 ]
@@ -270,7 +270,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net:8080/bdi/bdi/pacific/asset",
+                "url": "http://dev-cr-7769.turvo.net:8080/bdi/bdi/pacific/asset",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -282,7 +282,7 @@
                     },
                     {
                         "name": "nonce",
-                        "value": "180320211742"
+                        "value": "2303202101133"
                     }
                 ],
                 "store": [],
@@ -297,7 +297,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7770.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
+                "url": "http://dev-cr-7769.turvo.net/connect/bdi/upload/findBatchesAndUpdateCount",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",

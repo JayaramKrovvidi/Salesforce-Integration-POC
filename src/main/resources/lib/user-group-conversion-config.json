@@ -1,0 +1,23 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+			
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "GroupId",
+			"destId": "groupId",
+			"defaultValue": "grpId"
+		},
+		{
+			"sourceId": "Permission",
+			"destId": "permission",
+			"defaultValue": "Admin"
+		}
+	]
+}

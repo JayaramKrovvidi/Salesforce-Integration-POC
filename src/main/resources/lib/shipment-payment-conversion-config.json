@@ -10,16 +10,17 @@
 		},
 		{
 			"sourceId": "CustomerOrderId",
-			"destId": "customerOrder.id"
+			"destId": "customerOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
 			"sourceId": "CarrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
 		},
         {
 			"sourceId": "InvoiceId",
-			"destId": "invoice.id",
-            "defaultValue":"invoiceId"
+			"destId": "invoice.id"
 		},
         {
 			"sourceId": "TrackingNumber",
@@ -28,12 +29,12 @@
         {
 			"sourceId": "PaymentDate",
 			"destId": "paymentDate",
-            "defaultValue":"paymentDate"
+            "defaultValue":"2021-03-21"
 		},
         {
 			"sourceId": "Method",
 			"destId": "method",
-            "defaultValue":"method"
+            "defaultValue":"1703"
 		},
         {
 			"sourceId": "Notes",
@@ -42,12 +43,12 @@
         {
 			"sourceId": "Amount",
 			"destId": "amount",
-            "defaultValue":"amount"
+            "defaultValue":"80"
 		},
         {
 			"sourceId": "PaymentTerm",
 			"destId": "paymentTerm",
-            "defaultValue":"paymentTerm"
+            "defaultValue":"QuickPay"
 		},{
 			"sourceId": "Fee",
 			"destId": "fee"

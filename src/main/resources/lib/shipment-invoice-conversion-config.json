@@ -10,29 +10,32 @@
 		},
 		{
 			"sourceId": "CustomerOrderId",
-			"destId": "customerOrder.id"
+			"destId": "customerOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
 		},
 		{
 			"sourceId": "CarrierOrderId",
-			"destId": "carrierOrder.id"
+			"destId": "carrierOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
 		},
         {
 			"sourceId": "Date",
 			"destId": "date",
-            "defaultValue":"date"
+            "defaultValue":"2021-05-15"
 		},
         {
 			"sourceId": "InvoiceNum",
-			"destId": "invoiceNum",
-            "defaultValue":"invoiceNum"
+			"destId": "invoiceNum"
 		},
         {
-			"sourceId": "ExpectedDeliveyDate",
-			"destId": "dueDate"
+			"sourceId": "ExpectedDeliveryDate",
+			"destId": "dueDate",
+			"defaultValue":"2021-05-15"
 		},
         {
 			"sourceId": "Status",
-			"destId": "status"
+			"destId": "status",
+			"defaultValue":"2806"
 		},
         {
 			"sourceId": "Notes",
@@ -41,7 +44,7 @@
         {
 			"sourceId": "Amount",
 			"destId": "amount",
-            "defaultValue":"amount"
+            "defaultValue":"100"
 		},
         {
 			"sourceId": "DocumentId",

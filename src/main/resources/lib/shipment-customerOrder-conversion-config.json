@@ -11,7 +11,7 @@
 		{
 			"sourceId": "DeliveredToId",
 			"destId": "customer.id",
-			"defaultValue":"customerId"
+			"defaultValue":"0015g0000067KuaAAE"
 		},
 		{
 			"sourceId": "OwnerId",

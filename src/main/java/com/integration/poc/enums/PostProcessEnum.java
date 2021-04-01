@@ -35,6 +35,9 @@ public enum PostProcessEnum {
   SHIPMENT_INVOICE_CONVERSION("ShipmentInvoiceConversion", "src\\main\\resources\\lib\\shipment-invoice-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   SHIPMENT_PAYMENT_CONVERSION("ShipmentPaymentConversion", "src\\main\\resources\\lib\\shipment-payment-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   SHIPMENT_DEDUCTION_CONVERSION("ShipmentDeductionConversion", "src\\main\\resources\\lib\\shipment-deduction-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  USER_CONVERSION("UserConversion", "src\\main\\resources\\lib\\user-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  USER_COMM_CHANNEL_CONVERSION("UserCommChannelConversion", "src\\main\\resources\\lib\\user-communication-channel-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  USER_GROUP_CONVERSION("UserGroupConversion", "src\\main\\resources\\lib\\user-group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   ORDER_CONVERSION("OrderConversion", "src\\main\\resources\\lib\\order-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   GROUP_CONVERSION("GroupObjectConversion", "src\\main\\resources\\lib\\group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
 

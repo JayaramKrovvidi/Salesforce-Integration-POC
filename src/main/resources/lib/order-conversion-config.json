@@ -5,15 +5,15 @@
 			"destId": "id"
 		},
 		{
-			"sourceId": "OrderKey",
-			"destId": "Order.Key",
-			"defaultValue":"4pf7jfTwon-85165658801"
+			"sourceId": "Id",
+			"destId": "Order.Key *"
 		},
 		{
 			"sourceId": "CustomerKey",
-			"destId": "Customer.Key",
-            "defaultValue": "CustomerKeyDefaultValue"
+			"destId": "Customer.Key *",
+			"defaultValue": "1"
 		},
+		
 		{
 			"sourceId": "ActivatedDate",
 			"destId": "Start.Date"
@@ -21,7 +21,7 @@
 		{
 			"sourceId": "EndDate",
 			"destId": "End.Date",
-            "defaultValue":"EndDateDefaultValue"
+			"defaultValue": "2021-03-23T11:24:17.000Z"
 		},
 		{
 			"sourceId": "CarrierKey",
@@ -42,7 +42,7 @@
 		{
 			"sourceId": "ItemId",
 			"destId": "Item.Id",
-            "defaultValue" : "ItemIdDefaultValue"
+			"defaultValue":"10"
 		},
 		{
 			"sourceId": "Item.Key",
@@ -82,7 +82,8 @@
 		},
 		{
 			"sourceId": "CostsItemId",
-			"destId": "Costs.Item.Id"
+			"destId": "Costs.Item.Id",
+			"defaultValue":"23002"
 		},
 		{
 			"sourceId": "CostsItemPrice",
