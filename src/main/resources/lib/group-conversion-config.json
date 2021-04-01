@@ -15,7 +15,7 @@
         {
 			"sourceId": "CreatedById",
 			"destId": "userId",
-			"defaultValue":"81"
+			"defaultValue":"1"
 		},
         {
 			"sourceId": "Permission",
