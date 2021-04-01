@@ -84,7 +84,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, Name, OwnerId FROM Group",
+                "requestBody": "SELECT Id, Name, CreatedById FROM Group",
                 "store": [
                     "id"
                 ]
