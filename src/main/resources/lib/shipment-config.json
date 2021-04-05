@@ -1,0 +1,405 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "ActualDeliveryDate",
+			"destId": "startDate",
+			"defaultValue":"2021-02-26"
+		},
+		{
+			"sourceId": "CreatedDate",
+			"destId": "endDate",
+			"defaultValue":"2021-02-22"
+		},
+		{
+			"sourceId": "ShipmentNumber",
+			"destId": "customId"
+		},
+		{
+			"sourceId": "status",
+			"destId": "status.code"
+		},
+		{
+			"sourceId": "StatusNotes",
+			"destId": "status.notes"
+		},
+		{
+			"sourceId": "MinPay",
+			"destId": "minPay"
+		},
+		{
+			"sourceId": "MaxPay",
+			"destId": "maxPay"
+		},
+		{
+			"sourceId": "TagsValue",
+			"destId": "tags.value"
+		},
+		{
+			"sourceId": "isLtl",
+			"destId": "isLtl"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "shipment.id"
+		},
+		{
+			"sourceId": "CustomerOrderId",
+			"destId": "customerOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
+		},
+		{
+			"sourceId": "carrierOrderId",
+			"destId": "carrierOrder.id",
+            "defaultValue":"8015g000000bsTDAAY"
+		},
+		{
+			"sourceId": "ContactId",
+			"destId": "contact.id",
+            "defaultValue":"0035g0000038pLxAAI"
+		},
+		{
+			"sourceId": "role",
+			"destId": "role",
+            "defaultValue":"1991"
+		},
+		{
+			"sourceId": "TrackMethod",
+			"destId": "trackMethod",
+			"defaultValue":"31300"
+		},
+		{
+			"sourceId": "CarrierId",
+			"destId": "carrier.id",
+            "defaultValue":"1000"
+		},
+		{
+			"sourceId": "OwnerId",
+			"destId": "accountOwner.id"
+		},
+		{
+			"sourceId": "LineItemCode",
+			"destId": "lineItem.code",
+            "defaultValue":"23006"
+		},
+		{
+			"sourceId": "LineItemQty",
+			"destId": "lineItem.qty",
+            "defaultValue":"1"
+		},
+		{
+			"sourceId": "LineItemPrice",
+			"destId": "lineItem.price",
+            "defaultValue":"80"
+		},
+		{
+			"sourceId": "LineItemAmount",
+			"destId": "lineItem.amount",
+            "defaultValue":"80"
+		},
+		{
+			"sourceId": "LineItemNotes",
+			"destId": "lineItem.notes"
+		},
+		{
+			"sourceId": "LineItemBillable",
+			"destId": "lineItem.billable"
+		},
+		{
+			"sourceId": "LineItemPayable",
+			"destId": "lineItem.payable"
+		},
+		{
+			"sourceId": "DeliveredToId",
+			"destId": "customer.id",
+			"defaultValue":"0015g0000067KuaAAE"
+		},
+		{
+			"sourceId": "EnableSharing",
+			"destId": "enableSharing"
+		},
+        {
+			"sourceId": "Amount",
+			"destId": "amount",
+            "defaultValue":"20"
+		}
+        ,{
+			"sourceId": "Date",
+			"destId": "date",
+            "defaultValue":"2021-02-27"
+		},
+		{
+			"sourceId": "Type",
+			"destId": "type"
+		},
+		{
+			"sourceId": "Size",
+			"destId": "size"
+		},
+		{
+			"sourceId": "Temp",
+			"destId": "temp"
+		},
+		{
+			"sourceId": "Services",
+			"destId": "services"
+		},
+		{
+			"sourceId": "Description",
+			"destId": "description"
+		},
+		{
+			"sourceId": "Vin",
+			"destId": "vin"
+		},
+		{
+			"sourceId": "externalId.type",
+			"destId": "externalId.type",
+            "defaultValue":"7607"
+		},
+		{
+			"sourceId": "externalId.value",
+			"destId": "externalId.value",
+            "defaultValue":"123354657"
+		},
+		{
+			"sourceId": "AssetNumber",
+			"destId": "assetNumber"
+		},
+		{
+			"sourceId": "LicenseNumber",
+			"destId": "licenseNumber"
+		},
+        {
+			"sourceId": "InvoiceNum",
+			"destId": "invoiceNum"
+		},
+        {
+			"sourceId": "ExpectedDeliveryDate",
+			"destId": "dueDate",
+			"defaultValue":"2021-05-15"
+		},
+        {
+			"sourceId": "Status",
+			"destId": "status",
+			"defaultValue":"2806"
+		},
+        {
+			"sourceId": "DocumentId",
+			"destId": "document.id"
+		},
+		{
+			"sourceId": "SourceLocationId",
+			"destId": "routeStart.id",
+            "defaultValue":"1315g000000kKv8AAE"
+		},
+		{
+			"sourceId": "DestinationLocationId",
+			"destId": "routeEnd.id",
+            "defaultValue":"1315g000000kNTAAA2"
+		},
+		{
+			"sourceId": "Name",
+			"destId": "name",
+            "defaultValue":"Itemname"
+		},
+		{
+			"sourceId": "TrackingNumber",
+			"destId": "refNumber"
+		},
+		{
+			"sourceId": "LotNumber",
+			"destId": "lotNumber"
+		},
+		{
+			"sourceId": "Category",
+			"destId": "category",
+            "defaultValue":"22300"
+		},
+		{
+			"sourceId": "Notes",
+			"destId": "notes"
+		},
+		{
+			"sourceId": "Qty",
+			"destId": "qty",
+            "defaultValue":"200"
+		},
+		{
+			"sourceId": "QtyUnit",
+			"destId": "qty.unit",
+            "defaultValue":"6001"
+		},
+		{
+			"sourceId": "Weight",
+			"destId": "weight"
+		},
+		{
+			"sourceId": "Value",
+			"destId": "value"
+		},
+		{
+			"sourceId": "FreightClass",
+			"destId": "freightClass"
+		},
+		{
+			"sourceId": "Nmfc",
+			"destId": "nmfc"
+		},
+		{
+			"sourceId": "NmfcSub",
+			"destId": "nmfcSub"
+		},
+		{
+			"sourceId": "IsHazmat",
+			"destId": "isHazmat"
+		},
+		{
+			"sourceId": "IsStackable",
+			"destId": "isStackable"
+		},
+		{
+			"sourceId": "VinId",
+			"destId": "vin.id"
+		},
+		{
+			"sourceId": "VinYear",
+			"destId": "vin.year"
+		},
+		{
+			"sourceId": "VinMake",
+			"destId": "vin.make"
+		},
+		{
+			"sourceId": "VinModel",
+			"destId": "vin.model"
+		},
+		{
+			"sourceId": "VinColor",
+			"destId": "vin.color"
+		},
+		{
+			"sourceId": "DimLength",
+			"destId": "dim.length"
+		},
+		{
+			"sourceId": "DimWidth",
+			"destId": "dim.width"
+		}
+		,
+		{
+			"sourceId": "DimHeight",
+			"destId": "dim.height"
+		},
+		{
+			"sourceId": "WheelBase",
+			"destId": "wheelBase"
+		},
+		{
+			"sourceId": "Identification",
+			"destId": "identification"
+		},
+		{
+			"sourceId": "ShipToName",
+			"destId": "shippingName"
+		},
+		{
+			"sourceId": "HazardClass",
+			"destId": "hazardClass"
+		},
+		{
+			"sourceId": "PackingGroup",
+			"destId": "packingGroup"
+		},
+		{
+			"sourceId": "EmergencyContactId",
+			"destId": "emergencyContact.id"
+		},
+        {
+			"sourceId": "InvoiceId",
+			"destId": "invoice.id"
+		},
+        {
+			"sourceId": "TrackingNumber",
+			"destId": "referenceNum"
+		},
+        {
+			"sourceId": "PaymentDate",
+			"destId": "paymentDate",
+            "defaultValue":"2021-03-21"
+		},
+        {
+			"sourceId": "Method",
+			"destId": "method",
+            "defaultValue":"1703"
+		},
+        {
+			"sourceId": "PaymentTerm",
+			"destId": "paymentTerm",
+            "defaultValue":"QuickPay"
+		},{
+			"sourceId": "Fee",
+			"destId": "fee"
+		},
+		{
+			"sourceId": "SourceLocationId",
+			"destId": "location.id",
+			"defaultValue":"1315g000000kKv8AAE"
+		},
+		{
+			"sourceId": "FragmentSequence",
+			"destId": "fragmentSequence",
+            "defaultValue":"0"
+		},
+		{
+			"sourceId": "Sequence",
+			"destId": "sequence",
+            "defaultValue":"0"
+		},
+		{
+			"sourceId": "TimeZone",
+			"destId": "timezone",
+            "defaultValue":"America/New_York"
+		},
+		{
+			"sourceId": "StopType",
+			"destId": "stopType",
+			"defaultValue":"1500"
+		},
+		{
+			"sourceId": "SchedulingType",
+			"destId": "schedulingType",
+			"defaultValue":"9400"
+		},
+		{
+			"sourceId": "PoNumbers",
+			"destId": "poNumbers"
+		},
+		{
+			"sourceId": "AppointmentNumber",
+			"destId": "appointment.number"
+		},
+		{
+			"sourceId": "AppointmentStart",
+			"destId": "appointment.start"
+		},
+		{
+			"sourceId": "AppointmentEnd",
+			"destId": "appointment.end"
+		},
+		{
+			"sourceId": "TransportationMode",
+			"destId": "transportation.mode",
+            "defaultValue":"TL"
+		},
+		{
+			"sourceId": "TransportationType",
+			"destId": "transportation.type",
+            "defaultValue":"Any"
+
+		}
+	]
+}

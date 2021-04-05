@@ -52,18 +52,18 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
       List<Node> nodes = inFormatter.from(response);
 
-      LOGGER.info(" ------- CSV String before Processing --------\n {} \n", response);
-      // LOGGER.info(" -------- Mediator Representation before Processing --------");
-      // Node.printNodes(nodes);
+//      LOGGER.info(" ------- CSV String before Processing --------\n {} \n", response);
+//       LOGGER.info(" -------- Mediator Representation before Processing --------");
+//       Node.printNodes(nodes);
 
       List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
       String processedResponse = outFormatter.to(processedNodes);
 
-      // LOGGER.info(" -------- Mediator Representation after Processing --------");
-      // Node.printNodes(nodes);
-      LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
+//       LOGGER.info(" -------- Mediator Representation after Processing --------");
+//       Node.printNodes(nodes);
+//      LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
 
-      saveFileLocally(processedResponse, apiKey, key);
+//      saveFileLocally(processedResponse, apiKey, key);
     }
   }
 
