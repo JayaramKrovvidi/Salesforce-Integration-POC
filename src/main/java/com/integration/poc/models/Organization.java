@@ -27,9 +27,9 @@ public class Organization {
 
   @Column(name = "org_nm")
   private String orgNm;
-  
-  
-//changes
+
+
+  // changes
   @Column(name = "integration_typ_nm")
   private String integrationTypNm;
 
