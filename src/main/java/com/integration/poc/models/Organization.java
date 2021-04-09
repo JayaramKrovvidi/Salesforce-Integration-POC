@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,13 +22,15 @@ public class Organization {
 
   @Id
   @Column(name = "org_id")
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer orgId;
 
   @Column(name = "org_nm")
   private String orgNm;
-
-  @Column(name = "org_integration_typ_nm")
+  
+  
+//changes
+  @Column(name = "integration_typ_nm")
   private String integrationTypNm;
 
   @Column(name = "last_modified_tm")

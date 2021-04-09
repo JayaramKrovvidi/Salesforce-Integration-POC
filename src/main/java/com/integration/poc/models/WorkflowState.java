@@ -2,16 +2,20 @@ package com.integration.poc.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.integration.poc.converter.MapToStringConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,14 +27,15 @@ public class WorkflowState {
 
   @Id
   @Column(name = "wf_id")
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer wfId;
 
   @Column(name = "json_id")
   private Integer jsonId;
 
-  @Column(name = "run_config_json")
-  private String runConfigJson;
+  @Column(name = "run_config_mapper")
+  @Convert(converter = MapToStringConverter.class)
+  private Map<String, Object> runConfigMapper;
 
   @Column(name = "status")
   private String status;
