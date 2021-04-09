@@ -1,8 +1,6 @@
 package com.integration.poc.services.impl;
 
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -30,8 +28,6 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   @Autowired
   IMapBuilder mapBuilder;
-
-  private static final Logger LOGGER = LogManager.getLogger(RestApiExecutorImpl.class);
 
   @Override
   public String executeApi(ApiRequestConfig apiRequest, String apiKey) {

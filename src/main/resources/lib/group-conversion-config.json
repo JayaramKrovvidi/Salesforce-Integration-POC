@@ -15,7 +15,7 @@
         {
 			"sourceId": "CreatedById",
 			"destId": "userId",
-			"defaultValue":"0055g0000061A4OAAU"
+			"defaultValue":"0055g000003SiJaAAK"
 		},
         {
 			"sourceId": "Permission",
