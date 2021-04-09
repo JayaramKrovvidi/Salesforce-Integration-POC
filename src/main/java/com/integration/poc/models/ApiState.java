@@ -1,7 +1,9 @@
 package com.integration.poc.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.integration.poc.converters.StringListConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +34,7 @@ public class ApiState {
   private String apiKey;
 
   @Column(name = "request_config")
-  private Integer requestConfig;
+  private String requestConfig;
 
   @Column(name = "status")
   private String status;
@@ -43,10 +46,12 @@ public class ApiState {
   private String retry;
 
   @Column(name = "on_success")
-  private String onSuccess;
+  @Convert(converter = StringListConverter.class)
+  private List<String> onSuccess;
 
   @Column(name = "on_failure")
-  private Integer onFailure;
+  @Convert(converter = StringListConverter.class)
+  private List<String> onFailure;
 
   @Column(name = "last_modified_tm")
   private LocalDateTime lastModifiedTm;

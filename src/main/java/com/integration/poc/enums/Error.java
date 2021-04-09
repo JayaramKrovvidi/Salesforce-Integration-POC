@@ -2,7 +2,8 @@ package com.integration.poc.enums;
 
 public enum Error {
   NO_DATA_FOUND(1, "No Data Found Error"),
-  REST_CLIENT(2, "Rest Client Exception");
+  REST_CLIENT(2, "Rest Client Exception"),
+  WORKFLOW(3, "Workflow");
 
   private final int errorCode;
   private final String errorMsg;
