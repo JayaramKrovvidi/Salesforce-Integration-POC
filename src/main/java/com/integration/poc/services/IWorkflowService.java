@@ -1,7 +1,7 @@
 package com.integration.poc.services;
 
 import java.util.Map;
-import com.integration.poc.responseDtos.WorkFlowResponse;
+import com.integration.poc.dtos.response.WorkFlowResponse;
 
 public interface IWorkflowService {
 

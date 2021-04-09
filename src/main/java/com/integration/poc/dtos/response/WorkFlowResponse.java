@@ -1,4 +1,4 @@
-package com.integration.poc.responseDtos;
+package com.integration.poc.dtos.response;
 
 import java.time.LocalDateTime;
 import java.util.List;

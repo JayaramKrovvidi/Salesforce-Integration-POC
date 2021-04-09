@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.integration.poc.constants.StatusConstants;
 import com.integration.poc.dtos.external.CompositeApiRequest;
 import com.integration.poc.dtos.internal.GenericApiRequest;
+import com.integration.poc.dtos.response.WorkFlowResponse;
 import com.integration.poc.enums.Error;
 import com.integration.poc.exceptions.GenericError;
 import com.integration.poc.exceptions.GenericException;
@@ -21,7 +22,6 @@ import com.integration.poc.models.WorkflowState;
 import com.integration.poc.repositories.IApiStateRepository;
 import com.integration.poc.repositories.IOrgJsonStoreRepository;
 import com.integration.poc.repositories.IWorkflowRepository;
-import com.integration.poc.responseDtos.WorkFlowResponse;
 import com.integration.poc.services.IWorkflowService;
 
 @Service
