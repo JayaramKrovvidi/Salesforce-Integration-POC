@@ -87,10 +87,9 @@ public class JSONMediatorImpl implements IMediator {
       JSONObject obj = jsonObjBuilder(getValuesFromNodeList(objectNode.getSubNodes()), headers);
       array.add(obj);
     }
-    Map<String, List<JSONObject>> map = new HashMap<>();
-    map.put("objects", array);
-    JSONObject jsonobj = new JSONObject(map);
-    return jsonobj.toString();
+    
+    System.out.println(array.toString());
+    return array.toString();
   }
 
   private JSONObject jsonObjBuilder(List<String> values, List<String> root) {

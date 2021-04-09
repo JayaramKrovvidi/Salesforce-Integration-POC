@@ -16,6 +16,6 @@ public class ApiRequestConfig {
   private Object requestBody;
   private List<String> store;
   private List<Handle> successHandlers;
-  private List<String> procKeyOnSuccess;
-  private List<String> procKeyOnFailure;
+  private List<ProcKeyDTO> procKeyOnSuccess;
+  private List<ProcKeyDTO> procKeyOnFailure;
 }

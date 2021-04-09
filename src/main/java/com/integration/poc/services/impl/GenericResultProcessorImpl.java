@@ -2,6 +2,7 @@ package com.integration.poc.services.impl;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.Node;
 import com.integration.poc.dtos.internal.PostProcessConfig;
+import com.integration.poc.dtos.internal.ProcKeyDTO;
+import com.integration.poc.enums.FormatterEnum;
 import com.integration.poc.enums.PostProcessEnum;
 import com.integration.poc.services.IMediator;
 import com.integration.poc.services.IResultProcessor;
@@ -36,18 +39,28 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
   @Override
   public void process(ApiRequestConfig request, String apiKey, String response, boolean success) {
-
-    List<String> keys = success ? request.getProcKeyOnSuccess() : request.getProcKeyOnFailure();
-    if (CollectionUtils.isEmpty(keys)) {
-      return;
+   if (CollectionUtils.isEmpty(request.getProcKeyOnSuccess())&&CollectionUtils.isEmpty(request.getProcKeyOnFailure())) {
+     return;
+   }
+    List<ProcKeyDTO> procs=new ArrayList<>();
+    if(success) {
+      for(int i=0;i<request.getProcKeyOnSuccess().size();i++) {
+        procs.add(request.getProcKeyOnSuccess().get(i));
+      }
+    }
+    else {
+      for(int i=0;i<request.getProcKeyOnFailure().size();i++) {
+        procs.add(request.getProcKeyOnFailure().get(i));
+      }
     }
 
-    for (String key : keys) {
+   
+    for (ProcKeyDTO proc : procs) {
       // Get Necessary Details and execute Post Processing
-      IMediator inFormatter = factory.getBeanForClass(PostProcessEnum.getInputFormatterByKey(key));
+      IMediator inFormatter = factory.getBeanForClass(FormatterEnum.getFormatterByKey(proc.getInFormatter()));
       IMediator outFormatter =
-          factory.getBeanForClass(PostProcessEnum.getOutputFormatterByKey(key));
-      String configFilePath = PostProcessEnum.getConfigFilePath(key);
+          factory.getBeanForClass(FormatterEnum.getFormatterByKey(proc.getOutFormatter()));
+      String configFilePath = PostProcessEnum.getConfigFilePath(proc.getName());
       PostProcessConfig postProcessConfig = fileManager.getConfigFromResource(configFilePath);
 
       List<Node> nodes = inFormatter.from(response);
@@ -61,14 +74,15 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
 //       LOGGER.info(" -------- Mediator Representation after Processing --------");
 //       Node.printNodes(nodes);
-//      LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
+      LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
 
-//      saveFileLocally(processedResponse, apiKey, key);
+      saveFileLocally(processedResponse, apiKey, proc.getName(),proc.getOutFormatter());
     }
   }
 
-  private void saveFileLocally(String processedResponse, String apiKey, String processKey) {
-    String fileName = apiKey + processKey + ".csv";
+  private void saveFileLocally(String processedResponse, String apiKey, String processKey,String outFormat) {
+   
+    String fileName = apiKey + processKey + "."+outFormat;
     String filePath = localFilePath + fileName;
 
     FileWriter fileWriter = null;
