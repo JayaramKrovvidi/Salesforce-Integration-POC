@@ -13,7 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.integration.poc.converters.ApiRequestConfigConverter;
 import com.integration.poc.converters.StringListConverter;
+import com.integration.poc.dtos.internal.ApiRequestConfig;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +37,8 @@ public class ApiState {
   private String apiKey;
 
   @Column(name = "request_config")
-  private String requestConfig;
+  @Convert(converter = ApiRequestConfigConverter.class)
+  private ApiRequestConfig requestConfig;
 
   @Column(name = "status")
   private String status;

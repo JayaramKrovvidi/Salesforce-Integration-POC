@@ -80,8 +80,7 @@ public class WorkflowServiceImpl implements IWorkflowService {
     apiState.setWfId(wfId);
     apiState.setApiKey(apiRequest.getApiKey());
     apiState.setRetry(apiRequest.getRetry());
-    apiState.setRequestConfig(apiRequest.getApiRequest()
-        .toString());
+    apiState.setRequestConfig(apiRequest.getApiRequest());
     apiState.setStatus(StatusConstants.INITIALIZED);
     apiState.setOnSuccess(apiRequest.getOnSuccess());
     apiState.setOnFailure(apiRequest.getOnFailure());
@@ -105,7 +104,7 @@ public class WorkflowServiceImpl implements IWorkflowService {
         .collect(Collectors.toList());
   }
 
-  private CompositeApiRequest getCompositeJson(String compositeJsonString) {
+  private CompositeApiRequest getCompositeJson(CompositeApiRequest compositeJsonString) {
     return new CompositeApiRequest();
   }
 
@@ -126,9 +125,7 @@ public class WorkflowServiceImpl implements IWorkflowService {
     if (workFlow.isPresent()) {
       WorkflowState workflowState = workFlow.get();
       workflowState.setRunConfigMapper(runConfigsMapper);
-
       workflowRepo.save(workflowState);
-
     }
     throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
         Error.WORKFLOW.getErrorMsg() + "Requested workflow not found"));

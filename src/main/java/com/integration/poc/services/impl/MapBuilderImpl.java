@@ -11,18 +11,24 @@ import com.integration.poc.services.IMapBuilder;
 @RequestScope
 public class MapBuilderImpl implements IMapBuilder {
 
-  Map<String, Map<String, Object>> mapBuilder = new HashMap<>();
+//  Map<String, Map<String, Object>> mapBuilder = new HashMap<>();
 
   @Override
-  public void putMap(String apiKey, String id, Object obj) {
+  public Map<String,  Object> putMap(Map<String, Object> mapBuilder,String apiKey, String id, Object obj) {
     mapBuilder.putIfAbsent(apiKey, new HashMap<>());
-    mapBuilder.get(apiKey)
-        .putIfAbsent(id, obj);
+    Map<String,Object> map2=(Map<String, Object>) mapBuilder.get(apiKey);
+       map2.putIfAbsent(id, obj);
+        mapBuilder.put(apiKey, map2);
+    return mapBuilder;
   }
 
   @Override
-  public Object getMap(String apiKey, String id) {
-    return mapBuilder.get(apiKey)
-        .get(id);
+  public Object getMap(Map<String,Object> mapBuilder,String apiKey, String id) {
+     
+        Map<String,Object> innerMap = (Map<String, Object>) mapBuilder.get(apiKey);
+        return innerMap.get(id);
+        
   }
+
+  
 }

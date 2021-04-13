@@ -1,7 +1,9 @@
 package com.integration.poc.services;
 
-public interface IMapBuilder {
-  public void putMap(String apiKey, String id, Object obj);
+import java.util.Map;
 
-  public Object getMap(String apiKey, String id);
+public interface IMapBuilder {
+  public Map<String, Object> putMap(Map<String,Object> mapBuilder,String apiKey, String id, Object obj);
+
+  public Object getMap(Map<String,  Object> mapBuilder,String apiKey, String id);
 }
