@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.integration.poc.dtos.response.WorkFlowResponse;
 import com.integration.poc.services.IWorkflowService;
 
+
 @RestController
 @RequestMapping("workflow")
 public class WorkflowController {
@@ -25,22 +26,26 @@ public class WorkflowController {
     return workflowService.initializeWorkflow(orgId, jsonKey);
   }
 
-  @PostMapping(value = "/start/{workFlowId}")
-  public void startWorkFlow(@RequestBody Map<String, String> runConfigs,
-      @PathVariable(name = "workFlowId") Integer workFlowId) {
-    workflowService.startWorkflow(workFlowId, runConfigs);
+  @PostMapping(value = "/{workFlowId}/start")
+  public void startWorkFlow(@PathVariable(name = "workFlowId") Integer workFlowId) {
+    workflowService.startWorkflow(workFlowId);
   }
 
 
-  @GetMapping(value = "/get/{workFlowId}")
+  @GetMapping(value = "/{workFlowId}")
   public WorkFlowResponse getWorkflow(@PathVariable(name = "workFlowId") Integer workFlowId) {
     return workflowService.getWorkFlow(workFlowId);
   }
 
-  @PutMapping(value = "/updateRunConfig/{workFlowId}")
+  @PutMapping(value = "/{workFlowId}/updateRunConfig")
   public void updateWorkFlow(@PathVariable(name = "workFlowId") Integer workFlowId,
       @RequestBody Map<String, String> runConfigs) {
     workflowService.updateWorkFlowRunConfigs(workFlowId, runConfigs);
+  }
+
+  @GetMapping(value = "/{workFlowId}/getAllDetails")
+  public WorkFlowResponse getAllDetails(@PathVariable(name = "workFlowId") Integer workFlowId) {
+    return workflowService.getAllData(workFlowId);
   }
 
 }

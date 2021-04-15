@@ -30,7 +30,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
   IMapBuilder mapBuilder;
 
   @Override
-  public String executeApi(ApiRequestConfig apiRequest, String apiKey) {
+  public String executeApi(ApiRequestConfig apiRequest, String apiKey,Integer workFlowId) {
     switch (apiRequest.getMethodType()) {
       case "GET":
         return executeGet(apiRequest, apiKey);

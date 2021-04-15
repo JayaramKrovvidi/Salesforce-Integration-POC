@@ -22,6 +22,7 @@ import com.integration.poc.models.WorkflowState;
 import com.integration.poc.repositories.IApiStateRepository;
 import com.integration.poc.repositories.IOrgJsonStoreRepository;
 import com.integration.poc.repositories.IWorkflowRepository;
+import com.integration.poc.services.ICompositeApiRunner;
 import com.integration.poc.services.IWorkflowService;
 
 @Service
@@ -35,6 +36,12 @@ public class WorkflowServiceImpl implements IWorkflowService {
 
   @Autowired
   IApiStateRepository apiStateRepo;
+  
+  @Autowired
+  ICompositeApiRunner composite;
+  
+  @Autowired 
+  WorkFlowRunnerImpl workFlowRunnerImpl;
 
   @Override
   @Transactional
@@ -119,16 +126,21 @@ public class WorkflowServiceImpl implements IWorkflowService {
 
 
   @Override
-  public void startWorkflow(Integer workFlowId, Map<String, String> runConfigs) {
-    Map<String, Object> runConfigsMapper = createMapper(runConfigs);
+  public void startWorkflow(Integer workFlowId) {
     Optional<WorkflowState> workFlow = workflowRepo.findById(workFlowId);
-    // if check for status
     if (workFlow.isPresent()) {
       WorkflowState workflowState = workFlow.get();
-      workflowState.setRunConfigMapper(runConfigsMapper);
-
-      workflowRepo.save(workflowState);
-
+      if (workflowState.getStatus().equals(StatusConstants.INITIALIZED)) {
+        workflowState.setStatus(StatusConstants.IN_PROGRESS);
+        workflowState.setLastModifiedTm(LocalDateTime.now());
+        WorkflowState workflowState2 = workflowRepo.save(workflowState);
+        try {
+          workFlowRunnerImpl.process(workFlowId);
+        } catch (Exception e) {
+          System.out.println(e);
+        }
+        
+      }
     }
     throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
         Error.WORKFLOW.getErrorMsg() + "Requested workflow not found"));
@@ -165,4 +177,27 @@ public class WorkflowServiceImpl implements IWorkflowService {
     throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
         Error.WORKFLOW.getErrorMsg() + "Requested workflow not found"));
   }
+
+  @Override
+  public WorkFlowResponse getAllData(Integer workFlowId) {
+    
+    Optional<WorkflowState> workFlowOptional = workflowRepo.findById(workFlowId);
+    if (workFlowOptional.isPresent()) {
+      WorkflowState workflow = workFlowOptional.get();
+      WorkFlowResponse workFlowResponse  = new WorkFlowResponse();
+      workFlowResponse.setWfId(workflow.getWfId());
+      workFlowResponse.setJsonId(workflow.getJsonId());
+      workFlowResponse.setRunConfigMapper(workflow.getRunConfigMapper());
+      workFlowResponse.setStatus(workflow.getStatus());
+      workFlowResponse.setDetailMsgTxt(workflow.getDetailMsgTxt());
+      workFlowResponse.setLastModifiedTm(workflow.getLastModifiedTm());
+      workFlowResponse.setCurrentApiId(workflow.getCurrentApiId());
+      workFlowResponse.setApiList(workflow.getApiList());
+      workFlowResponse.setRuntimeVariablesList(workflow.getRuntimeVariablesList());
+      workFlowResponse.setJsonStore(workflow.getJsonStore());
+      return workFlowResponse;
+    }
+    return null;  
+  }
+ 
 }

@@ -7,8 +7,9 @@ public interface IWorkflowService {
 
   public Integer initializeWorkflow(Integer orgId, String jsonKey);
 
-  public void startWorkflow(Integer workFlowId, Map<String, String> runConfigs);
+  public void startWorkflow(Integer workFlowId);
 
+  public WorkFlowResponse getAllData(Integer workFlowId);
 
   public WorkFlowResponse getWorkFlow(Integer workFlowId);
 
