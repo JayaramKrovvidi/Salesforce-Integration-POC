@@ -57,7 +57,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   private String executePut(ApiRequestConfig apiRequest, String apiKey,Integer wfId) {
 
-    prepareApiConfigForExecution(apiRequest);
+    prepareApiConfigForExecution(apiRequest,wfId);
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
@@ -69,7 +69,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   private String executeGet(ApiRequestConfig apiRequest, String apiKey,Integer wfId) {
 
-    prepareApiConfigForExecution(apiRequest);
+    prepareApiConfigForExecution(apiRequest,wfId);
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
@@ -80,7 +80,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   private String executePost(ApiRequestConfig apiRequest, String apiKey,Integer wfId) {
 
-    prepareApiConfigForExecution(apiRequest);
+    prepareApiConfigForExecution(apiRequest,wfId);
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
@@ -93,37 +93,24 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   // -------------- Helper Methods Start Here -----------------
 
-  private void prepareApiConfigForExecution(ApiRequestConfig apiRequest) {
-    Integer wfId = null;
-    Optional<RuntimeVariables> runTime=runTimeRepo.findByWfId(wfId);
-    Map<String, Object> map =new HashMap<>();
+  private void prepareApiConfigForExecution(ApiRequestConfig apiRequest,Integer wfId) {
+    Util.replaceParamsAtRuntime(apiRequest.getHeaders(),wfId);
+    Util.replaceParamsAtRuntime(apiRequest.getRequestParams(),wfId);
 
-    if(runTime.isPresent()) {
-    RuntimeVariables  runTimeVariables=runTime.get();
-    map = runTimeVariables.getValue();
-    Util.replaceParamsAtRuntime(map, apiRequest.getHeaders());
-    Util.replaceParamsAtRuntime(map, apiRequest.getRequestParams());
-
-    }   
   }
 
   private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey,
       String response,Integer wfId) {
-    Optional<RuntimeVariables> runTime=runTimeRepo.findByWfId(wfId);
-    RuntimeVariables runTimeVariables;
-    Map<String, Object> map =new HashMap<>();
-    if(runTime.isPresent()) {
-      runTimeVariables=runTime.get();
-    map = runTimeVariables.getValue();
+    RuntimeVariables runTimeVariables=new RuntimeVariables();
     List<String> storeIds = apiRequest.getStore();
     if (!CollectionUtils.isEmpty(storeIds)) {
       for (String storageId : storeIds) {
         String value = xmlParser.parsedata(response, storageId);
-        map = mapBuilder.putMap(map,apiKey, storageId, value);
+        runTimeVariables.setWfId(wfId);
+        runTimeVariables.setKey(apiKey+"_"+storeIds);
+        runTimeVariables.setValue(value);
+        runTimeRepo.save(runTimeVariables);
       }
-    }
-    runTimeVariables.setValue(map);
-    runTimeRepo.save(runTimeVariables);
     }
     
   }

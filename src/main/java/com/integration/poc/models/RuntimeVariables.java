@@ -1,10 +1,8 @@
 package com.integration.poc.models;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Convert;
-import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,8 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.integration.poc.converter.MapToStringConverter;
-import com.integration.poc.converters.CompositeApiConverter;
+import com.integration.poc.converters.ObjectToStringConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,8 +33,8 @@ public class RuntimeVariables {
   private String key;
 
   @Column(name = "value")
-  @Convert(converter = MapToStringConverter.class)
-  private Map<String,Object> value;
+  @Convert(converter = ObjectToStringConverter.class)
+  private Object value;
 
   @Column(name = "last_modified_tm")
   private LocalDateTime lastModifiedTm;

@@ -7,5 +7,7 @@ public interface IRuntimeVariablesRepository
     extends ICustomJPARepository<RuntimeVariables, Integer> {
   
   public Optional<RuntimeVariables> findByWfId(Integer wfId);
+  public Optional<RuntimeVariables> findByWfIdAndKey(Integer wfId,String key);
+
 
 }

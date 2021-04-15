@@ -2,31 +2,36 @@ package com.integration.poc.services.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
+import com.integration.poc.models.RuntimeVariables;
+import com.integration.poc.repositories.IRuntimeVariablesRepository;
 import com.integration.poc.services.IMapBuilder;
 
 
 @Service
 @RequestScope
 public class MapBuilderImpl implements IMapBuilder {
+  
+  @Autowired
+  IRuntimeVariablesRepository runTimeRepo;
 
 //  Map<String, Map<String, Object>> mapBuilder = new HashMap<>();
 
   @Override
-  public Map<String,  Object> putMap(Map<String, Object> mapBuilder,String apiKey, String id, Object obj) {
-    mapBuilder.putIfAbsent(apiKey, new HashMap<>());
-    Map<String,Object> map2=(Map<String, Object>) mapBuilder.get(apiKey);
-       map2.putIfAbsent(id, obj);
-        mapBuilder.put(apiKey, map2);
-    return mapBuilder;
+  public void putValue(Integer wfId,String apiKey, String id, Object obj) {
+    RuntimeVariables runtimeVariables=new RuntimeVariables();
+    runtimeVariables.setWfId(wfId);
+    runtimeVariables.setValue(obj);
+    runtimeVariables.setKey(apiKey+"_"+id);
+     runTimeRepo.save(runtimeVariables);
   }
 
   @Override
-  public Object getMap(Map<String,Object> mapBuilder,String apiKey, String id) {
-     
-        Map<String,Object> innerMap = (Map<String, Object>) mapBuilder.get(apiKey);
-        return innerMap.get(id);
+  public Object getValue(Integer wfId,String apiKey, String id) {
+            
+        return runTimeRepo.findByWfIdAndKey(wfId, apiKey+"_"+id);
         
   }
 
