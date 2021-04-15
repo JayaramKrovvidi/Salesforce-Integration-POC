@@ -1,0 +1,176 @@
+{
+    "requestList": [
+        {
+            "apiRequest": {
+                "url": "https://login.salesforce.com/services/Soap/u/51.0",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Accept",
+                        "value": "*/*"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "value": "text/xml; charset=UTF-8"
+                    },
+                    {
+                        "name": "SOAPAction",
+                        "value": "login"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"utf-8\" ?> <env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"> <env:Body> <n1:login xmlns:n1=\"urn:partner.soap.sforce.com\">  <n1:username>jayaram@accolitedigital.com</n1:username>      <n1:password>Accolite@123Ljmq16LqC8ndmxau4fTKLhsQS</n1:password> </n1:login>  </env:Body> </env:Envelope>",
+                "store": [
+                    "sessionId"
+                ]
+            },
+            "onSuccess": [
+                "2"
+            ],
+            "onFailure": [
+               
+            ],
+            "retry":"4",
+            "apiKey": "1"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/data/v51.0/jobs/ingest/",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/json; charset=UTF-8",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "Accept",
+                        "value": "application/json",
+                        "scope": "static"
+                    },
+                    {
+                        "name": "Authorization",
+                        "value": "{1.sessionId}",
+                        "scope": "runtime"
+                    }
+                ],
+                "requestBody": "{\"object\" : \"Contact\",\"contentType\" : \"CSV\",\"operation\" : \"insert\",\"lineEnding\": \"CRLF\"}",
+                "store": [
+                    "id"
+                ]
+            },
+            "onSuccess": [
+                "3"
+            ],
+            "onFailure": [],
+            "retry":"2",
+             "apiKey": "2"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/data/v51.0/jobs/ingest/{2.id}/batches/",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "PUT",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv;"
+                    },
+                    {
+                        "name": "Authorization",
+                        "value": "{1.sessionId}"
+                    },
+                    {
+                        "name":"Accept",
+                        "value":"application/json"
+                    }
+                ],
+                "requestBody": "",
+                "store": [
+                    
+                ]
+            },
+            "onSuccess": [
+                "4"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2",
+            "apiKey": "3"
+        }
+        ,
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/data/v51.0/jobs/ingest/{2.id}/",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "PATCH",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/json; charset=UTF-8"
+                    },
+                    {
+                        "name": "Authorization",
+                        "value": "{1.sessionId}"
+                    },
+                    {
+                        "name":"Accept",
+                        "value":"application/json"
+                    }
+                ],
+                "requestBody": "{  \"state\" : \"UploadComplete\"}",
+                "store": [
+                    
+                ]
+            },
+            "onSuccess": [
+                "5"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2",
+            "apiKey": "4"
+        }
+        ,
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/data/v51.0/jobs/ingest/{2.id}/successfulResults",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/json; charset=UTF-8"
+                    },
+                    {
+                        "name": "Authorization",
+                        "value": "{1.sessionId}"
+                    },
+                    {
+                        "name":"Accept",
+                        "value":"application/json"
+                    }
+                ],
+                "requestBody": "",
+                "store": [
+                   
+                ]
+            },
+            "onSuccess": [
+                "-1"
+            ],
+            "onFailure": ["-1"],
+            "retry":"2",
+            "apiKey": "5"
+        }
+    ]
+}
