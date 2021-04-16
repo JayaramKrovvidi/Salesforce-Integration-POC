@@ -1,5 +1,6 @@
 package com.integration.poc.services.impl;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class OrgJsonStoreServiceImpl implements IOrgJsonStoreService {
     orgJsonStore.setJsonKey(jsonKey);
     orgJsonStore.setOrgId(orgId);
     orgJsonStore.setJsonString(compositeApi);
+    orgJsonStore.setLastModifiedTm(LocalDateTime.now());
     return jsonStoreRepo.save(orgJsonStore).getId();
   }
   public OrgJsonStore getByEntityId(Integer id) {
@@ -36,6 +38,7 @@ public class OrgJsonStoreServiceImpl implements IOrgJsonStoreService {
    if (orgJsonStore.isPresent()) {
      OrgJsonStore orgJson=orgJsonStore.get();
      orgJson.setJsonString(compositeApi);
+     orgJson.setLastModifiedTm(LocalDateTime.now());
      return jsonStoreRepo.save(orgJson).getId();
    }
    throw new GenericException(new GenericError(Error.NO_DATA_FOUND.getErrorCode(),
@@ -48,6 +51,7 @@ public class OrgJsonStoreServiceImpl implements IOrgJsonStoreService {
     if(jsonStoreSearch.isPresent()) {
       OrgJsonStore jsonStore = jsonStoreSearch.get();
       jsonStore.setJsonString(compositeApi);
+      jsonStore.setLastModifiedTm(LocalDateTime.now());
       return jsonStoreRepo.save(jsonStore).getId();
     }
     throw new GenericException(new GenericError(Error.NO_DATA_FOUND.getErrorCode(),
