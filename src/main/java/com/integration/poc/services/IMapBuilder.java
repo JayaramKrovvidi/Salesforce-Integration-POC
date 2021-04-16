@@ -1,7 +1,5 @@
 package com.integration.poc.services;
 
-import java.util.Map;
-
 public interface IMapBuilder {
 
 

@@ -36,11 +36,11 @@ public class WorkflowServiceImpl implements IWorkflowService {
 
   @Autowired
   IApiStateRepository apiStateRepo;
-  
+
   @Autowired
   ICompositeApiRunner composite;
-  
-  @Autowired 
+
+  @Autowired
   WorkFlowRunnerImpl workFlowRunnerImpl;
 
   @Override
@@ -129,16 +129,17 @@ public class WorkflowServiceImpl implements IWorkflowService {
     Optional<WorkflowState> workFlow = workflowRepo.findById(workFlowId);
     if (workFlow.isPresent()) {
       WorkflowState workflowState = workFlow.get();
-      if (workflowState.getStatus().equals(StatusConstants.INITIALIZED)) {
+      if (workflowState.getStatus()
+          .equals(StatusConstants.INITIALIZED)) {
         workflowState.setStatus(StatusConstants.IN_PROGRESS);
         workflowState.setLastModifiedTm(LocalDateTime.now());
-        WorkflowState workflowState2 = workflowRepo.save(workflowState);
+        workflowRepo.save(workflowState);
         try {
           workFlowRunnerImpl.process(workFlowId);
         } catch (Exception e) {
           System.out.println(e);
         }
-        
+
       }
     }
     throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
@@ -179,11 +180,11 @@ public class WorkflowServiceImpl implements IWorkflowService {
 
   @Override
   public WorkFlowResponse getAllData(Integer workFlowId) {
-    
+
     Optional<WorkflowState> workFlowOptional = workflowRepo.findById(workFlowId);
     if (workFlowOptional.isPresent()) {
       WorkflowState workflow = workFlowOptional.get();
-      WorkFlowResponse workFlowResponse  = new WorkFlowResponse();
+      WorkFlowResponse workFlowResponse = new WorkFlowResponse();
       workFlowResponse.setWfId(workflow.getWfId());
       workFlowResponse.setJsonId(workflow.getJsonId());
       workFlowResponse.setRunConfigMapper(workflow.getRunConfigMapper());
@@ -196,7 +197,7 @@ public class WorkflowServiceImpl implements IWorkflowService {
       workFlowResponse.setJsonStore(workflow.getJsonStore());
       return workFlowResponse;
     }
-    return null;  
+    return null;
   }
- 
+
 }

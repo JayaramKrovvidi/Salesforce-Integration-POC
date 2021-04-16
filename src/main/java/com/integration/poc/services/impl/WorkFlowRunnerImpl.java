@@ -59,33 +59,11 @@ public class WorkFlowRunnerImpl {
     if (currentApi.isPresent()) {
       ApiState apiState = currentApi.get();
       apiState.setStatus(StatusConstants.IN_PROGRESS);
-      apiStateRepo.save(apiState);
-      // ApiRequestConfig requestConfig = apiState.getRequestConfig();
-      // it should not be a string.It is of type ApiRequestConfig
-      boolean success = executeCurrentApi(apiState,workflowState.getWfId());
-      // currentRequest = decideNextApi( currentRequest, success);
+      ApiState apiState2 = apiStateRepo.save(apiState);
+      boolean success = executeCurrentApi(apiState2, workflowState.getWfId());
       isSuccess(success, apiState, workflowState);
     }
   }
-
-  // public void executeComposite(WorkflowState workflowState) throws InterruptedException {
-  // Integer currentApiId = workflowState.getCurrentApiId();
-  // while(null!=currentApiId) {
-  // if (currentApiId == -1) {
-  // break;
-  // }
-  // Optional<ApiState> currentApi = apiStateRepo.findById(currentApiId);
-  // if(currentApi.isPresent()) {
-  // ApiState apiState = currentApi.get();
-  // apiState.setStatus(StatusConstants.IN_PROGRESS);
-  //// ApiRequestConfig requestConfig = apiState.getRequestConfig();
-  //// it should not be a string.It is of type ApiRequestConfig
-  // boolean success = executeCurrentApi(apiState);
-  //// currentRequest = decideNextApi( currentRequest, success);
-  // currentApiId = findNextApiId(success , apiState);
-  // }
-  // }
-  // }
 
 
   private void isSuccess(boolean success, ApiState apiState, WorkflowState workflowState)
@@ -115,18 +93,15 @@ public class WorkFlowRunnerImpl {
       apiState.setStatus(StatusConstants.FAILURE);
       apiStateRepo.save(apiState);
       workflowRepo.save(workflowState);
-    }
-    else {
+    } else {
       apiState.setRetry(String.valueOf(--retryInt));
       apiStateRepo.save(apiState);
-    } 
+    }
   }
 
-  private boolean executeCurrentApi(ApiState apiState , Integer workFlowId) {
-    // string is later changed to ApiRequestConfig
-    // String currentApiConfig = apiState.getRequestConfig();
-    ApiRequestConfig currentApiConfig = new ApiRequestConfig();
-    String response = findAdapterAndExecuteApi(apiState,workFlowId);
+  private boolean executeCurrentApi(ApiState apiState, Integer workFlowId) {
+    ApiRequestConfig currentApiConfig = apiState.getRequestConfig();
+    String response = findAdapterAndExecuteApi(apiState, workFlowId);
     List<Handle> successHandlers = currentApiConfig.getSuccessHandlers();
     boolean success = handleExecutor.executeHandles(apiState.getApiKey(), successHandlers);
     genericResultProcessor.process(currentApiConfig, String.valueOf(apiState.getApiId()), response,
@@ -134,15 +109,11 @@ public class WorkFlowRunnerImpl {
     return success;
   }
 
-  private String findAdapterAndExecuteApi(ApiState apiState,Integer workFlowId) {
-    // apiState.getRequestConfig().getRequestType();
-    // String requestType = genericApiRequest.getApiRequest()
-    // .getRequestType();
-    String requestType = "";
-    // String requestConfig = apiState.getRequestConfig();
-    ApiRequestConfig requestConfig = new ApiRequestConfig();
+  private String findAdapterAndExecuteApi(ApiState apiState, Integer workFlowId) {
+    ApiRequestConfig requestConfig = apiState.getRequestConfig();
+    String requestType = requestConfig.getRequestType();
     IApiExecutor apiExecutor = factory.getBeanForClass(AdaptersEnum.getAdapterByKey(requestType));
-    return apiExecutor.executeApi(requestConfig, apiState.getApiKey(),workFlowId);
+    return apiExecutor.executeApi(requestConfig, apiState.getApiKey(), workFlowId);
   }
 
 }
