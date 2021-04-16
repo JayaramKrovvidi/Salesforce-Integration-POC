@@ -64,6 +64,7 @@ public class CompositeApiRunnerImpl implements ICompositeApiRunner {
     ApiRequestConfig currentApiConfig = genericApiRequest.getApiRequest();
     LOGGER.info("API with Key: {} ready for execution", genericApiRequest.getApiKey());
     String response = findAdapterAndExecuteApi(genericApiRequest);
+    System.out.println(response);
     List<Handle> successHandlers = currentApiConfig.getSuccessHandlers();
     boolean success = handleExecutor.executeHandles(genericApiRequest.getApiKey(), successHandlers);
     LOGGER.info("API with Key: {} executed and status: {} ", genericApiRequest.getApiKey(),

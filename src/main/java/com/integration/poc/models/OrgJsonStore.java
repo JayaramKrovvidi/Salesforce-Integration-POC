@@ -3,6 +3,7 @@ package com.integration.poc.models;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.integration.poc.converters.CompositeApiConverter;
+import com.integration.poc.dtos.external.CompositeApiRequest;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +37,8 @@ public class OrgJsonStore {
   private String jsonKey;
 
   @Column(name = "json_string")
-  private String jsonString;
+  @Convert(converter = CompositeApiConverter.class)
+  private CompositeApiRequest jsonString;
 
   @Column(name = "last_modified_tm")
   private LocalDateTime lastModifiedTm;

@@ -1,12 +1,17 @@
 package com.integration.poc.services.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import com.integration.poc.dtos.internal.ApiRequestConfig;
 import com.integration.poc.dtos.internal.NameValuePair;
+import com.integration.poc.models.RuntimeVariables;
+import com.integration.poc.repositories.IRuntimeVariablesRepository;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.services.IMapBuilder;
 import com.integration.poc.services.IRestTemplateWrapper;
@@ -28,75 +33,85 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   @Autowired
   IMapBuilder mapBuilder;
+  
+  @Autowired
+  IRuntimeVariablesRepository runTimeRepo;
+  
+  
 
   @Override
   public String executeApi(ApiRequestConfig apiRequest, String apiKey,Integer workFlowId) {
     switch (apiRequest.getMethodType()) {
       case "GET":
-        return executeGet(apiRequest, apiKey);
+        return executeGet(apiRequest, apiKey,workFlowId);
       case "POST":
-        return executePost(apiRequest, apiKey);
+        return executePost(apiRequest, apiKey,workFlowId);
       case "PUT":
-        return executePut(apiRequest, apiKey);
+        return executePut(apiRequest, apiKey,workFlowId);
       default:
         return null;
     }
 
   }
 
-  private String executePut(ApiRequestConfig apiRequest, String apiKey) {
+  private String executePut(ApiRequestConfig apiRequest, String apiKey,Integer wfId) {
 
-    prepareApiConfigForExecution(apiRequest);
+    prepareApiConfigForExecution(apiRequest,wfId);
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.putForEntity(String.class, url, apiRequest.getRequestBody());
 
-    storeValuesFromResponse(apiRequest, apiKey, response);
+    storeValuesFromResponse(apiRequest, apiKey, response,wfId);
     return response;
   }
 
-  private String executeGet(ApiRequestConfig apiRequest, String apiKey) {
+  private String executeGet(ApiRequestConfig apiRequest, String apiKey,Integer wfId) {
 
-    prepareApiConfigForExecution(apiRequest);
+    prepareApiConfigForExecution(apiRequest,wfId);
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.customGetForEntity(String.class, url, addHeaders(apiRequest));
-    storeValuesFromResponse(apiRequest, apiKey, response);
+    storeValuesFromResponse(apiRequest, apiKey, response,wfId);
     return response;
   }
 
-  private String executePost(ApiRequestConfig apiRequest, String apiKey) {
+  private String executePost(ApiRequestConfig apiRequest, String apiKey,Integer wfId) {
 
-    prepareApiConfigForExecution(apiRequest);
+    prepareApiConfigForExecution(apiRequest,wfId);
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
     String response = restTemplate.customPostForEntity(String.class, url,
         apiRequest.getRequestBody(), addHeaders(apiRequest));
 
-    storeValuesFromResponse(apiRequest, apiKey, response);
+    storeValuesFromResponse(apiRequest, apiKey, response,wfId);
     return response;
   }
 
   // -------------- Helper Methods Start Here -----------------
 
-  private void prepareApiConfigForExecution(ApiRequestConfig apiRequest) {
-    // Replace RunTime Parameters
-    Util.replaceParamsAtRuntime(mapBuilder, apiRequest.getHeaders());
-    Util.replaceParamsAtRuntime(mapBuilder, apiRequest.getRequestParams());
+  private void prepareApiConfigForExecution(ApiRequestConfig apiRequest,Integer wfId) {
+    Util.replaceParamsAtRuntime(apiRequest.getHeaders(),wfId);
+    Util.replaceParamsAtRuntime(apiRequest.getRequestParams(),wfId);
+
   }
 
   private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey,
-      String response) {
+      String response,Integer wfId) {
+    RuntimeVariables runTimeVariables=new RuntimeVariables();
     List<String> storeIds = apiRequest.getStore();
     if (!CollectionUtils.isEmpty(storeIds)) {
       for (String storageId : storeIds) {
         String value = xmlParser.parsedata(response, storageId);
-        mapBuilder.putMap(apiKey, storageId, value);
+        runTimeVariables.setWfId(wfId);
+        runTimeVariables.setKey(apiKey+"_"+storeIds);
+        runTimeVariables.setValue(value);
+        runTimeRepo.save(runTimeVariables);
       }
     }
+    
   }
 
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {

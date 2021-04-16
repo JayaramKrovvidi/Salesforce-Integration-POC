@@ -1,0 +1,255 @@
+{
+	"mappers": [
+		{
+			"sourceId": "Id",
+			"destId": "id"
+		},
+		{
+			"sourceId": "Id",
+			"destId": "contextId"
+		},
+		{
+			"sourceId": "ToName",
+			"destId": "toName",
+            "defaultValue":"to_name_89"
+		},
+        {
+			"sourceId": "CareOf",
+			"destId": "careOf"
+		},
+        {
+			"sourceId": "Phone",
+			"destId": "phone.number"
+		},
+		{
+			"sourceId": "Phone.Country",
+			"destId": "phone.country",
+			"defaultValue": "IN"
+		},
+		{
+			"sourceId": "Emails",
+			"destId": "emails"
+		},
+		{
+			"sourceId": "ContactId",
+			"destId": "contactId"
+		},
+		{
+			"sourceId": "CreditLimit",
+			"destId": "creditLimit"
+		},
+		{
+			"sourceId": "PayTerms",
+			"destId": "payTerms",
+			"defaultValue": "7100"
+		},
+		{
+			"sourceId": "Instructions",
+			"destId": "instructions"
+		},
+		{
+			"sourceId": "PaysUnloading",
+			"destId": "paysUnloading"
+		},
+		{
+			"sourceId": "InvoiceDocuments",
+			"destId": "invoiceDocuments"
+		},
+		{
+			"sourceId": "AutoInvoice",
+			"destId": "autoInvoice"
+		},
+		{
+			"sourceId": "IsThirdParty",
+			"destId": "isThirdParty"
+		},
+		{
+			"sourceId": "EmailType",
+			"destId": "email.type",
+			"defaultValue": "1085"
+		},
+		{
+			"sourceId": "Email",
+			"destId": "email"
+		},
+		{
+			"sourceId": "PhoneType",
+			"destId": "phone.type",
+			"defaultValue": "1010"
+		},
+		{
+			"sourceId": "Phone",
+			"destId": "phone"
+		},
+		{
+			"sourceId": "OtherPhone",
+			"destId": "phone.extension"
+		},
+		{
+			"sourceId": "AddressType",
+			"destId": "address.type",
+			"defaultValue": "1160"
+		},
+		{
+			"sourceId": "ShippingStreet",
+			"destId": "address.line1"
+		},
+		{
+			"sourceId": "AddressLine2",
+			"destId": "address.line2"
+		},
+		{
+			"sourceId": "ShippingCity",
+			"destId": "address.city",
+			"defaultValue": "AddressCity"
+		},
+		{
+			"sourceId": "ShippingState",
+			"destId": "address.state",
+			"defaultValue":"AddressState"
+		},
+		{
+			"sourceId": "ShippingPostalCode",
+			"destId": "address.zip",
+			"defaultValue":"6778"
+		},
+		{
+			"sourceId": "ShippingCountry",
+			"destId": "address.country"
+		},
+		{
+			"sourceId": "IsPrimaryAddress",
+			"destId": "isPrimaryAddress",
+			"defaultValue": "true"
+		},
+		{
+			"sourceId": "IsPrimaryEmail",
+			"destId": "isPrimaryEmail",
+			"defaultValue": "true"
+		},
+		{
+			"sourceId": "IsPrimaryPhone",
+			"destId": "isPrimaryPhone",
+			"defaultValue": "true"
+		},
+		{
+			"sourceId": "Name",
+			"destId": "name"
+		},
+		{
+			"sourceId": "Clean.Status",
+			"destId": "status.code",
+			"defaultValue": "2202"
+		},
+		{
+			"sourceId": "Description",
+			"destId": "status.notes"
+		},
+		{
+			"sourceId": "TaxId",
+			"destId": "taxId"
+		},
+		{
+			"sourceId": "SpecialInstructions",
+			"destId": "specialInstructions"
+		},
+		{
+			"sourceId": "Website",
+			"destId": "url"
+		},
+		{
+			"sourceId": "PrimaryContactId",
+			"destId": "primaryContact.id"
+		},
+		{
+			"sourceId": "OwnerId",
+			"destId": "owner.id",
+            "defaultValue": "3"
+		},
+		{
+			"sourceId": "CompanyId",
+			"destId": "company.id"
+		},
+		{
+			"sourceId": "AccoutingSystem",
+			"destId": "accountingSystem",
+			"defaultValue": "14005"
+		},
+		{
+			"sourceId": "AccoutingId",
+			"destId": "accounting.id",
+			"defaultValue": "accounting_id_ad_cust_ftp7219"
+		},
+		{
+			"sourceId": "AccountingType",
+			"destId": "accounting.type",
+			"defaultValue": "9701"
+		},
+		{
+			"sourceId": "AccountingValue",
+			"destId": "accounting.value",
+			"defaultValue": "accounting value"
+		},
+		{
+			"sourceId": "_Type",
+			"destId": "type",
+			"defaultValue": "crm_id"
+		},
+		{
+			"sourceId": "Value",
+			"destId": "value",
+            "defaultValue":"100"
+		},
+		{
+			"sourceId": "GroupId",
+			"destId": "groupId",
+            "defaultValue":"grpId"
+		},
+		{
+			"sourceId": "ApptApproachingLate",
+			"destId": "appt.approachingLate"
+		},
+		{
+			"sourceId": "ActualEndTime",
+			"destId": "appt.approachingLateDuration"
+		},
+		{
+			"sourceId": "ApptRunningLate",
+			"destId": "appt.runningLate"
+		},
+		{
+			"sourceId": "ApptRunningLateDuration",
+			"destId": "appt.runningLateDuration"
+		},
+		{
+			"sourceId": "FcfsApproachingLate",
+			"destId": "fcfs.approachingLate"
+		},
+		{
+			"sourceId": "FcfsApproachingLateDuration",
+			"destId": "fcfs.approachingLateDuration"
+		},
+		{
+			"sourceId": "FcfsRunningLate",
+			"destId": "fcfs.runningLate"
+		},
+		{
+			"sourceId": "FcfsRunningLateDuration",
+			"destId": "fcfs.runningLateDuration"
+		},
+		{
+			"sourceId": "ShareOperatingCarrier",
+			"destId": "shareOperatingCarrier"
+		},
+		{
+			"sourceId": "OwnerId",
+			"destId": "user.id",
+            "defaultValue": "3"
+		},
+		{
+			"sourceId": "UserCommision",
+			"destId": "user.commission",
+            "defaultValue":"5"
+		}
+	]
+}

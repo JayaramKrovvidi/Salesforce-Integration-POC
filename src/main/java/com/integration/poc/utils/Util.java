@@ -8,11 +8,14 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.integration.poc.dtos.internal.NameValuePair;
 import com.integration.poc.services.IMapBuilder;
 
 public class Util {
 
+  @Autowired
+  static IMapBuilder mapBuilder;
   private static final String URL_PATTERN = "\\{(.*?)\\}";
 
   private Util() {
@@ -27,8 +30,8 @@ public class Util {
     return Arrays.asList(StringUtils.substringsBetween(name, "{", "}"));
   }
 
-  public static void replaceParamsAtRuntime(IMapBuilder mapBuilder,
-      List<NameValuePair<String, String>> params) {
+  public static void replaceParamsAtRuntime(
+      List<NameValuePair<String, String>> params,Integer wfId) {
     params.forEach(param -> {
       boolean isRunTimeValue = Util.checkRunTimeParameter(param.getValue());
       if (isRunTimeValue) {
@@ -36,7 +39,7 @@ public class Util {
         int firstDotIndex = value.indexOf(".");
         String apiKey = value.substring(0, firstDotIndex);
         String id = value.substring(firstDotIndex + 1);
-        param.setValue((String) mapBuilder.getMap(apiKey, id));
+        param.setValue((String) mapBuilder.getValue(wfId,apiKey, id));
       }
     });
   }
