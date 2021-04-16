@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.integration.poc.dtos.external.CompositeApiRequest;
 import com.integration.poc.models.OrgJsonStore;
-import com.integration.poc.services.ICompositeApiRunner;
+//import com.integration.poc.services.ICompositeApiRunner;
 import com.integration.poc.services.IOrgJsonStoreService;
 
 @RestController
 @RequestMapping("request")
 public class CompositeApiController {
 
-  @Autowired
-  ICompositeApiRunner compositeApiRunner;
+//  @Autowired
+//  ICompositeApiRunner compositeApiRunner;
   
   @Autowired
   IOrgJsonStoreService orgJsonStoreServiceImpl;
 
-  @PostMapping("/composite")
-  public void compositeApiTest(@RequestBody CompositeApiRequest runnerConfig) {
-    compositeApiRunner.run(runnerConfig);
-  }
+//  @PostMapping("/composite")
+//  public void compositeApiTest(@RequestBody CompositeApiRequest runnerConfig) {
+//    compositeApiRunner.run(runnerConfig);
+//  }
   
   @PostMapping("/orgId/{orgId}/jsonKey/{json_key}")
   public Integer storeCompositeJson(@RequestBody CompositeApiRequest compositeApiRequest

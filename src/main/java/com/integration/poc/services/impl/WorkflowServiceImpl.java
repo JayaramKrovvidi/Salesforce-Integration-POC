@@ -22,7 +22,7 @@ import com.integration.poc.models.WorkflowState;
 import com.integration.poc.repositories.IApiStateRepository;
 import com.integration.poc.repositories.IOrgJsonStoreRepository;
 import com.integration.poc.repositories.IWorkflowRepository;
-import com.integration.poc.services.ICompositeApiRunner;
+//import com.integration.poc.services.ICompositeApiRunner;
 import com.integration.poc.services.IWorkflowService;
 
 @Service
@@ -37,8 +37,8 @@ public class WorkflowServiceImpl implements IWorkflowService {
   @Autowired
   IApiStateRepository apiStateRepo;
 
-  @Autowired
-  ICompositeApiRunner composite;
+//  @Autowired
+//  ICompositeApiRunner composite;
 
   @Autowired
   WorkFlowRunnerImpl workFlowRunnerImpl;
