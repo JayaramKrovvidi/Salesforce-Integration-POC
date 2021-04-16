@@ -92,10 +92,33 @@ public class JSONMediatorImpl implements IMediator {
     return array.toString();
   }
 
-  private JSONObject jsonObjBuilder(List<String> values, List<String> root) {
-    Map<String, String> map = new HashMap<>();
-    for (int i = 0; i < root.size(); i++) {
-      map.put(root.get(i), values.get(i));
+  public JSONObject jsonObjBuilder(List<String> values, List<String> root) {
+//    Map<String, String> map = new HashMap<>();
+//    for (int i = 0; i < root.size(); i++) {
+//      map.put(root.get(i), values.get(i));
+//    }
+//    return new JSONObject(map);
+    Map<String, Object> map = new HashMap();
+    for (Integer j = 0; j < root.size(); j++) {
+      String key = root.get(j);
+      String value = values.get(j);
+      Map<String, Object> m = map;
+      String[] parts = key.split("\\.");
+      for (Integer i = 0; i < parts.length; i++) {
+        String part = parts[i];
+        if (i == parts.length - 1) {
+            // At last part so put value
+            m.put(part, value);
+        } else {
+            // Before last part so put map
+            Map<String, Object> mm = (Map<String, Object>) m.get(part);
+            if (mm == null) {
+                mm = new HashMap<String, Object>();
+                m.put(part, mm);
+            }
+            m = mm;
+        }
+      }
     }
     return new JSONObject(map);
 
