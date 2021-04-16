@@ -2,8 +2,6 @@ package com.integration.poc.services.impl;
 
 import java.io.FileReader;
 import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,13 +26,11 @@ public class IngestApiExecutorImpl implements IApiExecutor {
   @Autowired
   UrlBuilderUtil urlBuilder;
 
-  private static final Logger LOGGER = LogManager.getLogger(IngestApiExecutorImpl.class);
-
   @Value("${local.file.path}")
   private String localFilePath;
 
   @Override
-  public String executeApi(ApiRequestConfig apiRequest, String apiKey,Integer workFlowId) {
+  public String executeApi(ApiRequestConfig apiRequest, String apiKey, Integer workFlowId) {
     Map<String, String> requestParams = Util.createMap(apiRequest.getRequestParams());
     String path =
         localFilePath + requestParams.get("apiKey") + requestParams.get("processKey") + ".json";
@@ -45,10 +41,9 @@ public class IngestApiExecutorImpl implements IApiExecutor {
       JSONArray ingestJson = (JSONArray) jsonParser.parse(reader);
       String url = urlBuilder.buildUrl(apiRequest);
       for (int i = 0; i < ingestJson.size(); i++) {
-        System.out.println(ingestJson.get(i));
-        System.out.println(url);
-        // String response = restTemplate.customPostForEntity(String.class, url,
-         String in=getIngestJson((JSONObject) ingestJson.get(i));
+        String in = getIngestJson((JSONObject) ingestJson.get(i));
+        String response =
+            restTemplate.customPostForEntity(String.class, url, in, addHeaders(apiRequest));
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -64,9 +59,8 @@ public class IngestApiExecutorImpl implements IApiExecutor {
     JSONObject json;
     try {
       json = (JSONObject) parser.parse(ingestFormat);
-      json.put("time","2021-04-09T1352.876010800");
+      json.put("time", "2021-04-09T1352.876010800");
       json.put("data", obj);
-      System.out.println("json------------"+json.toString());
       return json.toString();
 
     } catch (Exception e) {
