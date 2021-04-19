@@ -93,6 +93,10 @@ public class RestApiExecutorImpl implements IApiExecutor {
     List<String> storeIds = apiRequest.getStore();
     if (!CollectionUtils.isEmpty(storeIds)) {
       for (String storageId : storeIds) {
+        if(storageId.equals("**")) {
+          mapBuilder.putMap(apiKey, "csv",response);
+          break;
+        }
         String value = xmlParser.parsedata(response, storageId);
         mapBuilder.putMap(apiKey, storageId, value);
       }
