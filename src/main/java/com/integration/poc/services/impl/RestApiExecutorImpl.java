@@ -117,7 +117,12 @@ public class RestApiExecutorImpl implements IApiExecutor {
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {
     HttpHeaders headers = new HttpHeaders();
     for (NameValuePair<String, String> header : apiRequest.getHeaders()) {
+      if(header.getName().equals("Authorization")) {
+        headers.add(header.getName(), "Bearer "+header.getValue());
+      }
+      else {
       headers.add(header.getName(), header.getValue());
+    }
     }
     return headers;
   }

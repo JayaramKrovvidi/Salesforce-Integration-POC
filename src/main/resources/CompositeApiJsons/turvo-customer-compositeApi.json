@@ -67,7 +67,7 @@
         "pathParams": [],
         "requestParams": [],
         "requestType": "REST",
-        "methodType": "POST",
+        "methodType": "GET",
         "headers": [],
         "requestBody": "",
         "store": ["ID"]
@@ -83,7 +83,7 @@
         "pathParams": [],
         "requestParams": [],
         "requestType": "REST",
-        "methodType": "PUT",
+        "methodType": "GET",
         "headers": [
           {
             "name": "Content-Type",
