@@ -11,6 +11,7 @@ import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.services.IMapBuilder;
 import com.integration.poc.services.IRestTemplateWrapper;
 import com.integration.poc.services.IXMLParser;
+import com.integration.poc.utils.RequestBodyBuilderUtil;
 import com.integration.poc.utils.UrlBuilderUtil;
 import com.integration.poc.utils.Util;
 
@@ -28,6 +29,9 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   @Autowired
   IMapBuilder mapBuilder;
+  
+  @Autowired
+  RequestBodyBuilderUtil requestBuilder;
 
   @Override
   public String executeApi(ApiRequestConfig apiRequest, String apiKey) {
@@ -73,20 +77,15 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
-    Object requestBody=getRequestBodyContent(apiRequest,apiKey);
+    String apiRequestBody=requestBuilder.buildRequestody(apiRequest);
     String response = restTemplate.customPostForEntity(String.class, url,
-        apiRequest.getRequestBody(), addHeaders(apiRequest));
+        apiRequestBody, addHeaders(apiRequest));
 
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }
 
-  private Object getRequestBodyContent(ApiRequestConfig apiRequest,String apiKey) {
-    if(apiRequest.getRequestBody().equals(apiKey+".CSV")){
-      return mapBuilder.getMap(apiKey, "CSV");
-    }
-    return apiRequest.getRequestBody();
-  }
+ 
   // -------------- Helper Methods Start Here -----------------
 
   private void prepareApiConfigForExecution(ApiRequestConfig apiRequest) {
@@ -97,22 +96,22 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey,
       String response) {
-    List<String> storeIds = apiRequest.getStore();
-    if (!CollectionUtils.isEmpty(storeIds)) {
+      List<String> storeIds = apiRequest.getStore();
+      if (!CollectionUtils.isEmpty(storeIds)) {
       for (String storageId : storeIds) {
-        if(storageId.equals("CSV")) {
-          mapBuilder.putMap(apiKey, "CSV",response);
-          break;
-        }
-        else if(storageId.equals("ID")) {
-          mapBuilder.putMap(apiKey, "ID",response);
-          break;
-        }
-        String value = xmlParser.parsedata(response, storageId);
-        mapBuilder.putMap(apiKey, storageId, value);
+      if (storageId.startsWith("*")) {
+      int indexOf = storageId.indexOf(".");
+      String substring = storageId.substring(indexOf+1);
+      mapBuilder.putMap(apiKey, substring,response);
       }
-    }
-  }
+      else {
+      String value = xmlParser.parsedata(response, storageId);
+      mapBuilder.putMap(apiKey, storageId, value);
+      }
+
+      }
+      }
+      }
 
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {
     HttpHeaders headers = new HttpHeaders();

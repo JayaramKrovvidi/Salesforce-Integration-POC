@@ -99,7 +99,7 @@
           }
         ],
         "requestBody": "",
-        "store": ["CSV"]
+        "store": ["*.CSV"]
       },
       "onSuccess": ["5"],
       "onFailure": ["-1"],
