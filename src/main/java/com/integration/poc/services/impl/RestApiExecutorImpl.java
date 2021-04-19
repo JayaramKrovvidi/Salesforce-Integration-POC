@@ -29,7 +29,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   @Autowired
   IMapBuilder mapBuilder;
-  
+
   @Autowired
   RequestBodyBuilderUtil requestBuilder;
 
@@ -77,15 +77,15 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
-    String apiRequestBody=requestBuilder.buildRequestody(apiRequest);
-    String response = restTemplate.customPostForEntity(String.class, url,
-        apiRequestBody, addHeaders(apiRequest));
+    String apiRequestBody = requestBuilder.buildRequestody(apiRequest);
+    String response =
+        restTemplate.customPostForEntity(String.class, url, apiRequestBody, addHeaders(apiRequest));
 
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }
 
- 
+
   // -------------- Helper Methods Start Here -----------------
 
   private void prepareApiConfigForExecution(ApiRequestConfig apiRequest) {
@@ -96,32 +96,30 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
   private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey,
       String response) {
-      List<String> storeIds = apiRequest.getStore();
-      if (!CollectionUtils.isEmpty(storeIds)) {
+    List<String> storeIds = apiRequest.getStore();
+    if (!CollectionUtils.isEmpty(storeIds)) {
       for (String storageId : storeIds) {
-      if (storageId.startsWith("*")) {
-      int indexOf = storageId.indexOf(".");
-      String substring = storageId.substring(indexOf+1);
-      mapBuilder.putMap(apiKey, substring,response);
+        if (storageId.startsWith("*")) {
+          int indexOf = storageId.indexOf(".");
+          String substring = storageId.substring(indexOf + 1);
+          mapBuilder.putMap(apiKey, substring, response);
+        } else {
+          String value = xmlParser.parsedata(response, storageId);
+          mapBuilder.putMap(apiKey, storageId, value);
+        }
       }
-      else {
-      String value = xmlParser.parsedata(response, storageId);
-      mapBuilder.putMap(apiKey, storageId, value);
-      }
-
-      }
-      }
-      }
+    }
+  }
 
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {
     HttpHeaders headers = new HttpHeaders();
     for (NameValuePair<String, String> header : apiRequest.getHeaders()) {
-      if(header.getName().equals("Authorization")) {
-        headers.add(header.getName(), "Bearer "+header.getValue());
+      if (header.getName()
+          .equals("Authorization")) {
+        headers.add(header.getName(), "Bearer " + header.getValue());
+      } else {
+        headers.add(header.getName(), header.getValue());
       }
-      else {
-      headers.add(header.getName(), header.getValue());
-    }
     }
     return headers;
   }

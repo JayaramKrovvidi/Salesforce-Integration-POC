@@ -11,12 +11,16 @@ import com.integration.poc.services.IXMLParser;
 
 @Service
 public class XMLParserImpl implements IXMLParser {
+  
+  Document doc = null;
 
   public String parsedata(String response, String id) {
     try {
-      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-      Document doc = dBuilder.parse(new InputSource(new StringReader(response)));
+      if (null==doc) {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        doc = dBuilder.parse(new InputSource(new StringReader(response)));
+      } 
       doc.getDocumentElement()
           .normalize();
       return (doc.getElementsByTagName(id)
