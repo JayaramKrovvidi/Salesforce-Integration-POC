@@ -90,7 +90,7 @@
             "value": "text/csv;"
           },
           {
-            "name": "X-SFDC-Session",
+            "name": "Authorization",
             "value": "{1.sessionId}"
           },
           {
@@ -119,7 +119,7 @@
             "value": "text/csv;"
           },
           {
-            "name": "X-SFDC-Session",
+            "name": "Authorization",
             "value": "{1.sessionId}"
           },
           {
@@ -127,12 +127,12 @@
             "value": "application/json"
           }
         ],
-        "requestBody": "",
+        "requestBody": "3.CSV",
         "store": [],
         "successHandlers": [
           {
             "handlerId": 1,
-            "operand1": "{3.id}",
+            "operand1": "{3.ID}",
             "operand2": "-1",
             "operator": "EQUALS",
             "result": ""
@@ -157,7 +157,7 @@
             "value": "application/json; charset=UTF-8"
           },
           {
-            "name": "X-SFDC-Session",
+            "name": "Authorization",
             "value": "{1.sessionId}"
           },
           {
@@ -186,7 +186,7 @@
             "value": "application/json; charset=UTF-8"
           },
           {
-            "name": "X-SFDC-Session",
+            "name": "Authorization",
             "value": "{1.sessionId}"
           },
           {

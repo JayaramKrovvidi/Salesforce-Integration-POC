@@ -73,6 +73,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
+    Object requestBody=getRequestBodyContent(apiRequest,apiKey);
     String response = restTemplate.customPostForEntity(String.class, url,
         apiRequest.getRequestBody(), addHeaders(apiRequest));
 
@@ -80,6 +81,12 @@ public class RestApiExecutorImpl implements IApiExecutor {
     return response;
   }
 
+  private Object getRequestBodyContent(ApiRequestConfig apiRequest,String apiKey) {
+    if(apiRequest.getRequestBody().equals(apiKey+".CSV")){
+      return mapBuilder.getMap(apiKey, "CSV");
+    }
+    return apiRequest.getRequestBody();
+  }
   // -------------- Helper Methods Start Here -----------------
 
   private void prepareApiConfigForExecution(ApiRequestConfig apiRequest) {
