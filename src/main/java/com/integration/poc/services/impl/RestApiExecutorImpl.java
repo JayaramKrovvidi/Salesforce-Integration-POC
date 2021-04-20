@@ -1,6 +1,9 @@
 package com.integration.poc.services.impl;
 
 import java.util.List;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -42,6 +45,8 @@ public class RestApiExecutorImpl implements IApiExecutor {
         return executePost(apiRequest, apiKey);
       case "PUT":
         return executePut(apiRequest, apiKey);
+      case "PATCH":
+        return executePatch(apiRequest, apiKey);
       default:
         return null;
     }
@@ -54,8 +59,10 @@ public class RestApiExecutorImpl implements IApiExecutor {
 
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
-    String response = restTemplate.putForEntity(String.class, url, apiRequest.getRequestBody());
-
+     String apiRequestBody = requestBuilder.buildRequestody(apiRequest);
+    System.out.println(url);
+    String response = restTemplate.customPutForEntity(String.class, url, apiRequestBody, addHeaders(apiRequest));
+    System.out.println(response);
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }
@@ -84,6 +91,19 @@ public class RestApiExecutorImpl implements IApiExecutor {
     storeValuesFromResponse(apiRequest, apiKey, response);
     return response;
   }
+  private String executePatch(ApiRequestConfig apiRequest, String apiKey) {
+
+    prepareApiConfigForExecution(apiRequest);
+
+    // Build and execute external api
+    String url = urlBuilder.buildUrl(apiRequest);
+    String apiRequestBody = requestBuilder.buildRequestody(apiRequest);
+    String response =
+        restTemplate.customPatchForEntity(String.class, url, apiRequestBody, addHeaders(apiRequest));
+
+    storeValuesFromResponse(apiRequest, apiKey, response);
+    return response;
+  }
 
 
   // -------------- Helper Methods Start Here -----------------
@@ -94,22 +114,46 @@ public class RestApiExecutorImpl implements IApiExecutor {
     Util.replaceParamsAtRuntime(mapBuilder, apiRequest.getRequestParams());
   }
 
-  private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey,
-      String response) {
+  private void storeValuesFromResponse(ApiRequestConfig apiRequest, String apiKey, String response) {
     List<String> storeIds = apiRequest.getStore();
     if (!CollectionUtils.isEmpty(storeIds)) {
-      for (String storageId : storeIds) {
-        if (storageId.startsWith("*")) {
-          int indexOf = storageId.indexOf(".");
-          String substring = storageId.substring(indexOf + 1);
-          mapBuilder.putMap(apiKey, substring, response);
-        } else {
-          String value = xmlParser.parsedata(response, storageId);
-          mapBuilder.putMap(apiKey, storageId, value);
+        for (String storageId : storeIds) {
+            if (storageId.startsWith("*")) {
+                int indexOf = storageId.indexOf('.');
+                String substring = storageId.substring(indexOf + 1);
+                mapBuilder.putMap(apiKey, substring, response);
+            } else {
+                String value = parseData(apiRequest, response, storageId); 
+                mapBuilder.putMap(apiKey, storageId, value);
+            }
+
         }
-      }
     }
-  }
+}
+
+private String parseData(ApiRequestConfig apiRequest, String response, String storageId) {  
+    List<NameValuePair<String, String>> headers  = apiRequest.getHeaders();
+    for (NameValuePair<String, String> header:  headers ) {
+        if(header.getName().equals("Accept") && header.getValue().equals("application/json")) {
+            return parseJSON(response, storageId);
+        }
+    }
+    return xmlParser.parsedata(response, storageId);
+}
+
+private String parseJSON(String response, String storageId) {
+  JSONParser parser = new JSONParser();
+    JSONObject jsonObj;
+    try {
+      jsonObj = (JSONObject) parser.parse(response);
+      return (String) jsonObj.get(storageId);
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return null;
+}
+
 
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {
     HttpHeaders headers = new HttpHeaders();

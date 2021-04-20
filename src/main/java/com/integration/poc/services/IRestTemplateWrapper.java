@@ -7,6 +7,10 @@ public interface IRestTemplateWrapper {
 
   public <T, R> String customPostForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
       Object... uriVariables);
+  public <T, R> String customPatchForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
+      Object... uriVariables);
+  public <T, R> String customPutForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
+      Object... uriVariables);
 
   public <T> T getForEntity(Class<T> clazz, String url, Object... uriVariables);
 
@@ -15,7 +19,6 @@ public interface IRestTemplateWrapper {
   public <T, R> T postForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
       Object... uriVariables);
 
-  public <T, R> T putForEntity(Class<T> clazz, String url, R body, Object... uriVariables);
 
   public void delete(String url, Object... uriVariables);
 

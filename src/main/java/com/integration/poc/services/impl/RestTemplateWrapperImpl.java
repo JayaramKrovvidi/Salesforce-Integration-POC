@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
@@ -86,15 +87,7 @@ public class RestTemplateWrapperImpl implements IRestTemplateWrapper {
     return readValue(response, javaType);
   }
 
-  @Override
-  public <T, R> T putForEntity(Class<T> clazz, String url, R body, Object... uriVariables) {
-    HttpEntity<R> request = new HttpEntity<>(body);
-    ResponseEntity<String> response =
-        restTemplate.exchange(url, HttpMethod.PUT, request, String.class, uriVariables);
-    JavaType javaType = objectMapper.getTypeFactory()
-        .constructType(clazz);
-    return readValue(response, javaType);
-  }
+  
 
   @Override
   public void delete(String url, Object... uriVariables) {
@@ -127,6 +120,32 @@ public class RestTemplateWrapperImpl implements IRestTemplateWrapper {
     ResponseEntity<String> response =
         restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
     return response.getBody();
+  }
+  @Override
+  public <T, R> String customPutForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
+      Object... uriVariables) {
+    HttpEntity<R> entity = new HttpEntity<>(body, headers);
+    System.out.println(entity);
+    ResponseEntity<String> response =
+        restTemplate.exchange(url, HttpMethod.PUT, entity, String.class);
+    System.out.println(response);
+    return response.getBody();
+  }
+  @Override
+  public <T, R> String customPatchForEntity(Class<T> clazz, String url, R body, HttpHeaders headers,
+      Object... uriVariables) {
+   
+//    return response.getBody();
+   RestTemplate patchRestTemplate=new RestTemplate();
+    HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+    requestFactory.setConnectTimeout(30000);
+    requestFactory.setReadTimeout(30000);
+
+    patchRestTemplate.setRequestFactory(requestFactory);
+    HttpEntity<R> entity = new HttpEntity<>(body, headers);
+    ResponseEntity<String> response =
+        patchRestTemplate.exchange(url, HttpMethod.PATCH, entity, String.class);
+    return "";
   }
 
   @Override

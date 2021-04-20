@@ -17,7 +17,7 @@ public class MapBuilderImpl implements IMapBuilder {
   public void putMap(String apiKey, String id, Object obj) {
     mapBuilder.putIfAbsent(apiKey, new HashMap<>());
     mapBuilder.get(apiKey)
-        .putIfAbsent(id, obj);
+        .put(id, obj);
   }
 
   @Override
