@@ -28,7 +28,7 @@ public class UrlBuilderUtil {
     return urlBuilder.toString();
   }
 
-  private String buildPathParams(String url) {
+  public String buildPathParams(String url) {
 
     Pattern p = Pattern.compile(URL_PATTERN);
     Matcher ans = p.matcher(url);

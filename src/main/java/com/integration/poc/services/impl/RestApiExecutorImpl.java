@@ -60,7 +60,7 @@ public class RestApiExecutorImpl implements IApiExecutor {
     // Build and execute external api
     String url = urlBuilder.buildUrl(apiRequest);
      String apiRequestBody = requestBuilder.buildRequestody(apiRequest);
-    System.out.println(url);
+    System.out.println(apiRequestBody);
     String response = restTemplate.customPutForEntity(String.class, url, apiRequestBody, addHeaders(apiRequest));
     System.out.println(response);
     storeValuesFromResponse(apiRequest, apiKey, response);
@@ -158,12 +158,9 @@ private String parseJSON(String response, String storageId) {
   private HttpHeaders addHeaders(ApiRequestConfig apiRequest) {
     HttpHeaders headers = new HttpHeaders();
     for (NameValuePair<String, String> header : apiRequest.getHeaders()) {
-      if (header.getName()
-          .equals("Authorization")) {
-        headers.add(header.getName(), "Bearer " + header.getValue());
-      } else {
+     
         headers.add(header.getName(), header.getValue());
-      }
+      
     }
     return headers;
   }

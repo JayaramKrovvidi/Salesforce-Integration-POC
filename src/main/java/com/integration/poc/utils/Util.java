@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,7 @@ import com.integration.poc.dtos.internal.NameValuePair;
 import com.integration.poc.services.IMapBuilder;
 
 public class Util {
+  
 
   private static final String URL_PATTERN = "\\{(.*?)\\}";
 
@@ -30,14 +32,27 @@ public class Util {
   public static void replaceParamsAtRuntime(IMapBuilder mapBuilder,
       List<NameValuePair<String, String>> params) {
     params.forEach(param -> {
-      boolean isRunTimeValue = Util.checkRunTimeParameter(param.getValue());
-      if (isRunTimeValue) {
-        String value = getMatchedValues(param.getValue()).get(0);
-        int firstDotIndex = value.indexOf(".");
-        String apiKey = value.substring(0, firstDotIndex);
-        String id = value.substring(firstDotIndex + 1);
-        param.setValue((String) mapBuilder.getMap(apiKey, id));
-      }
+     
+        String paramValue=param.getValue();
+        Pattern p = Pattern.compile(URL_PATTERN);
+        Matcher ans = p.matcher(paramValue);
+        while (ans.find()) {
+          String group = ans.group(1);
+          int firstDot = group.indexOf(".");
+          String key1 = group.substring(0, firstDot);
+          String key2 = group.substring(firstDot + 1);
+
+          String res = mapBuilder.getMap(key1, key2)
+              .toString();
+          paramValue = paramValue.replace("{" + group + "}", res);
+          param.setValue(paramValue);
+        }
+//        String value = getMatchedValues(param.getValue()).get(0);
+//        int firstDotIndex = value.indexOf(".");
+//        String apiKey = value.substring(0, firstDotIndex);
+//        String id = value.substring(firstDotIndex + 1);
+//        System.out.println(mapBuilder.getMap(apiKey, id));
+       
     });
   }
 

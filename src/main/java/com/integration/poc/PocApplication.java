@@ -16,6 +16,5 @@ public class PocApplication {
     SpringApplication.run(PocApplication.class, args);
   }
 
-
 }
 
