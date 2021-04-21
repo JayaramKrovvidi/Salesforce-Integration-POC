@@ -1,5 +1,36 @@
 {
     "requestList": [
+    {
+            "apiRequest": {
+                "url": "http://dev-cr-7769-01.turvo.net/api/oauth/token",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                    },
+                    {
+                        "name": "Accept",
+                        "value": "application/json"
+                    }
+                ],
+                "requestBody": "{\"grant_type\": \"password\",\"username\": \"salesforcesupport@turvo.com\",\"password\": \"Temp@123\",\"remember\": true,\"client_id\": \"magellan-ws\", \"client_secret\": \"secret\", \"scope\": \"read+write\",\"type\": \"business\"}",
+                "store": [
+                    "access_token"
+                ]
+            },
+            "onSuccess": [
+                1
+            ],
+            "onFailure": [
+                -1
+            ],
+            "retry": "",
+            "apiKey": "10"
+        },
         {
             "apiRequest": {
                 "url": "https://login.salesforce.com/services/Soap/u/51.0",
