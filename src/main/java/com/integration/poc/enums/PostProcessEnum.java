@@ -2,6 +2,7 @@ package com.integration.poc.enums;
 
 import com.integration.poc.services.IMediator;
 import com.integration.poc.services.impl.CSVMediatorImpl;
+import com.integration.poc.services.impl.JSONMediatorImpl;
 
 public enum PostProcessEnum {
 
@@ -39,7 +40,12 @@ public enum PostProcessEnum {
   USER_COMM_CHANNEL_CONVERSION("UserCommChannelConversion", "src\\main\\resources\\lib\\user-communication-channel-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   USER_GROUP_CONVERSION("UserGroupConversion", "src\\main\\resources\\lib\\user-group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
   ORDER_CONVERSION("OrderConversion", "src\\main\\resources\\lib\\order-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
-  GROUP_CONVERSION("GroupObjectConversion", "src\\main\\resources\\lib\\group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class);
+  GROUP_CONVERSION("GroupObjectConversion", "src\\main\\resources\\lib\\group-conversion-config.json", CSVMediatorImpl.class, CSVMediatorImpl.class),
+  CUSTOMER_INGEST_CONVERSION("CustomerIngestConversion","",CSVMediatorImpl.class, JSONMediatorImpl.class),
+  ORDER_INGEST_CONVERSION("OrderIngestConversion","",CSVMediatorImpl.class, JSONMediatorImpl.class),
+  SHIPMENT_INGEST_CONVERSION("ShipmentIngestConversion","",CSVMediatorImpl.class, JSONMediatorImpl.class),
+  LOCATION_INGEST_CONVERSION("LocationIngestConversion","",CSVMediatorImpl.class, JSONMediatorImpl.class),
+  ASSET_INGEST_CONVERSION("AssetIngestConversion","",CSVMediatorImpl.class, JSONMediatorImpl.class);
 
 
 

@@ -1,0 +1,273 @@
+{
+    "requestList": [
+        {
+            "apiRequest": {
+                "url": "https://login.salesforce.com/services/Soap/u/51.0",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Accept",
+                        "value": "*/*"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "value": "text/xml; charset=UTF-8"
+                    },
+                    {
+                        "name": "SOAPAction",
+                        "value": "login"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"utf-8\" ?> <env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"> <env:Body> <n1:login xmlns:n1=\"urn:partner.soap.sforce.com\"> <n1:username>jayaram@accolitedigital.com</n1:username> <n1:password>Accolite@123Ljmq16LqC8ndmxau4fTKLhsQS</n1:password> </n1:login> </env:Body> </env:Envelope>",
+                "store": [
+                    "sessionId"
+                ]
+            },
+            "onSuccess": [
+                "2"
+            ],
+            "onFailure": [],
+            "retry": "4",
+            "apiKey": "1"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "application/xml; charset=UTF-8"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Location</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "store": [
+                    "id"
+                ]
+            },
+            "onSuccess": [
+                "3"
+            ],
+            "onFailure": [],
+            "retry": "2",
+            "apiKey": "2"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv; charset=UTF-8"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "requestBody": "SELECT Id,Name,TimeZone,DrivingDirections,IsMobile,CreatedBy.Email,CreatedBy.Street,CreatedBy.PostalCode,CreatedBy.Extension, CreatedBy.MobilePhone,CreatedBy.State,CreatedBy.City,CreatedBy.Country FROM Location",
+                "store": [
+                    "id"
+                ]
+            },
+            "onSuccess": [
+                "6"
+            ],
+            "onFailure": [
+                "-1"
+            ],
+            "retry": "2",
+            "apiKey": "3"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "text/csv; charset=UTF-8"
+                    },
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <state>Closed</state> </jobInfo>"
+            },
+            "onSuccess": [
+                "-1"
+            ],
+            "onFailure": [],
+            "retry": "2",
+            "apiKey": "4"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ]
+            },
+            "onSuccess": [
+                "6"
+            ],
+            "onFailure": [],
+            "retry": "2",
+            "apiKey": "5"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "store": [
+                    "state"
+                ],
+                "successHandlers": [
+                    {
+                        "handlerId": 1,
+                        "operand1": "{6.state}",
+                        "operand2": "Completed",
+                        "operator": "EQUALS"
+                    }
+                ]
+            },
+            "onSuccess": [
+                "7"
+            ],
+            "onFailure": [
+                "-1"
+            ],
+            "retry": "5",
+            "apiKey": "6"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "store": [
+                    "result"
+                ]
+            },
+            "onSuccess": [
+                "8"
+            ],
+            "onFailure": [
+                "-1"
+            ],
+            "retry": "2",
+            "apiKey": "7"
+        },
+        {
+            "apiRequest": {
+                "url": "https://accolitedigital-dev-ed.my.salesforce.com/services/async/51.0/job/{2.id}/batch/{3.id}/result/{7.result}",
+                "pathParams": [],
+                "requestParams": [],
+                "requestType": "REST",
+                "methodType": "GET",
+                "headers": [
+                    {
+                        "name": "X-SFDC-Session",
+                        "value": "{1.sessionId}"
+                    }
+                ],
+                "procKeyOnSuccess": [
+                    "LocationIngestConversion"
+                ],
+                "procKeyOnFailure": []
+            },
+            "onSuccess": [
+                "9"
+            ],
+            "onFailure": [
+                "-1"
+            ],
+            "retry": "2",
+            "apiKey": "8"
+        },
+        {
+            "apiRequest": {
+                "url": "http://dev-cr-7769-01.turvo.net:8080/http/messages",
+                "pathParams": [],
+                "requestParams": [
+                    {
+                        "name": "processKey",
+                        "value": "LocationIngestConversion"
+                    },
+                    {
+                        "name": "apiKey",
+                        "value": "8"
+                    }
+                ],
+                "requestType": "INGEST",
+                "methodType": "POST",
+                "headers": [
+                    {
+                        "name": "Authorization",
+                        "value": "Bearer {10.access_token}"
+                    },
+                    {
+                        "name": "nonce",
+                        "value": "210420210505"
+                    },
+                    {
+                        "name": "ingest_json_name",
+                        "value": "ingest_json_location_template.json"
+                    }
+                ],
+                "procKeyOnSuccess": [],
+                "procKeyOnFailure": []
+            },
+            "onSuccess": [
+                "-1"
+            ],
+            "onFailure": [
+                "-1"
+            ],
+            "retry": "2",
+            "apiKey": "9"
+        }
+    ]
+}

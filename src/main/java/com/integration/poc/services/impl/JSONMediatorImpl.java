@@ -5,12 +5,14 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.internal.ConvConfig;
 import com.integration.poc.dtos.internal.Node;
@@ -20,9 +22,9 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
 @Service
-public class CSVMediatorImpl implements IMediator {
+public class JSONMediatorImpl implements IMediator {
 
-  private static final Logger LOGGER = LogManager.getLogger(CSVMediatorImpl.class);
+  private static final Logger LOGGER = LogManager.getLogger(JSONMediatorImpl.class);
 
   private static final String ROOT_NODE_NM = "root";
   private static final String OBJECT_NODE_NM = "obj";
@@ -69,35 +71,34 @@ public class CSVMediatorImpl implements IMediator {
     return nmValPairNodes;
   }
 
-  // ------ Converting from Node convention to CSV String -------
+  // ------ Converting from Node convention to JSON String -------
 
   @Override
   public String to(List<Node> nodes) {
     Node rootNode = nodes.get(0);
-    return buildCSVString(rootNode.getSubNodes());
+    return buildJSONString(rootNode.getSubNodes());
   }
 
-  private String buildCSVString(List<Node> objectNodes) {
-    StringBuilder csvBuilder = new StringBuilder();
-
-    // Add Header Line
+  private String buildJSONString(List<Node> objectNodes) {
     Node firstObject = objectNodes.get(0);
     List<String> headers = getNamesFromNodeList(firstObject.getSubNodes());
-    addLineToCSVString(csvBuilder, headers);
-
-    // Add Value lines
+    List<JSONObject> array = new ArrayList<>();
     for (Node objectNode : objectNodes) {
-      addLineToCSVString(csvBuilder, getValuesFromNodeList(objectNode.getSubNodes()));
+      JSONObject obj = jsonObjBuilder(getValuesFromNodeList(objectNode.getSubNodes()), headers);
+      array.add(obj);
     }
-
-    return csvBuilder.toString();
+    
+    System.out.println(array.toString());
+    return array.toString();
   }
 
-  private void addLineToCSVString(StringBuilder csvBuilder, List<String> values) {
-    csvBuilder.append(values.stream()
-        .map(value -> "\"" + value + "\"")
-        .collect(Collectors.joining(",")));
-    csvBuilder.append(NEW_LINE);
+  private JSONObject jsonObjBuilder(List<String> values, List<String> root) {
+    Map<String, String> map = new HashMap<>();
+    for (int i = 0; i < root.size(); i++) {
+      map.put(root.get(i), values.get(i));
+    }
+    return new JSONObject(map);
+
   }
 
   private List<String> getNamesFromNodeList(List<Node> nodes) {
@@ -203,8 +204,10 @@ public class CSVMediatorImpl implements IMediator {
     return mappingsList.stream()
         .collect(Collectors.toMap(ConvConfig::getDestId, ConvConfig::getSourceId));
   }
+
   @Override
   public String getType() {
-  return ".csv";
+    // TODO Auto-generated method stub
+    return ".json";
   }
 }

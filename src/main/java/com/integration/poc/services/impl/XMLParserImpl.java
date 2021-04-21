@@ -16,11 +16,11 @@ public class XMLParserImpl implements IXMLParser {
 
   public String parsedata(String response, String id) {
     try {
-      if (null==doc) {
+      
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         doc = dBuilder.parse(new InputSource(new StringReader(response)));
-      } 
+      
       doc.getDocumentElement()
           .normalize();
       return (doc.getElementsByTagName(id)
