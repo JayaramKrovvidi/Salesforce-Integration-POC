@@ -63,12 +63,12 @@ public class GenericResultProcessorImpl implements IResultProcessor {
       // Node.printNodes(nodes);
       LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
 
-      saveFileLocally(processedResponse, apiKey, key);
+      saveFileLocally(processedResponse, apiKey, key,outFormatter.getType());
     }
   }
 
-  private void saveFileLocally(String processedResponse, String apiKey, String processKey) {
-    String fileName = apiKey + processKey + ".csv";
+  private void saveFileLocally(String processedResponse, String apiKey, String processKey,String type) {
+    String fileName = apiKey + processKey +type;
     String filePath = localFilePath + fileName;
 
     FileWriter fileWriter = null;

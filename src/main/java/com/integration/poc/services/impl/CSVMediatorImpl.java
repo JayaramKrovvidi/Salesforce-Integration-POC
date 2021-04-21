@@ -200,4 +200,8 @@ public class CSVMediatorImpl implements IMediator {
     return mappingsList.stream()
         .collect(Collectors.toMap(ConvConfig::getDestId, ConvConfig::getSourceId));
   }
+  @Override
+  public String getType() {
+  return ".json";
+  }
 }

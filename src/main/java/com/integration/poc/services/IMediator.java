@@ -10,4 +10,6 @@ public interface IMediator {
   public String to(List<Node> nodes);
 
   public List<Node> process(List<Node> nodes, PostProcessConfig config);
+  
+  public String getType();
 }
