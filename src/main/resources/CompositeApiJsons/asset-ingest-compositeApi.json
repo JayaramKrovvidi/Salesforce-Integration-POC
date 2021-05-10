@@ -1,6 +1,6 @@
 {
     "requestList": [
-    {
+     {
             "apiRequest": {
                 "url": "http://dev-cr-7769-01.turvo.net/api/oauth/token",
                 "pathParams": [],
@@ -31,6 +31,7 @@
             "retry": "",
             "apiKey": "10"
         },
+    
         {
             "apiRequest": {
                 "url": "https://login.salesforce.com/services/Soap/u/51.0",
@@ -81,7 +82,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Order</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
+                "requestBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\"> <operation>query</operation> <object>Asset</object> <concurrencyMode>Parallel</concurrencyMode> <contentType>CSV</contentType> </jobInfo>",
                 "store": [
                     "id"
                 ]
@@ -110,7 +111,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, AccountId, ActivatedDate, EndDate FROM Order",
+                "requestBody": "  SELECT Id, Status,SerialNumber FROM Asset",
                 "store": [
                     "id"
                 ]
@@ -285,7 +286,7 @@
                     },
                     {
                         "name": "ingest_json_name",
-                        "value": "ingest_json_order_template.json"
+                        "value": "ingest_json_asset_template.json"
                     }
                 ],
                 "procKeyOnSuccess": [],

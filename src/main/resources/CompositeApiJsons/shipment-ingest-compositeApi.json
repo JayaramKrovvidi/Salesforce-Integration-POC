@@ -110,7 +110,7 @@
                         "value": "{1.sessionId}"
                     }
                 ],
-                "requestBody": "SELECT Id, ShipmentNumber,SourceLocationId,DestinationLocationId, Status, DeliveredToId, Provider, OwnerId, Description, TrackingNumber, ShipToName FROM Shipment",
+                "requestBody": "SELECT Id, ShipmentNumber,SourceLocationId,DestinationLocationId, Status, DeliveredToId, Provider, OwnerId, Description, TrackingNumber, ShipToName,ShipToCountry,ShipToCity,ShipFromCountry,ShipFromCity,order__r.AccountId FROM Shipment",
                 "store": [
                     "id"
                 ]
@@ -245,7 +245,7 @@
                     }
                 ],
                 "procKeyOnSuccess": [
-                    "ShipmentIngestConversion"
+                    "CustomerIngestConversion"
                 ],
                 "procKeyOnFailure": []
             },
@@ -265,7 +265,7 @@
                 "requestParams": [
                     {
                         "name": "processKey",
-                        "value": "ShipmentIngestConversion"
+                        "value": "CustomerIngestConversion"
                     },
                     {
                         "name": "apiKey",

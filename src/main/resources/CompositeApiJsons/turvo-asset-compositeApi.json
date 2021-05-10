@@ -27,7 +27,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7769-01.turvo.net:8080/api/events/ACCOUNT",
+                "url": "http://dev-cr-7769-01.turvo.net:8080/api/events/ASSET",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -135,7 +135,7 @@
                         "value": "Bearer {1.sessionId}"
                     }
                 ],
-                "requestBody": "{\"object\" : \"Account\",\"contentType\" : \"CSV\",\"operation\" : \"insert\",\"lineEnding\": \"LF\"}",
+                "requestBody": "{\"object\" : \"Asset\",\"contentType\" : \"CSV\",\"operation\" : \"insert\",\"lineEnding\": \"LF\"}",
                 "store": [
                     "id"
                 ]

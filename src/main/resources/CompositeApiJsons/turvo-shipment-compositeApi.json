@@ -2,7 +2,7 @@
     "requestList": [
         {
             "apiRequest": {
-                "url": "http://dev-cr-7769-01.turvo.net/api/oauth/token",
+                "url": "http://dev-cr-7769-sf-01.turvo.net/api/oauth/token",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -27,7 +27,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7769-01.turvo.net:8080/api/events/ACCOUNT",
+                "url": "http://dev-cr-7769-sf-01.turvo.net:8080/api/events/SHIPMENT",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -53,7 +53,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7769-01.turvo.net:8080/api/events/consolidated/records/next",
+                "url": "http://dev-cr-7769-sf-01.turvo.net:8080/api/events/consolidated/records/next",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -135,7 +135,7 @@
                         "value": "Bearer {1.sessionId}"
                     }
                 ],
-                "requestBody": "{\"object\" : \"Account\",\"contentType\" : \"CSV\",\"operation\" : \"insert\",\"lineEnding\": \"LF\"}",
+                "requestBody": "{\"object\" : \"Shipment\",\"contentType\" : \"CSV\",\"operation\" : \"insert\",\"lineEnding\": \"LF\"}",
                 "store": [
                     "id"
                 ]
@@ -149,7 +149,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7769-01.turvo.net:8080/api/events/consolidated/id/{3.id}",
+                "url": "http://dev-cr-7769-sf-01.turvo.net:8080/api/events/consolidated/id/{3.id}",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",
@@ -204,7 +204,7 @@
         },
         {
             "apiRequest": {
-                "url": "http://dev-cr-7769-01.turvo.net:8080/api/events/consolidated/records/{3.id}/update/COMPLETED",
+                "url": "http://dev-cr-7769-sf-01.turvo.net:8080/api/events/consolidated/records/{3.id}/update/COMPLETED",
                 "pathParams": [],
                 "requestParams": [],
                 "requestType": "REST",

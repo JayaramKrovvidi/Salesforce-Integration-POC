@@ -214,7 +214,7 @@
                     }
                 ],
                 "procKeyOnSuccess": [
-                    "LocationIngestConversion"
+                    "CustomerIngestConversion"
                 ],
                 "procKeyOnFailure": []
             },
@@ -234,7 +234,7 @@
                 "requestParams": [
                     {
                         "name": "processKey",
-                        "value": "LocationIngestConversion"
+                        "value": "CustomerIngestConversion"
                     },
                     {
                         "name": "apiKey",
@@ -271,3 +271,8 @@
         }
     ]
 }
+
+
+[   {     "operation": "shift",     "spec": {       "SerialNumber": "asset_number",       "Id": "assetId",       "Status": {         "Registered": {           "#AVAILABLE": "availability_status.value",           "#19401": "availability_status.key"         },         "*": {           "#UNAVAILABLE": "availability_status.value"         }       }     } } ,   {     "operation": "default",     "spec": {       "equipment_type": {         "key": "24401",         "value": "Automotive racks"       }     } }  ] 
+
+"{""primary_id_path"":{""asset"":""$.details.Basic.assetId""},""transaction_data_id_paths"":{},""transaction_data_array_id_paths"":{},""transaction_data_array_sourceId_paths"":{}}"
