@@ -3,8 +3,8 @@ package com.integration.poc.enums;
 import com.integration.poc.services.IApiExecutor;
 import com.integration.poc.services.impl.DatabaseExecutorImpl;
 import com.integration.poc.services.impl.FtpApiExecutorImpl;
-import com.integration.poc.services.impl.RestApiExecutorImpl;
 import com.integration.poc.services.impl.IngestApiExecutorImpl;
+import com.integration.poc.services.impl.RestApiExecutorImpl;
 
 
 public enum AdaptersEnum {

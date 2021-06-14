@@ -29,7 +29,7 @@ public class UrlBuilderUtil {
   }
 
   private String buildPathParams(String url) {
-  Integer wfId=null;
+    Integer wfId = null;
     Pattern p = Pattern.compile(URL_PATTERN);
     Matcher ans = p.matcher(url);
     while (ans.find()) {
@@ -38,7 +38,7 @@ public class UrlBuilderUtil {
       String key1 = group.substring(0, firstDot);
       String key2 = group.substring(firstDot + 1);
 
-      String res = mapBuilder.getValue(wfId,key1, key2)
+      String res = mapBuilder.getValue(wfId, key1, key2)
           .toString();
       url = url.replace("{" + group + "}", res);
     }

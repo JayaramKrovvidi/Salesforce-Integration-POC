@@ -30,11 +30,16 @@ public class WorkflowController {
   public void startWorkFlow(@PathVariable(name = "workFlowId") Integer workFlowId) {
     workflowService.startWorkflow(workFlowId);
   }
+  
+  @PostMapping(value = "/{workFlowId}/resume")
+  public void resumeWorkFlow(@PathVariable(name = "workFlowId") Integer workFlowId) {
+    workflowService.resumeWorkflow(workFlowId);
+  }
 
 
   @GetMapping(value = "/{workFlowId}")
   public WorkFlowResponse getWorkflow(@PathVariable(name = "workFlowId") Integer workFlowId) {
-    return workflowService.getWorkFlow(workFlowId);
+    return workflowService.getWorkFlowBasicDetails(workFlowId);
   }
 
   @PutMapping(value = "/{workFlowId}/updateRunConfig")
@@ -45,7 +50,7 @@ public class WorkflowController {
 
   @GetMapping(value = "/{workFlowId}/getAllDetails")
   public WorkFlowResponse getAllDetails(@PathVariable(name = "workFlowId") Integer workFlowId) {
-    return workflowService.getAllData(workFlowId);
+    return workflowService.getWorkflowFullDetails(workFlowId);
   }
 
 }

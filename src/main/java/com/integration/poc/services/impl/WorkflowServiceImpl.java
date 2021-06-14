@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.integration.poc.constants.StatusConstants;
@@ -22,7 +24,7 @@ import com.integration.poc.models.WorkflowState;
 import com.integration.poc.repositories.IApiStateRepository;
 import com.integration.poc.repositories.IOrgJsonStoreRepository;
 import com.integration.poc.repositories.IWorkflowRepository;
-//import com.integration.poc.services.ICompositeApiRunner;
+// import com.integration.poc.services.ICompositeApiRunner;
 import com.integration.poc.services.IWorkflowService;
 
 @Service
@@ -37,11 +39,13 @@ public class WorkflowServiceImpl implements IWorkflowService {
   @Autowired
   IApiStateRepository apiStateRepo;
 
-//  @Autowired
-//  ICompositeApiRunner composite;
-
   @Autowired
   WorkFlowRunnerImpl workFlowRunnerImpl;
+
+  private static final String WF_NOT_PRESENT_ERR_MSG = "Requested workflow not found";
+  private static final Logger LOGGER = LogManager.getLogger(WorkflowServiceImpl.class);
+
+  // -------- Workflow Initialize Flow ---------
 
   @Override
   @Transactional
@@ -49,7 +53,7 @@ public class WorkflowServiceImpl implements IWorkflowService {
     Optional<OrgJsonStore> jsonStoreSearch = jsonStoreRepo.findByOrgIdAndJsonKey(orgId, jsonKey);
     if (jsonStoreSearch.isPresent()) {
       OrgJsonStore jsonStore = jsonStoreSearch.get();
-      CompositeApiRequest compositeApi = getCompositeJson(jsonStore.getJsonString());
+      CompositeApiRequest compositeApi = jsonStore.getJsonString();
       WorkflowState workflow = createWorkflowAndApis(jsonStore, compositeApi);
       return workflow.getWfId();
     }
@@ -111,59 +115,55 @@ public class WorkflowServiceImpl implements IWorkflowService {
         .collect(Collectors.toList());
   }
 
-  private CompositeApiRequest getCompositeJson(CompositeApiRequest compositeJsonString) {
-    return new CompositeApiRequest();
-  }
-
-  private Map<String, Object> createMapper(Map<String, String> runConfig) {
-    Map<String, Object> mapper = new HashMap<String, Object>();
-    for (Map.Entry<String, String> entry : runConfig.entrySet()) {
-      mapper.put(entry.getKey(), entry.getValue());
-    }
-    return mapper;
-  }
+  // ------------ Workflow Start & Resume Flows ---------------------
 
 
   @Override
   public void startWorkflow(Integer workFlowId) {
-    Optional<WorkflowState> workFlow = workflowRepo.findById(workFlowId);
-    if (workFlow.isPresent()) {
-      WorkflowState workflowState = workFlow.get();
-      if (workflowState.getStatus()
-          .equals(StatusConstants.INITIALIZED)) {
-        workflowState.setStatus(StatusConstants.IN_PROGRESS);
-        workflowState.setLastModifiedTm(LocalDateTime.now());
-        workflowRepo.save(workflowState);
-        try {
-          workFlowRunnerImpl.process(workFlowId);
-        } catch (Exception e) {
-          System.out.println(e);
-        }
-
-      }
+    Optional<WorkflowState> workFlowSearch = workflowRepo.findById(workFlowId);
+    if (workFlowSearch.isPresent()) {
+      WorkflowState workflow = workFlowSearch.get();
+      checkStatusAndExecuteWorkflow(workflow, StatusConstants.INITIALIZED);
     }
     throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
-        Error.WORKFLOW.getErrorMsg() + "Requested workflow not found"));
+        Error.WORKFLOW.getErrorMsg() + WF_NOT_PRESENT_ERR_MSG));
   }
 
   @Override
-  public WorkFlowResponse getWorkFlow(Integer workFlowId) {
-    Optional<WorkflowState> workFlow = workflowRepo.findById(workFlowId);
-    if (workFlow.isPresent()) {
-      WorkFlowResponse workFlowResponse = new WorkFlowResponse();
-      WorkflowState workflowState = workFlow.get();
-      workFlowResponse.setWfId(workflowState.getWfId());
-      workFlowResponse.setJsonId(workflowState.getJsonId());
-      workFlowResponse.setRunConfigMapper(workflowState.getRunConfigMapper());
-      workFlowResponse.setStatus(workflowState.getStatus());
-      workFlowResponse.setDetailMsgTxt(workflowState.getDetailMsgTxt());
-      workFlowResponse.setCurrentApiId(workflowState.getCurrentApiId());
-      workFlowResponse.setLastModifiedTm(workflowState.getLastModifiedTm());
-      return workFlowResponse;
+  public void resumeWorkflow(Integer workFlowId) {
+    Optional<WorkflowState> workFlowSearch = workflowRepo.findById(workFlowId);
+    if (workFlowSearch.isPresent()) {
+      WorkflowState workflow = workFlowSearch.get();
+      checkStatusAndExecuteWorkflow(workflow, StatusConstants.IN_PROGRESS);
     }
     throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
-        Error.WORKFLOW.getErrorMsg() + "Requested workflow not found"));
+        Error.WORKFLOW.getErrorMsg() + WF_NOT_PRESENT_ERR_MSG));
   }
+
+  private void checkStatusAndExecuteWorkflow(WorkflowState workflow, String status) {
+    String currentStatus = workflow.getStatus();
+    if (currentStatus.equals(status)) {
+      tryAndExecuteWorkflow(workflow);
+    } else {
+      throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
+          Error.WORKFLOW.getErrorMsg() + "Workflow not in expected " + status + " status"));
+    }
+  }
+
+  private void tryAndExecuteWorkflow(WorkflowState workflow) {
+    workflow.setStatus(StatusConstants.IN_PROGRESS);
+    workflow.setLastModifiedTm(LocalDateTime.now());
+    workflowRepo.save(workflow);
+    try {
+      workFlowRunnerImpl.executeWorkflow(workflow);
+    } catch (Exception e) {
+      workflow.setStatus(StatusConstants.FAILURE);
+      workflowRepo.save(workflow);
+      LOGGER.error("Exception executing Workflow ID: {} :: {}", workflow.getWfId(), e.getMessage());
+    }
+  }
+
+  // ----------- Update Workflow RunConfigs -------
 
   @Override
   public void updateWorkFlowRunConfigs(Integer workFlowId, Map<String, String> runConfigs) {
@@ -175,29 +175,41 @@ public class WorkflowServiceImpl implements IWorkflowService {
       workflowRepo.save(workflow);
     }
     throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
-        Error.WORKFLOW.getErrorMsg() + "Requested workflow not found"));
+        Error.WORKFLOW.getErrorMsg() + WF_NOT_PRESENT_ERR_MSG));
+  }
+
+  // ---------- Get Workflow Details ----------
+
+  @Override
+  public WorkFlowResponse getWorkFlowBasicDetails(Integer workFlowId) {
+    Optional<WorkflowState> workFlow = workflowRepo.findById(workFlowId);
+    if (workFlow.isPresent()) {
+      WorkflowState workflowState = workFlow.get();
+      return WorkFlowResponse.getBasicDetailsFromEntity(workflowState);
+    }
+    throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
+        Error.WORKFLOW.getErrorMsg() + WF_NOT_PRESENT_ERR_MSG));
   }
 
   @Override
-  public WorkFlowResponse getAllData(Integer workFlowId) {
-
+  public WorkFlowResponse getWorkflowFullDetails(Integer workFlowId) {
     Optional<WorkflowState> workFlowOptional = workflowRepo.findById(workFlowId);
     if (workFlowOptional.isPresent()) {
       WorkflowState workflow = workFlowOptional.get();
-      WorkFlowResponse workFlowResponse = new WorkFlowResponse();
-      workFlowResponse.setWfId(workflow.getWfId());
-      workFlowResponse.setJsonId(workflow.getJsonId());
-      workFlowResponse.setRunConfigMapper(workflow.getRunConfigMapper());
-      workFlowResponse.setStatus(workflow.getStatus());
-      workFlowResponse.setDetailMsgTxt(workflow.getDetailMsgTxt());
-      workFlowResponse.setLastModifiedTm(workflow.getLastModifiedTm());
-      workFlowResponse.setCurrentApiId(workflow.getCurrentApiId());
-      workFlowResponse.setApiList(workflow.getApiList());
-      workFlowResponse.setRuntimeVariablesList(workflow.getRuntimeVariablesList());
-      workFlowResponse.setJsonStore(workflow.getJsonStore());
-      return workFlowResponse;
+      return WorkFlowResponse.getFullDetailsFromEntity(workflow);
     }
-    return null;
+    throw new GenericException(new GenericError(Error.WORKFLOW.getErrorCode(),
+        Error.WORKFLOW.getErrorMsg() + WF_NOT_PRESENT_ERR_MSG));
+  }
+
+  // --------- Helper Methods Start Here ----------
+
+  private Map<String, Object> createMapper(Map<String, String> runConfig) {
+    Map<String, Object> mapper = new HashMap<String, Object>();
+    for (Map.Entry<String, String> entry : runConfig.entrySet()) {
+      mapper.put(entry.getKey(), entry.getValue());
+    }
+    return mapper;
   }
 
 }

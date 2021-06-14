@@ -14,50 +14,55 @@ import com.integration.poc.services.IOrgJsonStoreService;
 
 @Service
 public class OrgJsonStoreServiceImpl implements IOrgJsonStoreService {
-  
+
   @Autowired
   IOrgJsonStoreRepository jsonStoreRepo;
 
   @Override
-  public Integer storeCompositeApi(CompositeApiRequest compositeApi, String jsonKey, Integer orgId) {
+  public Integer storeCompositeApi(CompositeApiRequest compositeApi, String jsonKey,
+      Integer orgId) {
 
-    OrgJsonStore orgJsonStore=new OrgJsonStore();
+    OrgJsonStore orgJsonStore = new OrgJsonStore();
     orgJsonStore.setJsonKey(jsonKey);
     orgJsonStore.setOrgId(orgId);
     orgJsonStore.setJsonString(compositeApi);
     orgJsonStore.setLastModifiedTm(LocalDateTime.now());
-    return jsonStoreRepo.save(orgJsonStore).getId();
+    return jsonStoreRepo.save(orgJsonStore)
+        .getId();
   }
+
   public OrgJsonStore getByEntityId(Integer id) {
     Optional<OrgJsonStore> jsonStore = jsonStoreRepo.findById(id);
     return jsonStore.orElse(null);
   }
-  
+
   public Integer updateJsonStore(CompositeApiRequest compositeApi, Integer id) {
     Optional<OrgJsonStore> orgJsonStore = jsonStoreRepo.findById(id);
-   if (orgJsonStore.isPresent()) {
-     OrgJsonStore orgJson=orgJsonStore.get();
-     orgJson.setJsonString(compositeApi);
-     orgJson.setLastModifiedTm(LocalDateTime.now());
-     return jsonStoreRepo.save(orgJson).getId();
-   }
-   throw new GenericException(new GenericError(Error.NO_DATA_FOUND.getErrorCode(),
-       Error.NO_DATA_FOUND.getErrorMsg() + "Requested Json not found"));
-
-  }
-  
-  public Integer updateByJsonKey(CompositeApiRequest compositeApi, Integer orgId, String jsonKey) {
-    Optional<OrgJsonStore> jsonStoreSearch = jsonStoreRepo.findByOrgIdAndJsonKey(orgId, jsonKey);
-    if(jsonStoreSearch.isPresent()) {
-      OrgJsonStore jsonStore = jsonStoreSearch.get();
-      jsonStore.setJsonString(compositeApi);
-      jsonStore.setLastModifiedTm(LocalDateTime.now());
-      return jsonStoreRepo.save(jsonStore).getId();
+    if (orgJsonStore.isPresent()) {
+      OrgJsonStore orgJson = orgJsonStore.get();
+      orgJson.setJsonString(compositeApi);
+      orgJson.setLastModifiedTm(LocalDateTime.now());
+      return jsonStoreRepo.save(orgJson)
+          .getId();
     }
     throw new GenericException(new GenericError(Error.NO_DATA_FOUND.getErrorCode(),
         Error.NO_DATA_FOUND.getErrorMsg() + "Requested Json not found"));
 
   }
-  
+
+  public Integer updateByJsonKey(CompositeApiRequest compositeApi, Integer orgId, String jsonKey) {
+    Optional<OrgJsonStore> jsonStoreSearch = jsonStoreRepo.findByOrgIdAndJsonKey(orgId, jsonKey);
+    if (jsonStoreSearch.isPresent()) {
+      OrgJsonStore jsonStore = jsonStoreSearch.get();
+      jsonStore.setJsonString(compositeApi);
+      jsonStore.setLastModifiedTm(LocalDateTime.now());
+      return jsonStoreRepo.save(jsonStore)
+          .getId();
+    }
+    throw new GenericException(new GenericError(Error.NO_DATA_FOUND.getErrorCode(),
+        Error.NO_DATA_FOUND.getErrorMsg() + "Requested Json not found"));
+
+  }
+
 
 }

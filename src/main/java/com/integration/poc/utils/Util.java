@@ -30,8 +30,8 @@ public class Util {
     return Arrays.asList(StringUtils.substringsBetween(name, "{", "}"));
   }
 
-  public static void replaceParamsAtRuntime(
-      List<NameValuePair<String, String>> params,Integer wfId) {
+  public static void replaceParamsAtRuntime(List<NameValuePair<String, String>> params,
+      Integer wfId) {
     params.forEach(param -> {
       boolean isRunTimeValue = Util.checkRunTimeParameter(param.getValue());
       if (isRunTimeValue) {
@@ -39,7 +39,7 @@ public class Util {
         int firstDotIndex = value.indexOf(".");
         String apiKey = value.substring(0, firstDotIndex);
         String id = value.substring(firstDotIndex + 1);
-        param.setValue((String) mapBuilder.getValue(wfId,apiKey, id));
+        param.setValue((String) mapBuilder.getValue(wfId, apiKey, id));
       }
     });
   }

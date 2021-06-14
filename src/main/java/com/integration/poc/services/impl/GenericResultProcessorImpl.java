@@ -39,25 +39,30 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
   @Override
   public void process(ApiRequestConfig request, String apiKey, String response, boolean success) {
-   if (CollectionUtils.isEmpty(request.getProcKeyOnSuccess())&&CollectionUtils.isEmpty(request.getProcKeyOnFailure())) {
-     return;
-   }
-    List<ProcKeyDTO> procs=new ArrayList<>();
-    if(success) {
-      for(int i=0;i<request.getProcKeyOnSuccess().size();i++) {
-        procs.add(request.getProcKeyOnSuccess().get(i));
-      }
+    if (CollectionUtils.isEmpty(request.getProcKeyOnSuccess())
+        && CollectionUtils.isEmpty(request.getProcKeyOnFailure())) {
+      return;
     }
-    else {
-      for(int i=0;i<request.getProcKeyOnFailure().size();i++) {
-        procs.add(request.getProcKeyOnFailure().get(i));
+    List<ProcKeyDTO> procs = new ArrayList<>();
+    if (success) {
+      for (int i = 0; i < request.getProcKeyOnSuccess()
+          .size(); i++) {
+        procs.add(request.getProcKeyOnSuccess()
+            .get(i));
+      }
+    } else {
+      for (int i = 0; i < request.getProcKeyOnFailure()
+          .size(); i++) {
+        procs.add(request.getProcKeyOnFailure()
+            .get(i));
       }
     }
 
-   
+
     for (ProcKeyDTO proc : procs) {
       // Get Necessary Details and execute Post Processing
-      IMediator inFormatter = factory.getBeanForClass(FormatterEnum.getFormatterByKey(proc.getInFormatter()));
+      IMediator inFormatter =
+          factory.getBeanForClass(FormatterEnum.getFormatterByKey(proc.getInFormatter()));
       IMediator outFormatter =
           factory.getBeanForClass(FormatterEnum.getFormatterByKey(proc.getOutFormatter()));
       String configFilePath = PostProcessEnum.getConfigFilePath(proc.getName());
@@ -65,24 +70,25 @@ public class GenericResultProcessorImpl implements IResultProcessor {
 
       List<Node> nodes = inFormatter.from(response);
 
-//      LOGGER.info(" ------- CSV String before Processing --------\n {} \n", response);
-//       LOGGER.info(" -------- Mediator Representation before Processing --------");
-//       Node.printNodes(nodes);
+      // LOGGER.info(" ------- CSV String before Processing --------\n {} \n", response);
+      // LOGGER.info(" -------- Mediator Representation before Processing --------");
+      // Node.printNodes(nodes);
 
       List<Node> processedNodes = outFormatter.process(nodes, postProcessConfig);
       String processedResponse = outFormatter.to(processedNodes);
 
-//       LOGGER.info(" -------- Mediator Representation after Processing --------");
-//       Node.printNodes(nodes);
+      // LOGGER.info(" -------- Mediator Representation after Processing --------");
+      // Node.printNodes(nodes);
       LOGGER.info(" ---- CSV String after Processing ----\n {} \n", processedResponse);
 
-      saveFileLocally(processedResponse, apiKey, proc.getName(),proc.getOutFormatter());
+      saveFileLocally(processedResponse, apiKey, proc.getName(), proc.getOutFormatter());
     }
   }
 
-  private void saveFileLocally(String processedResponse, String apiKey, String processKey,String outFormat) {
-   
-    String fileName = apiKey + processKey + "."+outFormat;
+  private void saveFileLocally(String processedResponse, String apiKey, String processKey,
+      String outFormat) {
+
+    String fileName = apiKey + processKey + "." + outFormat;
     String filePath = localFilePath + fileName;
 
     FileWriter fileWriter = null;

@@ -4,7 +4,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter
-public class ObjectToStringConverter  implements AttributeConverter<Object, String> {
+public class ObjectToStringConverter implements AttributeConverter<Object, String> {
 
   @Override
   public String convertToDatabaseColumn(Object attribute) {
@@ -13,8 +13,8 @@ public class ObjectToStringConverter  implements AttributeConverter<Object, Stri
 
   @Override
   public Object convertToEntityAttribute(String dbData) {
-    return (Object)dbData;
+    return dbData;
   }
-  
+
 
 }

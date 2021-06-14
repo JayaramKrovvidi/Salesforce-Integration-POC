@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `api_state` (
   `status` VARCHAR(45) NOT NULL,
   `detail_msg_txt` VARCHAR(255) NULL,
   `retry` VARCHAR(45) NOT NULL,
+  `response` LONGTEXT NOT NULL,
   `on_success` VARCHAR(255) NOT NULL,
   `on_failure` VARCHAR(255) NOT NULL,
   `last_modified_tm` TIMESTAMP NULL,

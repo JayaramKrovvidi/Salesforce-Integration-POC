@@ -23,7 +23,7 @@ public class FtpApiExecutorImpl implements IApiExecutor {
   private String localFilePath;
 
   @Override
-  public String executeApi(ApiRequestConfig apiRequest, String apiKey,Integer workFlowId) {
+  public String executeApi(ApiRequestConfig apiRequest, String apiKey, Integer workFlowId) {
     switch (apiRequest.getMethodType()) {
       case "UPLOAD":
         return interpretRequestAndUpload(apiRequest);

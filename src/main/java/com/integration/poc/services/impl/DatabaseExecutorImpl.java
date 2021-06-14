@@ -23,7 +23,7 @@ public class DatabaseExecutorImpl implements IApiExecutor {
   private static final String DRIVER = "driver";
 
   @Override
-  public String executeApi(ApiRequestConfig apiRequest, String apiKey,Integer workFlowId) {
+  public String executeApi(ApiRequestConfig apiRequest, String apiKey, Integer workFlowId) {
     switch (apiRequest.getMethodType()) {
       case "SELECT":
         return extractDataAndExecute(apiRequest);

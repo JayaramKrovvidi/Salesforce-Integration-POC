@@ -49,6 +49,9 @@ public class ApiState {
   @Column(name = "retry")
   private String retry;
 
+  @Column(columnDefinition = "CLOB", name = "response")
+  private String response;
+
   @Column(name = "on_success")
   @Convert(converter = StringListConverter.class)
   private List<String> onSuccess;

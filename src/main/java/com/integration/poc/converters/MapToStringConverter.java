@@ -1,4 +1,4 @@
-package com.integration.poc.converter;
+package com.integration.poc.converters;
 
 
 import java.util.HashMap;

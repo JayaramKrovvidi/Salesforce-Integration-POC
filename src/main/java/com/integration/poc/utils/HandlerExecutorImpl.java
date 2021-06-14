@@ -13,12 +13,12 @@ public class HandlerExecutorImpl {
 
   @Autowired
   IMapBuilder mapBuilder;
-  
+
   @Autowired
   IRuntimeVariablesRepository runTimeRepo;
 
   public boolean executeHandles(String apiKey, List<Handle> handles) {
-    Integer wfId=null;
+    Integer wfId = null;
     if (CollectionUtils.isEmpty(handles)) {
       return true;
     }
@@ -26,12 +26,12 @@ public class HandlerExecutorImpl {
       executeHandler(apiKey, handle);
     }
     Handle lastHandle = handles.get(handles.size() - 1);
-    return (boolean) mapBuilder.getValue(wfId,apiKey, String.valueOf(lastHandle.getHandlerId()));
-   
+    return (boolean) mapBuilder.getValue(wfId, apiKey, String.valueOf(lastHandle.getHandlerId()));
+
   }
 
   private void executeHandler(String apiKey, Handle handle) {
-    Integer wfId=null;
+    Integer wfId = null;
     String operator = handle.getOperator();
     Object operand1 = fetchOperand(handle.getOperand1());
     Object operand2 = fetchOperand(handle.getOperand2());
@@ -39,11 +39,11 @@ public class HandlerExecutorImpl {
     if (operator.equalsIgnoreCase("EQUALS")) {
       result = executeEquals(operand1, operand2);
     }
-    mapBuilder.putValue(wfId,apiKey, String.valueOf(handle.getHandlerId()), result);
+    mapBuilder.putValue(wfId, apiKey, String.valueOf(handle.getHandlerId()), result);
   }
 
   private Object fetchOperand(Object operand) {
-    Integer wfId=null;
+    Integer wfId = null;
     String runtmVarCheck = operand.toString();
     if (Util.checkRunTimeParameter(runtmVarCheck)) {
       String runtimeId = Util.getMatchedValues(runtmVarCheck)
@@ -51,7 +51,7 @@ public class HandlerExecutorImpl {
       int firstDotIndex = runtimeId.indexOf(".");
       String apiKey = runtimeId.substring(0, firstDotIndex);
       String id = runtimeId.substring(firstDotIndex + 1);
-      return mapBuilder.getValue(wfId,apiKey, id);
+      return mapBuilder.getValue(wfId, apiKey, id);
     }
     return operand;
   }
