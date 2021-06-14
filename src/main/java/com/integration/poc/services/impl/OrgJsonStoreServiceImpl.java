@@ -2,6 +2,8 @@ package com.integration.poc.services.impl;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+
+import com.integration.poc.dtos.response.JsonStoreDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.integration.poc.dtos.external.CompositeApiRequest;
@@ -31,9 +33,9 @@ public class OrgJsonStoreServiceImpl implements IOrgJsonStoreService {
         .getId();
   }
 
-  public OrgJsonStore getByEntityId(Integer id) {
+  public JsonStoreDto getByEntityId(Integer id) {
     Optional<OrgJsonStore> jsonStore = jsonStoreRepo.findById(id);
-    return jsonStore.orElse(null);
+    return jsonStore.map(JsonStoreDto::new).orElse(null);
   }
 
   public Integer updateJsonStore(CompositeApiRequest compositeApi, Integer id) {

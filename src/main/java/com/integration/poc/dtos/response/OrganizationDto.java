@@ -14,6 +14,8 @@ public class OrganizationDto {
   private String integrationTypNm;
   private LocalDateTime lastModifiedTm;
 
+  private OrganizationDto() {}
+
   public OrganizationDto(Organization org) {
     super();
     this.orgId = org.getOrgId();
