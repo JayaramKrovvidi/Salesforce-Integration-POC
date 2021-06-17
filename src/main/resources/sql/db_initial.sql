@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `api_state` (
   `status` VARCHAR(45) NOT NULL,
   `detail_msg_txt` VARCHAR(255) NULL,
   `retry` VARCHAR(45) NOT NULL,
-  `response` LONGTEXT NOT NULL,
   `on_success` VARCHAR(255) NOT NULL,
   `on_failure` VARCHAR(255) NOT NULL,
   `last_modified_tm` TIMESTAMP NULL,
@@ -79,6 +78,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mapping_store` (
   `mapping_id` INT NOT NULL AUTO_INCREMENT,
   `json_id` INT NOT NULL,
+  `mapping_key` VARCHAR(255) NOT NULL,
   `mapping_json` JSON NULL,
   `last_modified_tm` TIMESTAMP NULL,
   PRIMARY KEY (`mapping_id`))
